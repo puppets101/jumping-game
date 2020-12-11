@@ -1,1 +1,3 @@
-class Obstacle extends MovableEntity {}
+class Obstacle extends MovableEntity {
+    
+}

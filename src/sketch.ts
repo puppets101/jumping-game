@@ -1,6 +1,7 @@
 //---- GLOBAL VARIABLES ----//
 // let game: Game;
-
+let obstacle1: Obstacle;
+let obstacle2: Obstacle;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -21,9 +22,11 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
+  obstacle1 = new Obstacle(0, 2, 300, 100, 10, 10);
+  obstacle2 = new Obstacle(0, 0, 500, 500, 200, 400)
   // noCursor();
-
-  drawableEntity = new drawableEntity();
+  
+  
 }
 
 /**
@@ -37,6 +40,11 @@ function draw() {
   stroke("white");
   strokeWeight(10);
   circle(width * 0.5, height * 0.5, width * 0.2);
+  fill("red");
+  obstacle1.draw();
+  obstacle1.update()
+  obstacle2.draw();
+  obstacle1.update()
 
   // game.update();
   // game.draw();
