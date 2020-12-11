@@ -8,11 +8,9 @@ class Game {
         this.menu = new Menu();
         this.gamePlay = new GamePlay();
     }
-
     update(){
         
     }
-
     draw() {
 
     }
