@@ -7,9 +7,9 @@
  * sound files, images etc...
  */
 function preload() {
-    // Tyvärr har jag inte fått till den globala typningen för
-    // inladdningen av ljud men fungerar bra enligt nedan..
-    // sound = (window as any).loadSound('../assets/mySound.wav');
+  // Tyvärr har jag inte fått till den globala typningen för
+  // inladdningen av ljud men fungerar bra enligt nedan..
+  // sound = (window as any).loadSound('../assets/mySound.wav');
 }
 
 /**
@@ -19,11 +19,11 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    frameRate(60);
-    // noCursor();
-    
-    // game = new Game();
+  createCanvas(windowWidth, windowHeight);
+  frameRate(60);
+  // noCursor();
+
+  // game = new Game();
 }
 
 /**
@@ -32,20 +32,19 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-    background('blue');
-    fill('green');
-    stroke('white');
-    strokeWeight(10);
-    circle(width * .5, height * .5, width * 0.2);
+  background("blue");
+  fill("green");
+  stroke("white");
+  strokeWeight(10);
+  circle(width * 0.5, height * 0.5, width * 0.2);
 
-    // game.update();
-    // game.draw();
+  // game.update();
+  // game.draw();
 }
-
 
 /**
  *  Built in windowResize listener function in P5
  */
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth, windowHeight);
 }
