@@ -1,6 +1,5 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -21,6 +20,8 @@ function preload() {
 function setup() {
   createCanvas(600, 400); // bestäm storlek
   frameRate(60);
+  obstacle1 = new Obstacle(0, 2, 300, 100, 10, 10);
+  obstacle2 = new Obstacle(0, 0, 500, 500, 200, 400)
   // noCursor();
  
   game = new Game();
