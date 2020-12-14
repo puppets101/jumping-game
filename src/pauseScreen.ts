@@ -1,6 +1,6 @@
 class PauseScreen extends DrawableEntity {
-    menuOptions: string;
-    backgroundColor: string;
+    private menuOptions: string;
+    private backgroundColor: string;
 
     continueGame() {
 
