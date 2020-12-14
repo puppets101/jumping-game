@@ -1,0 +1,3 @@
+class Background extends MovableEntity {
+    
+}
