@@ -1,5 +1,5 @@
-class Lives extends MovableEntity {
-    
+class Lives extends DrawableEntity {
+
     private lives: number;
 
     public countLives() {
