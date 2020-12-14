@@ -1,3 +1,3 @@
-interface Imenu{
+interface Imenu {
      IsMenuOpen: Boolean; 
 }
