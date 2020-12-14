@@ -20,8 +20,6 @@ function preload() {
 function setup() {
   createCanvas(600, 400); // bestäm storlek
   frameRate(60);
-  obstacle1 = new Obstacle(0, 2, 300, 100, 10, 10);
-  obstacle2 = new Obstacle(0, 0, 500, 500, 200, 400)
   // noCursor();
  
   game = new Game();
@@ -34,7 +32,6 @@ function setup() {
  */
 function draw() {
   background("green")
-
   game.update();
   game.draw();
 }

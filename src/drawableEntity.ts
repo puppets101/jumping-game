@@ -1,22 +1,25 @@
+import p5 from "p5";
+
+
+// error when added type p5.Vector on _position
 abstract class DrawableEntity {
   protected height: number;
   protected width: number;
-  protected yPosition: number;
-  protected xPosition: number;
+  protected position: p5.Vector;
+  protected isVisable: boolean;
+  protected img: string;
 
-  constructor(
-    _height: number,
-    _width: number,
-    _yPosition: number,
-    _xPosition: number
-  ) {
+  constructor(_height: number, _width: number, _position: p5.Vector, _isVisable: boolean, _img: string) {
+
     this.height = _height;
     this.width = _width;
-    this.yPosition = _yPosition;
-    this.xPosition = _xPosition;
+    this.position = _position;
+    this.isVisable = _isVisable;
+    this.img = _img;
   }
 
   public draw() {
-    rect(this.xPosition, this.yPosition, this.width, this.height);
+
+
   }
 }

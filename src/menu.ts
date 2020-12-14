@@ -1,4 +1,4 @@
-class Menu {
+class Menu extends Imenu {
      private menuAudio:MenuAudio
      private gameOver:GameOver
      private pauseScreen:PauseScreen
