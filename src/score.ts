@@ -7,7 +7,6 @@ class Score extends DrawableEntity {
     
     constructor(score: number, _height: number, _width: number, _position: p5.Vector, _isVisable: boolean, _img: string) {
         super(_height, _width, _position, _isVisable, _img);
-        this.
         this.score = score;
     }
     
