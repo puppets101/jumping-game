@@ -1,7 +1,6 @@
 import p5 from "p5";
 
 
-
 // error when added type p5.Vector on _position
 abstract class DrawableEntity {
   protected height: number;
@@ -10,8 +9,8 @@ abstract class DrawableEntity {
   protected isVisable: boolean;
   protected img: string;
 
-
   constructor(_height: number, _width: number, _position: p5.Vector, _isVisable: boolean, _img: string) {
+
     this.height = _height;
     this.width = _width;
     this.position = _position;
@@ -20,5 +19,7 @@ abstract class DrawableEntity {
   }
 
   public draw() {
+
+
   }
 }
