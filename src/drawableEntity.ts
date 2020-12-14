@@ -4,8 +4,12 @@ abstract class DrawableEntity {
   protected yPosition: number;
   protected xPosition: number;
 
-
-  constructor(_height: number, _width: number, _yPosition: number, _xPosition: number) {
+  constructor(
+    _height: number,
+    _width: number,
+    _yPosition: number,
+    _xPosition: number
+  ) {
     this.height = _height;
     this.width = _width;
     this.yPosition = _yPosition;
@@ -13,6 +17,6 @@ abstract class DrawableEntity {
   }
 
   public draw() {
-    rect(this.xPosition, this.yPosition, this.width, this.height)
+    rect(this.xPosition, this.yPosition, this.width, this.height);
   }
 }
