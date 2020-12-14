@@ -1,20 +1,16 @@
+import p5 from "p5";
+
 abstract class MovableEntity extends DrawableEntity {
-  velocity: number;
+  velocity: p5.Vector;
   applyGravity: number;
 
-  constructor(_velocity: number, _applyGravity: number, width: number, height: number, xPosition: number, yPosition: number) {
-    super(width, height, xPosition, yPosition);
+  constructor(_velocity: p5.Vector, _applyGravity: number, _height: number, _width: number, _position: p5.Vector, _isVisable: boolean, _img: string) {
+    super(_width, _height, _position, _isVisable, _img);
     this.velocity = _velocity;
     this.applyGravity = _applyGravity;
   }
 
   update() {
-    // this.yPosition -= this.velocity
-    this.yPosition += this.applyGravity;
-
-    if ((this.yPosition + this.height) >= height) {
-      this.applyGravity = 0;
-
-    }
+    
   }
 }
