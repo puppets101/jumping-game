@@ -1,6 +1,3 @@
-import p5 from "p5";
-
-
 // error when added type p5.Vector on _position
 abstract class DrawableEntity {
   protected height: number;
