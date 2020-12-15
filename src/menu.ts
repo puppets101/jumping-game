@@ -1,16 +1,15 @@
 class Menu implements Imenu {
-     private menuAudio:MenuAudio;
+     private menuAudio:MenuAudio
      private gameOver:GameOver;
      private pauseScreen:PauseScreen;
      private titleScreen:TitleScreen;
-     IsMenuOpen: Boolean;
-   
-     constructor(_menuAudio:MenuAudio,_gameOver: GameOver,_pauseScreen: PauseScreen, _titleScreen: TitleScreen, _isMenuOpen:Boolean ){
-         this.menuAudio = _menuAudio;
-         this.gameOver = _gameOver;
-         this.pauseScreen = _pauseScreen;
-         this.titleScreen = _titleScreen;
-         this.IsMenuOpen = _isMenuOpen;
+      IsMenuOpen:Boolean
+     constructor(_IsMenuOpen: Boolean){
+         this.menuAudio = new MenuAudio;
+         this.gameOver = new GameOver;
+         this.pauseScreen = new PauseScreen
+         this.titleScreen = new TitleScreen;
+         this.IsMenuOpen = _IsMenuOpen
      }
      public startGame(){
 
@@ -19,10 +18,13 @@ class Menu implements Imenu {
 
      }
      public draw(){
-         
+         this.titleScreen.draw()
      }
 
 }
+         
     
           
+     
+   
          
