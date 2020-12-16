@@ -32,6 +32,7 @@ class Obstacle extends MovableEntity {
         rect(this.position.x, this.position.y, this.width, this.height)
     }
 
+    // CREATING OBSTACLES IN AN ARRAY
  /*   public addNewObstacle() {
         let newObstacle = new Obstacle();
         obstacle.push(newObstacle);

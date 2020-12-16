@@ -5,8 +5,8 @@ let platform2: Platform;
 let platform3: Platform;
 let platform4: Platform;
 let obstacle1: Obstacle;
-//let obstacle: Obstacle [];
-//let obstacleInterval: number;
+    //let obstacle: Obstacle [];
+    //let obstacleInterval: number;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -33,6 +33,8 @@ function setup() {
   platform3 = new Platform(createVector(900, 150));
   platform4 = new Platform(createVector(1200, 150));
   obstacle1 = new Obstacle();
+
+  // ADDING OBSTACLES IN AN ARRAY
   /*obstacleInterval = 5000;
   
   setInterval(addNewObstacle, obstacleInterval);
