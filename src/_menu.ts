@@ -4,11 +4,12 @@ class Menu implements Imenu {
      private pauseScreen:PauseScreen;
      private titleScreen:TitleScreen;
       IsMenuOpen:Boolean
+
      constructor(_IsMenuOpen: Boolean){
-         this.menuAudio = new MenuAudio;
-         this.gameOver = new GameOver;
-         this.pauseScreen = new PauseScreen
-         this.titleScreen = new TitleScreen;
+         this.menuAudio = new MenuAudio();
+         this.gameOver = new GameOver();
+         this.pauseScreen = new PauseScreen();
+         this.titleScreen = new TitleScreen();
          this.IsMenuOpen = _IsMenuOpen
      }
      public startGame(){
@@ -18,7 +19,8 @@ class Menu implements Imenu {
 
      }
      public draw(){
-         this.titleScreen.draw()
+         this.titleScreen.draw();
+         this.gameOver.draw();
      }
 
 }
