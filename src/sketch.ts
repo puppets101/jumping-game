@@ -23,6 +23,8 @@ function setup() {
   // noCursor();
  
  // game = new Game();
+ 
+ score1 = new Score(createVector(), true, 0);
 }
 
 /**
@@ -34,6 +36,10 @@ function draw() {
   background("green")
   //game.update();
   //game.draw();
+
+  // score
+  score1.draw();
+  score1.countScore();
 }
 
 /**
