@@ -4,9 +4,8 @@ let platform1: Platform;
 let platform2: Platform;
 let platform3: Platform;
 let platform4: Platform;
-let obstacle1: Obstacle;
-    //let obstacle: Obstacle [];
-    //let obstacleInterval: number;
+let obstacleArray: Obstacle [] = [];
+let obstacleInterval: number;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -32,21 +31,14 @@ function setup() {
   platform2 = new Platform(createVector(900, 250));
   platform3 = new Platform(createVector(900, 150));
   platform4 = new Platform(createVector(1200, 150));
-  obstacle1 = new Obstacle();
-
-  // ADDING OBSTACLES IN AN ARRAY
-  /*obstacleInterval = 5000;
-  
+  obstacleInterval = 1000;
   setInterval(addNewObstacle, obstacleInterval);
+  // game = new Game();
+}
 
-  function addNewObstacle() {
-    let newObstacle = new Obstacle();
-    obstacle.push(newObstacle);
-    console.log(obstacle)
-  }*/
-
- 
- // game = new Game();
+function addNewObstacle() {
+  let newObstacle = new Obstacle();
+  obstacleArray.push(newObstacle);
 }
 
 
@@ -67,16 +59,15 @@ function draw() {
   platform3.draw();
   platform4.update();
   platform4.draw();
-  obstacle1.update();
-  obstacle1.draw();
   
-  /*for (i = 0, i < obstacle.length, i++;) {
-    obstacle[i].update();
-    obstacle[i].draw();
-
-  }*/
-
-
+  for (let i = 0; i < obstacleArray.length; i++) {
+    obstacleArray[i].update();
+    obstacleArray[i].draw();
+    obstacleArray[i].isOnScreen();
+    if (obstacleArray[i].isVisible === false) {
+      obstacleArray.splice(i, 1)
+    }
+  }
 }
 
 /**

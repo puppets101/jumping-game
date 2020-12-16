@@ -1,7 +1,7 @@
 abstract class DrawableEntity {
  
-  public position: p5.Vector; // CHANGED THIS TEMPORARILY!
-  protected isVisible: boolean;
+  public position: p5.Vector; // CHANGED THIS TEMPORARILY
+  public isVisible: boolean; // CHANGED THIS TEMPORARILY
  
 
 
