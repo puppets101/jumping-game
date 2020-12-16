@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+let platform: Platform;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -21,6 +22,7 @@ function setup() {
   createCanvas(600, 400); // bestäm storlek
   frameRate(60);
   // noCursor();
+  platform = new Platform();
  
  // game = new Game();
 }
@@ -34,6 +36,8 @@ function draw() {
   background("green")
   //game.update();
   //game.draw();
+  platform.update();
+  platform.draw();
 }
 
 /**

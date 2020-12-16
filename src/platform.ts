@@ -1,12 +1,21 @@
 class Platform extends MovableEntity {
-  protected color: number;
+  protected color: p5.Color;
+  protected height: number;
+  protected width: number;
 
-  constructor(_color: number,_position: p5.Vector, _isVisible: boolean,_velocity: p5.Vector, _applyGravity: number) {
-    super(_position, _isVisible,_velocity,_applyGravity);
-    this.color = _color;
+  constructor() {
+    super(createVector(300, 400 - 200), true, createVector(0, 0), 0);
+    this.color = color(100, 50, 150);
+    this.height = 20;
+    this.width = 100;
   }
 
-  public update() {}
+  public update() {
+    this.velocity = createVector(this.position.x -= 1, 0)
+  }
 
-  public draw() {}
+  public draw() {
+    fill(this.color)
+    rect(this.position.x + this.velocity.x, this.position.y, this.width, this.height)
+  }
 }
