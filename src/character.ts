@@ -1,12 +1,12 @@
 class Character extends MovableEntity {
-    private isAlive: boolean
+  private isAlive: boolean;
 
-    public jump() {
+  constructor(_isAlive: boolean) {
+    super();
+    this.isAlive = _isAlive;
+  }
 
-    }
+  public jump() {}
 
-    public collide() {
-
-    }
-
+  public collide() {}
 }

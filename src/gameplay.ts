@@ -7,20 +7,22 @@ class GamePlay extends Game {
   private lives: Lives;
   private gameAudio: GameAudio;
   private pauseScreen: PauseScreen;
-  // private projectile: Projectile;
+  private projectile: Projectile;
   private drawableEntity: DrawableEntity;
-  private MovableEntity: MovableEntity;
+  private movableEntity: MovableEntity;
 
   constructor(
-    _score: number,
+    _score: Score,
     _character: Character,
     _obstacle: Obstacle,
     _platform: Platform,
     _background: Background,
     _lives: Lives,
     _gameAudio: GameAudio,
-    _pauseScreen: PauseScreen
-    // _projectile: Projectile
+    _pauseScreen: PauseScreen,
+    _projectile: Projectile,
+    _drawableEntity: DrawableEntity,
+    _movableEntity: MovableEntity
   ) {
     super();
     this.score = _score;
@@ -32,13 +34,14 @@ class GamePlay extends Game {
     this.gameAudio = _gameAudio;
     this.pauseScreen = _pauseScreen;
     this.projectile = _projectile;
+    this.drawableEntity = _drawableEntity;
+    this.movableEntity = _movableEntity;
   }
+  pauseGame() {}
+
+  gameOver() {}
 
   public update() {}
 
   public draw() {}
-
-  pauseGame() {}
-
-  gameOver() {}
 }
