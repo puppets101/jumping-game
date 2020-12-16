@@ -1,6 +1,16 @@
-class PauseScreen extends DrawableEntity {
-    private menuOptions: string;
-    private backgroundColor: string;
+// interface ?
+class PauseScreen {
+    protected menuOptions: string;
+    protected bgColor: string;
+   
+
+    constructor(){
+        this.menuOptions = ""
+        this.bgColor = ""
+        //this.isMenuOpen = _isMenuOpen
+        
+    }
+    
 
     continueGame() {
 
@@ -9,4 +19,6 @@ class PauseScreen extends DrawableEntity {
     quit() {
 
     }
+    draw(){}
+
 }

@@ -1,16 +1,19 @@
 class Menu implements Imenu {
-     private menuAudio:MenuAudio;
-     private gameOver:GameOver;
-     private pauseScreen:PauseScreen;
-     private titleScreen:TitleScreen;
-     IsMenuOpen: Boolean;
+     protected menuAudio:MenuAudio;
+     protected gameOver:GameOver;
+     protected pauseScreen:PauseScreen;
+     protected titleScreen:TitleScreen;
+     public isMenuOpen: boolean;
+     public menuState: string
+
    
-     constructor(_isMenuOpen:Boolean){
+     constructor(_isMenuOpen:boolean,_menuState: string){
          this.menuAudio = new MenuAudio();
          this.gameOver = new GameOver();
          this.pauseScreen = new PauseScreen();
          this.titleScreen = new TitleScreen();
-         this.IsMenuOpen = _isMenuOpen
+         this.isMenuOpen = _isMenuOpen
+         this.menuState = _menuState
      }
      public startGame(){
 
