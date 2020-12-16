@@ -1,12 +1,27 @@
 class Platform extends MovableEntity {
-  protected color: number;
+  protected color: p5.Color;
+  protected height: number;
+  protected width: number;
 
-  constructor(_color: number,_position: p5.Vector, _isVisible: boolean,_velocity: p5.Vector, _applyGravity: number) {
-    super(_position, _isVisible,_velocity,_applyGravity);
-    this.color = _color;
+  constructor(_position: p5.Vector) {
+    super(_position, true, createVector(3, 0), 0); // Changing velocity.x alters speed
+    this.color = color(100, 50, 150);
+    this.height = 20;
+    this.width = 100;
   }
 
-  public update() {}
+  public update() {
+    // Random spawn is used to randomize the respawning position of the platform
+    const randomSpawn = Math.random()
+    this.position.x -= this.velocity.x;
 
-  public draw() {}
+    if (this.position.x < 0 - this.width) {
+      this.position.x = 600 + (randomSpawn * 300)
+    }
+  }
+
+  public draw() {
+    fill(this.color)
+    rect(this.position.x, this.position.y, this.width, this.height)
+  }
 }
