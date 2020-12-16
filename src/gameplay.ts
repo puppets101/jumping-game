@@ -11,31 +11,18 @@ class GamePlay extends Game {
   private drawableEntity: DrawableEntity;
   private movableEntity: MovableEntity;
 
-  constructor(
-    _score: Score,
-    _character: Character,
-    _obstacle: Obstacle,
-    _platform: Platform,
-    _background: Background,
-    _lives: Lives,
-    _gameAudio: GameAudio,
-    _pauseScreen: PauseScreen,
-    _projectile: Projectile,
-    _drawableEntity: DrawableEntity,
-    _movableEntity: MovableEntity
-  ) {
+  constructor() {
     super();
-    this.score = _score;
-    this.character = _character;
-    this.obstacle = _obstacle;
-    this.platform = _platform;
-    this.background = _background;
-    this.lives = _lives;
-    this.gameAudio = _gameAudio;
-    this.pauseScreen = _pauseScreen;
-    this.projectile = _projectile;
-    this.drawableEntity = _drawableEntity;
-    this.movableEntity = _movableEntity;
+    this.score = new Score();
+    this.character = new Character();
+    this.obstacle = new Obstacle();
+    this.platform = new Platform();
+    this.background = new Background();
+    this.lives = new Lives();
+    this.gameAudio = new GameAudio();
+    this.pauseScreen = new PauseScreen();
+    this.projectile = new Projectile();
+    
   }
   pauseGame() {}
 

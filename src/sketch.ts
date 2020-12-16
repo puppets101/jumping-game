@@ -22,7 +22,7 @@ function setup() {
   frameRate(60);
   // noCursor();
  
-  game = new Game();
+ // game = new Game();
 }
 
 /**
@@ -32,8 +32,8 @@ function setup() {
  */
 function draw() {
   background("green")
-  game.update();
-  game.draw();
+  //game.update();
+  //game.draw();
 }
 
 /**

@@ -1,3 +1,4 @@
 interface Imenu {
-     IsMenuOpen: Boolean; 
+     isMenuOpen: boolean; 
+     menuState:string;
 }
