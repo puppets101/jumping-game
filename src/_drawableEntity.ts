@@ -1,6 +1,6 @@
 abstract class DrawableEntity {
  
-  protected position: p5.Vector;
+  public position: p5.Vector;
   protected isVisible: boolean;
  
 

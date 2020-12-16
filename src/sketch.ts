@@ -4,6 +4,7 @@ let platform1: Platform;
 let platform2: Platform;
 let platform3: Platform;
 let platform4: Platform;
+let obstacle1: Obstacle;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -29,6 +30,7 @@ function setup() {
   platform2 = new Platform(createVector(900, 250));
   platform3 = new Platform(createVector(900, 150));
   platform4 = new Platform(createVector(1200, 150));
+  obstacle1 = new Obstacle(createVector(500, 0))
  
  // game = new Game();
 }
@@ -50,6 +52,8 @@ function draw() {
   platform3.draw();
   platform4.update();
   platform4.draw();
+  obstacle1.update();
+  obstacle1.draw();
 }
 
 /**
