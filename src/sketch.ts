@@ -30,7 +30,8 @@ function setup() {
   platform2 = new Platform(createVector(900, 250));
   platform3 = new Platform(createVector(900, 150));
   platform4 = new Platform(createVector(1200, 150));
-  obstacle1 = new Obstacle(createVector(500, 0))
+  obstacle1 = new Obstacle();
+
  
  // game = new Game();
 }
@@ -54,6 +55,7 @@ function draw() {
   platform4.draw();
   obstacle1.update();
   obstacle1.draw();
+
 }
 
 /**
