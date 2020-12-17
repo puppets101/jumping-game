@@ -47,7 +47,6 @@ function draw() {
   game.draw();
   character.draw();
 
-
   score1.draw();
   score1.countScore();
 }
