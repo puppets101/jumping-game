@@ -31,6 +31,7 @@ function setup() {
     game.gamePlay.addNewPlatform()
   }, obstacleInterval);
   character = new Character(true, createVector(), true, createVector(), 0);
+  score1 = new Score(createVector(), true, 0);
 }
 
 /**
