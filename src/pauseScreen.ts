@@ -2,13 +2,13 @@
 class PauseScreen {
     protected menuOptions: string;
     protected bgColor: string;
-   
+    private menu: Imenu;
 
-    constructor(){
-        this.menuOptions = ""
-        this.bgColor = ""
+    constructor(menu: Imenu){
+        this.menuOptions = "";
+        this.bgColor = "";
         //this.isMenuOpen = _isMenuOpen
-        
+        this.menu = menu;
     }
     
 
