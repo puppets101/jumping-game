@@ -6,29 +6,37 @@ class Character extends MovableEntity {
 
   constructor(
     isAlive: boolean,
-    position: p5.Vector,
+    position: p5.Vector;
     isVisible: boolean,
     velocity: p5.Vector,
     applyGravity: number
   ) {
-    super(createVector(100, 300), true, createVector(0, 50), 10);
+    super(createVector(100, 300), true, createVector(0, 50), 1);
     this.isAlive = isAlive;
   }
 
   public jump() {
-    this.position.y -= this.velocity.y;
+    this.position.y = this.position.y -= this.velocity.y;
 
-    setInterval(() => {
-      if (this.position.y < 300) {
-        this.position.y = 300;
-      }
-    }, 1000);
+    // setInterval(() => {
+    //   if (this.position.y < 300) {
+    //     this.position.y = 300;
+    //   }
+    // }, 1000);
 
     // this.position.y -= this.applyGravity;
 
     // if (this.position.y > height) {
     //   this.position.y = 0;
     // }
+  }
+
+  public gravity() {
+    this.position.y += this.applyGravity;
+    console.log(this.position.y)
+     if (this.position.y >= 300) {
+        this.position.y = 300;
+      }
   }
 
   public collide() {}
