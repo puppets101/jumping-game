@@ -1,9 +1,9 @@
 class GameAudio extends DrawableEntity {
  protected volume: boolean;
 
-  constructor(_height: number, _width: number, _position: p5.Vector, _isVisable: boolean, _img: string,_volume:boolean) {
+  constructor(_position: p5.Vector, _isVisible: boolean, _volume:boolean) {
     
-    super(_height, _width, _position, _isVisable, _img);
+    super(_position, _isVisible);
     this.volume = _volume;
   }
 

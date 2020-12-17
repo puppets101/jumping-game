@@ -1,7 +1,7 @@
 class Obstacle extends MovableEntity {
     protected color: p5.Color;
     public height: number;
-    protected width: number;
+    public width: number;
 
     constructor() {
         super(createVector(500, 0), true, createVector(0, 10), 0); 
@@ -13,6 +13,7 @@ class Obstacle extends MovableEntity {
     public update() {
         this.position.y += this.velocity.y;
         this.position.x -= this.velocity.x;
+        this.isOnScreen()
     }
 
     public draw() {
@@ -20,7 +21,7 @@ class Obstacle extends MovableEntity {
         rect(this.position.x, this.position.y, this.width, this.height)
     }
 
-    public isOnScreen() {
+    private isOnScreen() {
         if (this.position.x + this.width < 0) {
             this.isVisible = false;           
         }
