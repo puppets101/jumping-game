@@ -1,7 +1,7 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-
 let obstacleInterval: number = 1000;
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -24,7 +24,10 @@ function setup() {
   frameRate(60);
   // noCursor();
   game = new Game(); 
-  setInterval(function(){game.gamePlay.addNewObstacle()}, obstacleInterval);
+  setInterval( function() {
+    game.gamePlay.addNewObstacle() 
+    game.gamePlay.addNewPlatform()
+  }, obstacleInterval);
 
 }
 
@@ -40,7 +43,6 @@ function draw() {
   background("green")
   game.update();
   game.draw();
-
   }
 
 
