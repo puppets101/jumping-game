@@ -1,4 +1,6 @@
+
 class GamePlay {
+
   // private score: Score;
   // private character: Character;
   // private obstacle: Obstacle;
@@ -17,6 +19,7 @@ private platform4: Platform;
 private obstacleArray: Obstacle [];
 
   constructor() {
+
     // this.score = new Score();
     // this.character = new Character();
     // this.obstacle = new Obstacle();
@@ -26,11 +29,14 @@ private obstacleArray: Obstacle [];
     // this.gameAudio = new GameAudio();
     // this.pauseScreen = new PauseScreen();
     // this.projectile = new Projectile();
+
     this.platform1 = new Platform(createVector(600, 250));
     this.platform2 = new Platform(createVector(900, 250));
     this.platform3 = new Platform(createVector(900, 150));
     this.platform4 = new Platform(createVector(1200, 150));
     this.obstacleArray = [];
+    // this.movableEntities = [];
+    
   }
   pauseGame() {}
 
@@ -74,6 +80,24 @@ private obstacleArray: Obstacle [];
     this.obstacleArray.push(newObstacle);
   }
 
+
+    // for (const entity of this.movableEntities){
+    //   if(entity instanceof ScrollableEntity) {
+    //     entity.position.x -= 51;
+    //   }
+    //   if(entity instanceof MovableEntity){
+    //     entity.update()
+    //   }
+    // }
+ 
+
+  // private checkCollision(){
+  //   for (const entity of this.movableEntities){
+  //     if(entity instanceof Obstacle) {
+       
+  //     }
+  //   }
+  }
 }
 
 
