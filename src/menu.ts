@@ -10,7 +10,7 @@ class Menu implements Imenu {
      constructor(_isMenuOpen:boolean,_menuState: string){
          this.menuAudio = new MenuAudio();
          this.gameOver = new GameOver();
-         this.pauseScreen = new PauseScreen();
+         this.pauseScreen = new PauseScreen(this);
          this.titleScreen = new TitleScreen();
          this.isMenuOpen = _isMenuOpen
          this.menuState = _menuState
