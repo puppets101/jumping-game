@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+let character: Character;
 let obstacleInterval: number = 1000;
 
 /**
@@ -23,16 +24,14 @@ function setup() {
   createCanvas(600, 400); // bestäm storlek
   frameRate(60);
   // noCursor();
+  
   game = new Game(); 
   setInterval( function() {
     game.gamePlay.addNewObstacle() 
     game.gamePlay.addNewPlatform()
   }, obstacleInterval);
-
+  character = new Character(true, createVector(), true, createVector(), 0);
 }
-
-
-
 
 /**
  * Built in draw function in P5
@@ -40,16 +39,22 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  background("green")
+  background("green");
   game.update();
   game.draw();
-  }
+  character.draw();
+}
 
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    console.log("jump");
+    character.jump();
+  }
+}
 
 /**
- *  Built in windowResize listener function in P5
+   * Built in windowResize listener function in P5
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
- */
+  function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);} 
+   */
