@@ -1,10 +1,11 @@
 class GameOver{
-    
     backGroundColor:String
     menuOptions:String
-    constructor(){
+    private menu: Imenu;
+    constructor(menu: Imenu){
         this.menuOptions = ""
         this.backGroundColor = ""
+        this.menu = menu;
     }
     public playAgain(){
 
