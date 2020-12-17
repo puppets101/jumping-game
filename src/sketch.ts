@@ -46,6 +46,10 @@ function draw() {
   game.update();
   game.draw();
   character.draw();
+
+
+  score1.draw();
+  score1.countScore();
 }
 
 function keyPressed() {
