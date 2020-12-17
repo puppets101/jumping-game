@@ -22,7 +22,17 @@ class Menu implements Imenu {
 
      }
      public draw(){
-         
+        if (this.menuState === "main"){
+            //show main menu
+        } else if (this.menuSate === "pause") {
+            //show pause menu
+        } else if (this.menuState === "gameOver"){
+            //show game over menu 
+        } else {
+            this.titleScreen.draw();
+            
+            
+        }
      }
 
 }

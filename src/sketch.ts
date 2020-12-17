@@ -4,6 +4,8 @@ let platform1: Platform;
 let platform2: Platform;
 let platform3: Platform;
 let platform4: Platform;
+
+let menu: Menu;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -13,6 +15,7 @@ function preload() {
   // Tyvärr har jag inte fått till den globala typningen för
   // inladdningen av ljud men fungerar bra enligt nedan..
   // sound = (window as any).loadSound('../assets/mySound.wav');
+  
 }
 
 /**
@@ -24,6 +27,8 @@ function preload() {
 function setup() {
   createCanvas(600, 400); // bestäm storlek
   frameRate(60);
+  menu = new Menu(true, ""); 
+
   // noCursor();
   // platform1 = new Platform(createVector(600, 250));
   // platform2 = new Platform(createVector(900, 250));
@@ -39,7 +44,8 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  background("green")
+  
+  menu.draw();
   //game.update();
   //game.draw();
   // platform1.update();

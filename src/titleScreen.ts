@@ -22,6 +22,7 @@ class TitleScreen {
   }
 
   draw() {
+    
     //prints the video as an image on the canvas and loops it
     image(this.titleScreen, 0, 0, 1200, 600);
     this.titleScreen.loop();
