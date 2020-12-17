@@ -25,10 +25,10 @@ function setup() {
   createCanvas(600, 400); // bestäm storlek
   frameRate(60);
   // noCursor();
-  platform1 = new Platform(createVector(600, 250));
-  platform2 = new Platform(createVector(900, 250));
-  platform3 = new Platform(createVector(900, 150));
-  platform4 = new Platform(createVector(1200, 150));
+  // platform1 = new Platform(createVector(600, 250));
+  // platform2 = new Platform(createVector(900, 250));
+  // platform3 = new Platform(createVector(900, 150));
+  // platform4 = new Platform(createVector(1200, 150));
  
  // game = new Game();
 }
@@ -42,14 +42,14 @@ function draw() {
   background("green")
   //game.update();
   //game.draw();
-  platform1.update();
-  platform1.draw();
-  platform2.update();
-  platform2.draw();
-  platform3.update();
-  platform3.draw();
-  platform4.update();
-  platform4.draw();
+  // platform1.update();
+  // platform1.draw();
+  // platform2.update();
+  // platform2.draw();
+  // platform3.update();
+  // platform3.draw();
+  // platform4.update();
+  // platform4.draw();
 }
 
 /**
