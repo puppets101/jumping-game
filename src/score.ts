@@ -1,6 +1,4 @@
 
-let score1: Score;
-
 class Score extends DrawableEntity {
    private score: number;
     

@@ -2,6 +2,8 @@
 let game: Game;
 let character: Character;
 let obstacleInterval: number = 1000;
+let score1: Score;
+
 
 /**
  * Built in preload function in P5
