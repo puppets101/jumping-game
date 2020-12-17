@@ -43,6 +43,7 @@ function draw() {
   game.update();
   game.draw();
   character.draw();
+  character.gravity();
 }
 
 function keyPressed() {
