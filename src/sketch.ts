@@ -1,11 +1,10 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-let platform1: Platform;
-let platform2: Platform;
-let platform3: Platform;
-let platform4: Platform;
+
 
 let menu: Menu;
+let outrunFont: any;
+let pixelFont: any;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -16,6 +15,8 @@ function preload() {
   // inladdningen av ljud men fungerar bra enligt nedan..
   // sound = (window as any).loadSound('../assets/mySound.wav');
   
+  outrunFont = loadFont('./assets/fonts/Outrun_future.otf')
+  pixelFont = loadFont('./assets/fonts/PressStart2P-Regular.ttf')
 }
 
 /**
@@ -25,15 +26,12 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(600, 400); // bestäm storlek
+  createCanvas(800, 600); // bestäm storlek
   frameRate(60);
   menu = new Menu(true, ""); 
 
   // noCursor();
-  // platform1 = new Platform(createVector(600, 250));
-  // platform2 = new Platform(createVector(900, 250));
-  // platform3 = new Platform(createVector(900, 150));
-  // platform4 = new Platform(createVector(1200, 150));
+
  
  // game = new Game();
 }
