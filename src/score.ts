@@ -11,6 +11,7 @@ class Score extends DrawableEntity {
         fill("black")
         this.score = this.score + deltaTime / 500
         text(round(this.score), 40, 50);
+        textFont(pixelFont);
     }
 
     draw() {

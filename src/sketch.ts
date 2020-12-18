@@ -59,7 +59,7 @@ function setup() {
 function draw() {
 
   background("green");
-  menu.draw();
+  // menu.draw();
   game.update();
   game.draw();
   character.update();
