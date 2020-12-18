@@ -14,7 +14,5 @@ class Score extends DrawableEntity {
     }
 
     draw() {
-        let v1 = createVector(50, 50);
-        ellipse(v1.x, v1.y, 50, 50)
     }
 }
