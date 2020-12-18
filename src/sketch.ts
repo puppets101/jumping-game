@@ -5,6 +5,7 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 let character: Character;
+let score1: Score;
 
 /**
  * Built in preload function in P5
@@ -36,8 +37,6 @@ function setup() {
   score1 = new Score(createVector(), true, 0);
 
 
-
-
   game = new Game();
 
   character = new Character(
@@ -66,7 +65,6 @@ function draw() {
   character.update();
   character.draw();
 
-  score1.draw();
   score1.countScore();
 }
 
