@@ -1,9 +1,10 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-let character: Character;
-let obstacleInterval: number = 1000;
-let score1: Score;
 
+let menu: Menu;
+let outrunFont: any;
+let pixelFont: any;
+let character: Character;
 
 /**
  * Built in preload function in P5
@@ -14,6 +15,9 @@ function preload() {
   // Tyvärr har jag inte fått till den globala typningen för
   // inladdningen av ljud men fungerar bra enligt nedan..
   // sound = (window as any).loadSound('../assets/mySound.wav');
+  
+  outrunFont = loadFont('./assets/fonts/Outrun_future.otf')
+  pixelFont = loadFont('./assets/fonts/PressStart2P-Regular.ttf')
 }
 
 /**
@@ -23,17 +27,29 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(600, 400); // bestäm storlek
+  createCanvas(800, 600); // bestäm storlek
   frameRate(60);
+  menu = new Menu(true, ""); 
+
   // noCursor();
-  
-  game = new Game(); 
-  setInterval( function() {
-    game.gamePlay.addNewObstacle() 
-    game.gamePlay.addNewPlatform()
-  }, obstacleInterval);
-  character = new Character(true, createVector(), true, createVector(), 0);
+
   score1 = new Score(createVector(), true, 0);
+
+
+
+
+  game = new Game();
+
+  character = new Character(
+    true,
+    createVector(),
+    createVector(),
+    true,
+    createVector(),
+    0
+  );
+
+
 }
 
 /**
@@ -42,20 +58,16 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
+
   background("green");
+  menu.draw();
   game.update();
   game.draw();
+  character.update();
   character.draw();
 
   score1.draw();
   score1.countScore();
-}
-
-function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    console.log("jump");
-    character.jump();
-  }
 }
 
 /**
