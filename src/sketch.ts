@@ -1,7 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
 let character: Character;
-let obstacleInterval: number = 1000;
 
 /**
  * Built in preload function in P5
@@ -26,10 +25,7 @@ function setup() {
   // noCursor();
 
   game = new Game();
-  setInterval(function () {
-    game.gamePlay.addNewObstacle();
-    game.gamePlay.addNewPlatform();
-  }, obstacleInterval);
+
   character = new Character(
     true,
     createVector(),
@@ -49,15 +45,8 @@ function draw() {
   background("green");
   game.update();
   game.draw();
+  character.update();
   character.draw();
-  character.gravity();
-}
-
-function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    console.log("jump");
-    character.jump();
-  }
 }
 
 /**
