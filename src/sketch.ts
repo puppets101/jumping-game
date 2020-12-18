@@ -36,10 +36,7 @@ function setup() {
 
 
   game = new Game();
-  setInterval(function () {
-    game.gamePlay.addNewObstacle();
-    game.gamePlay.addNewPlatform();
-  }, obstacleInterval);
+
   character = new Character(
     true,
     createVector(),
@@ -64,13 +61,6 @@ function draw() {
   game.draw();
   character.update();
   character.draw();
-}
-
-function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    console.log("jump");
-    character.jump();
-  }
 }
 
 /**
