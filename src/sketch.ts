@@ -1,8 +1,17 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+
+let menu: Menu;
+let outrunFont: any;
+let pixelFont: any;
 let character: Character;
-let obstacleInterval: number = 1000;
+
+
 let projectiles: Projectile
+
+let score1: Score;
+
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -12,6 +21,9 @@ function preload() {
   // Tyvärr har jag inte fått till den globala typningen för
   // inladdningen av ljud men fungerar bra enligt nedan..
   // sound = (window as any).loadSound('../assets/mySound.wav');
+  
+  outrunFont = loadFont('./assets/fonts/Outrun_future.otf')
+  pixelFont = loadFont('./assets/fonts/PressStart2P-Regular.ttf')
 }
 
 /**
@@ -21,15 +33,17 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(600, 400); // bestäm storlek
+  createCanvas(800, 600); // bestäm storlek
   frameRate(60);
+  menu = new Menu(true, ""); 
+
   // noCursor();
 
+  score1 = new Score(createVector(), true, 0);
+
+
   game = new Game();
-  setInterval(function () {
-    game.gamePlay.addNewObstacle();
-    game.gamePlay.addNewPlatform();
-  }, obstacleInterval);
+
   character = new Character(
     true,
     createVector(),
@@ -38,6 +52,8 @@ function setup() {
     createVector(),
     0
   );
+
+
 }
 
 /**
@@ -46,20 +62,22 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
+
   background("green");
+  // menu.draw();
   game.update();
   game.draw();
+  character.update();
   character.draw();
-  character.gravity();
+
+ 
   projectiles.shoot()
   
-}
 
-function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    console.log("jump");
-    character.jump();
-  }
+
+
+
+  score1.countScore();
 }
 
 /**
