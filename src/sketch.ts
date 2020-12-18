@@ -24,13 +24,20 @@ function setup() {
   createCanvas(600, 400); // bestäm storlek
   frameRate(60);
   // noCursor();
-  
-  game = new Game(); 
-  setInterval( function() {
-    game.gamePlay.addNewObstacle() 
-    game.gamePlay.addNewPlatform()
+
+  game = new Game();
+  setInterval(function () {
+    game.gamePlay.addNewObstacle();
+    game.gamePlay.addNewPlatform();
   }, obstacleInterval);
-  character = new Character(true, createVector(), true, createVector(), 0);
+  character = new Character(
+    true,
+    createVector(),
+    createVector(),
+    true,
+    createVector(),
+    0
+  );
 }
 
 /**
