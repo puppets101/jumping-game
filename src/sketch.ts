@@ -2,7 +2,7 @@
 let game: Game;
 let character: Character;
 let obstacleInterval: number = 1000;
-
+let projectiles: Projectile
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -51,6 +51,8 @@ function draw() {
   game.draw();
   character.draw();
   character.gravity();
+  projectiles.shoot()
+  
 }
 
 function keyPressed() {
