@@ -46,14 +46,7 @@ function draw() {
   menu.draw();
   //game.update();
   //game.draw();
-  // platform1.update();
-  // platform1.draw();
-  // platform2.update();
-  // platform2.draw();
-  // platform3.update();
-  // platform3.draw();
-  // platform4.update();
-  // platform4.draw();
+
 }
 
 /**
