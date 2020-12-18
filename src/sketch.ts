@@ -33,6 +33,9 @@ function setup() {
 
   // noCursor();
 
+  score1 = new Score(createVector(), true, 0);
+
+
 
 
   game = new Game();
@@ -45,6 +48,7 @@ function setup() {
     createVector(),
     0
   );
+
 
 }
 
@@ -61,6 +65,9 @@ function draw() {
   game.draw();
   character.update();
   character.draw();
+
+  score1.draw();
+  score1.countScore();
 }
 
 /**

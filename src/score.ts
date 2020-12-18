@@ -1,3 +1,4 @@
+
 class Score extends DrawableEntity {
    private score: number;
     
@@ -7,10 +8,13 @@ class Score extends DrawableEntity {
     }
     
     countScore() {
-        
+        fill("black")
+        this.score = this.score + deltaTime / 500
+        text(round(this.score), 40, 50);
     }
 
     draw() {
-
+        let v1 = createVector(50, 50);
+        ellipse(v1.x, v1.y, 50, 50)
     }
 }
