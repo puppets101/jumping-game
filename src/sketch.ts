@@ -71,7 +71,6 @@ function draw() {
   character.draw();
 
  
-  projectiles.shoot()
   
 
 
