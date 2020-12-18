@@ -5,7 +5,12 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 let character: Character;
+
+
+let projectiles: Projectile
+
 let score1: Score;
+
 
 /**
  * Built in preload function in P5
@@ -64,6 +69,13 @@ function draw() {
   game.draw();
   character.update();
   character.draw();
+
+ 
+  projectiles.shoot()
+  
+
+
+
 
   score1.countScore();
 }
