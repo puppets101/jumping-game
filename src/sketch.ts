@@ -1,10 +1,11 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
 
-
 let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
+let character: Character;
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -32,8 +33,22 @@ function setup() {
 
   // noCursor();
 
- 
- // game = new Game();
+
+
+  game = new Game();
+  setInterval(function () {
+    game.gamePlay.addNewObstacle();
+    game.gamePlay.addNewPlatform();
+  }, obstacleInterval);
+  character = new Character(
+    true,
+    createVector(),
+    createVector(),
+    true,
+    createVector(),
+    0
+  );
+
 }
 
 /**
@@ -42,16 +57,25 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  
-  menu.draw();
-  //game.update();
-  //game.draw();
 
+  background("green");
+  menu.draw();
+  game.update();
+  game.draw();
+  character.update();
+  character.draw();
+}
+
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    console.log("jump");
+    character.jump();
+  }
 }
 
 /**
- *  Built in windowResize listener function in P5
- */
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+   * Built in windowResize listener function in P5
+
+  function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);} 
+   */

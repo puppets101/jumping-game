@@ -1,17 +1,18 @@
 class Game {
     
-    private menu: Menu;
-    private gamePlay: GamePlay;
+    // private menu: Menu;
+    public gamePlay: GamePlay;
 
     constructor() {
-        this.menu = new Menu(true);
+    //     this.menu = new Menu(true);
         this.gamePlay = new GamePlay();
     }
         
     update(){
-        
+        this.gamePlay.update();
     }
-    draw() {
 
+    draw() {
+        this.gamePlay.draw();
     }
 }
