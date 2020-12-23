@@ -1,10 +1,11 @@
 class Game {
+    public menu: Menu;
     
     // private menu: Menu;
     public gamePlay: GamePlay;
 
     constructor() {
-    //     this.menu = new Menu(true);
+        this.menu = new Menu(true, "");
         this.gamePlay = new GamePlay();
     }
         
@@ -14,5 +15,6 @@ class Game {
 
     draw() {
         this.gamePlay.draw();
+        // this.menu.draw();
     }
 }

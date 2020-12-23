@@ -14,7 +14,9 @@ class GamePlay {
   private platformArray: Platform[];
   private obstacleInterval: number;
 
+
   constructor() {
+    
     // this.score = new Score();
     // this.character = new Character();
     // this.obstacle = new Obstacle();
@@ -39,9 +41,9 @@ class GamePlay {
     }, this.obstacleInterval);
   }
 
-  pauseGame() {}
+  pauseGame() { }
 
-  gameOver() {}
+  gameOver() { }
 
   public update() {
     this.checkCollisions();
@@ -77,17 +79,17 @@ class GamePlay {
           (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.platformArray[p].position.y &&
             this.platformArray[p].position.x >
-              this.obstacleArray[i].position.x - this.platformArray[p].width &&
+            this.obstacleArray[i].position.x - this.platformArray[p].width &&
             this.platformArray[p].position.x <
-              this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the higher platforms
+            this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the higher platforms
           (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.platformArray[p].position.y &&
             this.platformArray[p].position.x >
-              this.obstacleArray[i].position.x - this.platformArray[p].width &&
+            this.obstacleArray[i].position.x - this.platformArray[p].width &&
             this.platformArray[p].position.x <
-              this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the lower platforms
+            this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the lower platforms
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-            400
+          400
         ) {
           // check if obstacle lands on the ground
           this.obstacleArray[i].velocity.y = 0;
