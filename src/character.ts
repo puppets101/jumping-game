@@ -30,16 +30,13 @@ class Character extends MovableEntity {
   // }
 
   public jump() {
-    console.log("jump");
-    this.velocity.y += this.liftForce;
-  }
-
-  public gravity() {
-    // this.applyGravity = 0.6;
-    // this.position.y += this.applyGravity;
-    // if (this.position.y >= 300) {
-    //   this.position.y = 300;
-    // }
+    // Prevents character to jump if already in air
+    if (this.position.y < 320) {
+      console.log("jumping");
+    } else {
+      console.log("jump");
+      this.velocity.y += this.liftForce;
+    }
   }
 
   public collide() {}
