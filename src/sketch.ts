@@ -61,7 +61,7 @@ function draw() {
   // menu.draw();
   game.update();
   game.draw();
-  character.update();
+  // character.update();
   character.draw();
 
   score1.countScore();
