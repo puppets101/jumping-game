@@ -68,7 +68,7 @@ function draw() {
 }
 
 function keyPressed() {
-  if (key === " ") {
+  if (keyCode === UP_ARROW) {
     character.jump();
   }
 }

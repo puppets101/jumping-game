@@ -19,7 +19,7 @@ class Character extends MovableEntity {
     // this.prevKeyIsPressed = false;
     this.velocity = createVector(0, 0);
     // this.applyGravity = 0.1;
-    this.liftForce = -40;
+    this.liftForce = -30;
   }
 
   // private handleUserInput() {
@@ -30,6 +30,7 @@ class Character extends MovableEntity {
   // }
 
   public jump() {
+    console.log("jump");
     this.velocity.y += this.liftForce;
   }
 
