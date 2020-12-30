@@ -1,6 +1,6 @@
 class Character extends MovableEntity {
   private isAlive: boolean;
-  private size: p5.Vector;
+  public size: p5.Vector;
   // private prevKeyIsPressed: boolean;
   private liftForce: number;
 
@@ -31,7 +31,7 @@ class Character extends MovableEntity {
 
   public jump() {
     // Prevents character to jump if already in air
-    if (this.position.y < 320) {
+    if (this.position.y + this.size.y < 400) {
       console.log("jumping");
     } else {
       console.log("jump");

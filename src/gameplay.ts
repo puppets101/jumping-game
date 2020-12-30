@@ -93,6 +93,16 @@ class GamePlay {
           this.obstacleArray[i].velocity.y = 0;
           this.obstacleArray[i].velocity.x = 3;
         }
+        // Character collision with object
+        if (
+          this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
+            character.position.x - character.size.x &&
+          this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
+            character.position.y + character.size.y
+        ) {
+          console.log("hit");
+          // TODO - Create func to lose a life
+        }
       }
     }
   }
