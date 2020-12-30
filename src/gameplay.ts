@@ -13,6 +13,8 @@ class GamePlay {
   private obstacleArray: Obstacle[];
   private platformArray: Platform[];
   private obstacleInterval: number;
+  private lives: Lives;
+  private graceModeActive: boolean;
 
   constructor() {
     // this.score = new Score();
@@ -37,6 +39,8 @@ class GamePlay {
       this.addNewObstacle();
       this.addNewPlatform();
     }, this.obstacleInterval);
+    this.lives = new Lives(createVector(), true);
+    this.graceModeActive = false;
   }
 
   pauseGame() {}
@@ -100,8 +104,18 @@ class GamePlay {
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             character.position.y + character.size.y
         ) {
+          if (this.graceModeActive) {
+            console.log(this.graceModeActive);
+            return true;
+          }
           console.log("hit");
-          // TODO - Create func to lose a life
+          // Create func to lose a life and add two seconds of grace mode
+          this.lives.countLives();
+          this.graceModeActive = true;
+          setTimeout(() => {
+            this.graceModeActive = false;
+          }, 2000);
+          return true;
         }
       }
     }
@@ -117,6 +131,7 @@ class GamePlay {
     for (let i = 0; i < this.platformArray.length; i++) {
       this.platformArray[i].draw();
     }
+    this.lives.draw();
   }
 
   public addNewObstacle() {
