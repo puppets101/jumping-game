@@ -1,6 +1,6 @@
 class Platform extends MovableEntity {
   private color: p5.Color;
-  private height: number;
+  public height: number;
   public width: number;
   private highOrLow: number;
 
@@ -18,26 +18,25 @@ class Platform extends MovableEntity {
 
     // highOrLow value decides whether platform should have high or low yPosition
     if (this.highOrLow === 1) {
-      this.position.y = 250
+      this.position.y = 250;
     } else if (this.highOrLow === 0) {
-      this.position.y = 150
+      this.position.y = 150;
     }
 
-    this.isOnScreen()
+    this.isOnScreen();
   }
 
   private isOnScreen() {
     if (this.position.x + this.width < 0) {
-        this.isVisible = false;           
+      this.isVisible = false;
+    } else {
+      this.isVisible = true;
     }
-    else {
-        this.isVisible = true;
-    }
-}
+  }
 
   public draw() {
-    fill(this.color)
-    noStroke()
-    rect(this.position.x, this.position.y, this.width, this.height)
+    fill(this.color);
+    noStroke();
+    rect(this.position.x, this.position.y, this.width, this.height);
   }
 }
