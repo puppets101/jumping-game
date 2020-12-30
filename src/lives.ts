@@ -9,6 +9,8 @@ class Lives extends DrawableEntity {
     this.life--;
     if (this.life === 0) {
       console.log("game over");
+      character.isAlive = false;
+      // TODO - Implement logic to show game over menu
     }
   }
 

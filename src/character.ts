@@ -1,5 +1,5 @@
 class Character extends MovableEntity {
-  private isAlive: boolean;
+  public isAlive: boolean;
   public size: p5.Vector;
   // private prevKeyIsPressed: boolean;
   private liftForce: number;
