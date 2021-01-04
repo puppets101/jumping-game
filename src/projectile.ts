@@ -10,8 +10,7 @@ class Projectile extends MovableEntity {
   }
   public shoot() {
     if (keyCode === LEFT_ARROW) {
-      fill(this.color)
-      ellipse(this.position.x, this.position.y, this.diameter)
+      this.draw()
       this.position.x = this.position.x += 5
     }
   };
