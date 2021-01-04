@@ -4,6 +4,7 @@ class TitleScreen {
   private fade: number;
   private fadeAmount: number;
   private titleScreen: any; // ANYYYYY ???????????????????????????????????
+  private createTitleScreen: any; // AAAAAAAAAAAAAAAAAAAAAAAAAAANNYYYYYYY?????
 
   constructor(menu: Imenu) {
     this.backstory = "";
@@ -12,24 +13,29 @@ class TitleScreen {
     //fade in and out for the press any key text
     this.fadeAmount = 1;
     this.fade = 40;
+
+
     //add the video to the variable titleScreen
-    this.titleScreen = createVideo(["./assets/video/title.mp4"]);
-    // default videos prints on the dom, not on canvas, so its hidden by default and then printed on cavas in draw function
-    this.titleScreen.hide();
+    this.titleScreen = loadImage("./assets/imgs/titleGif.gif");
+    
+    
   }
 
   pressAnyKey() {
     // if key is pressed -- menuState = main
   }
-
+ // TACK FÖR ART https://www.reddit.com/r/cyberpunkgame/comments/9big46/cyberpunk_2077_pixel_art_oc/
   draw() {
-  
-      //prints the video as an image on the canvas and loops it
-      image(this.titleScreen, 0, 0, 800, 600);
-      this.titleScreen.loop();
+
+    //move this to titlescreen class????????????????????????????????????? cant reach the menuState var in there atm
+    if (keyIsPressed === true) {
+      menu.menuState = "main";
+    }
+    
+    image(this.titleScreen, 0, 0, width, height);
+    
       // game.update();
       // game.draw();
-
       //text for the logo
       textFont(outrunFont);
       textSize(50);

@@ -8,6 +8,7 @@ let pixelFont: any;
 let projectiles: Projectile;
 let backgroundImg: any;
 
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -46,8 +47,9 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
+  
+  
   background(backgroundImg);
-  // menu.draw();
   game.update();
   game.draw();
 }

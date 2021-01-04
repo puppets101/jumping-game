@@ -20,11 +20,16 @@ class Menu implements Imenu {
   }
   public startGame() {}
   public quit() {}
+
   public update() {
-    //handles the users click 
-    if (!this.prevMouseIsPressed && mouseIsPressed && menu.menuState === "main") {
+    //handles the users click  
+    
+    console.log(menu.menuState);
+    
+    if (menu.menuState === "main") {
       this.prevMouseIsPressed = false;
-      const mouseClicked = () => {
+      // const mouseClicked = () => {
+        console.log(mouseX + '' mouseY);
         if (this.mainMenuOptions === 0) {
           if (mouseX < 500 && mouseX > 300) {
             if (mouseY < 400 && mouseY > 377) {
@@ -46,14 +51,13 @@ class Menu implements Imenu {
               }
             }
           }
-        }
+        // }
       };
-      mouseClicked();
+      // mouseClicked();
     }
     this.prevMouseIsPressed = mouseIsPressed;
   }
   public draw() {
-    this.update();
     if (this.isMenuOpen === true) {
       if (this.menuState === "main") {
         //main menu layout
