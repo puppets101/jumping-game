@@ -18,7 +18,6 @@ class Character extends MovableEntity {
     this.position = createVector(100, 320);
     // this.prevKeyIsPressed = false;
     this.velocity = createVector(0, 0);
-    // this.applyGravity = 0.1;
     this.liftForce = -30;
   }
 

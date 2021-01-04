@@ -63,6 +63,8 @@ function draw() {
   game.draw();
 
   character.draw();
+  // console.log(character.position.y);
+  // console.log(character.position.x);
 
   score1.countScore();
 }

@@ -97,6 +97,7 @@ class GamePlay {
           this.obstacleArray[i].velocity.y = 0;
           this.obstacleArray[i].velocity.x = 3;
         }
+
         // Character collision with object
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
@@ -116,6 +117,28 @@ class GamePlay {
             this.graceModeActive = false;
           }, 2000);
           return true;
+        }
+      }
+    }
+
+    // Character collision with platform
+    for (let p = 0; p < this.platformArray.length; p++) {
+      if (this.platformArray[p].position.x < 150) {
+        console.log("span 100-150");
+        if (
+          round(character.position.y) + character.size.y <
+            this.platformArray[p].position.y + 3 &&
+          round(character.position.y) + character.size.y >
+            this.platformArray[p].position.y - 3 &&
+          character.position.x <
+            this.platformArray[p].position.x + this.platformArray[p].width
+          // Remember bug - platforms on top of eachother - fall down
+        ) {
+          console.log("lands");
+          character.velocity.y = 0;
+          character.applyGravity = 0;
+        } else {
+          character.applyGravity = 0.4;
         }
       }
     }
