@@ -123,23 +123,30 @@ class GamePlay {
 
     // Character collision with platform
     for (let p = 0; p < this.platformArray.length; p++) {
-      if (this.platformArray[p].position.x < 150) {
-        console.log("span 100-150");
-        if (
-          round(character.position.y) + character.size.y <
-            this.platformArray[p].position.y + 3 &&
-          round(character.position.y) + character.size.y >
-            this.platformArray[p].position.y - 3 &&
-          character.position.x <
-            this.platformArray[p].position.x + this.platformArray[p].width
-          // Remember bug - platforms on top of eachother - fall down
-        ) {
-          console.log("lands");
-          character.velocity.y = 0;
-          character.applyGravity = 0;
-        } else {
-          character.applyGravity = 0.4;
-        }
+      if (
+        round(character.position.y) + character.size.y <
+          this.platformArray[p].position.y + 3 &&
+        round(character.position.y) + character.size.y >
+          this.platformArray[p].position.y - 3 &&
+        character.position.x <
+          this.platformArray[p].position.x + this.platformArray[p].width &&
+        character.position.x + character.size.x >
+          this.platformArray[p].position.x &&
+        character.velocity.y >= 0
+      ) {
+        character.velocity.y = 0;
+        character.applyGravity = 0;
+        character.canJump = true;
+      }
+      if (
+        round(character.position.y) + character.size.y <
+          this.platformArray[p].position.y + 3 &&
+        round(character.position.y) + character.size.y >
+          this.platformArray[p].position.y - 3 &&
+        character.position.x >
+          this.platformArray[p].position.x + this.platformArray[p].width
+      ) {
+        character.applyGravity = 0.4;
       }
     }
   }

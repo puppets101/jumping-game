@@ -3,6 +3,7 @@ class Character extends MovableEntity {
   public size: p5.Vector;
   // private prevKeyIsPressed: boolean;
   private liftForce: number;
+  public canJump: boolean;
 
   constructor(
     isAlive: boolean,
@@ -19,6 +20,7 @@ class Character extends MovableEntity {
     // this.prevKeyIsPressed = false;
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
+    this.canJump = true;
   }
 
   // private handleUserInput() {
@@ -29,12 +31,13 @@ class Character extends MovableEntity {
   // }
 
   public jump() {
-    // Prevents character to jump if already in air
-    if (this.position.y + this.size.y < 400) {
-      console.log("jumping");
-    } else {
+    if (this.canJump) {
       console.log("jump");
-      this.velocity.y += this.liftForce;
+      character.velocity.y += this.liftForce;
+      this.applyGravity = 0.4;
+      this.canJump = false;
+    } else {
+      console.log("jumping");
     }
   }
 
@@ -48,6 +51,7 @@ class Character extends MovableEntity {
     if (this.position.y > 320) {
       this.position.y = 320;
       this.velocity.y = 0;
+      this.canJump = true;
     }
     if (this.position.y < 0) {
       this.position.y = 0;
