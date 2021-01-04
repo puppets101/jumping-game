@@ -5,14 +5,11 @@ class Character extends MovableEntity {
   private liftForce: number;
   public canJump: boolean;
 
-  constructor(
-    isAlive: boolean,
-    size: p5.Vector,
-    position: p5.Vector,
-    isVisible: boolean,
-    velocity: p5.Vector,
-    applyGravity: number
-  ) {
+  constructor() // position: p5.Vector, // size: p5.Vector, // isAlive: boolean,
+  // isVisible: boolean,
+  // velocity: p5.Vector,
+  // applyGravity: number
+  {
     super(createVector(), true, createVector(), 0.4);
     this.isAlive = true;
     this.size = createVector(50, 80);
@@ -33,7 +30,7 @@ class Character extends MovableEntity {
   public jump() {
     if (this.canJump) {
       console.log("jump");
-      character.velocity.y += this.liftForce;
+      this.velocity.y += this.liftForce;
       this.applyGravity = 0.4;
       this.canJump = false;
     } else {

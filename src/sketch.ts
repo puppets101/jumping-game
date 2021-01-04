@@ -4,11 +4,8 @@ let game: Game;
 let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
-let character: Character;
 
 let projectiles: Projectile;
-
-let score1: Score;
 
 /**
  * Built in preload function in P5
@@ -37,18 +34,7 @@ function setup() {
 
   // noCursor();
 
-  score1 = new Score(createVector(), true, 0);
-
   game = new Game();
-
-  character = new Character(
-    true,
-    createVector(),
-    createVector(),
-    true,
-    createVector(),
-    0
-  );
 }
 
 /**
@@ -61,17 +47,11 @@ function draw() {
   // menu.draw();
   game.update();
   game.draw();
-
-  character.draw();
-  // console.log(character.position.y);
-  // console.log(character.position.x);
-
-  score1.countScore();
 }
 
 function keyPressed() {
   if (keyCode === UP_ARROW) {
-    character.jump();
+    game.gamePlay.character.jump();
   }
 }
 
