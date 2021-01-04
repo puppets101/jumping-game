@@ -1,6 +1,6 @@
 class GamePlay {
-  // private score: Score;
-  // private character: Character;
+  private score: Score;
+  public character: Character;
   // private obstacle: Obstacle;
   // private platform: Platform;
   // private background: Background;
@@ -17,8 +17,8 @@ class GamePlay {
   private graceModeActive: boolean;
 
   constructor() {
-    // this.score = new Score();
-    // this.character = new Character();
+    this.score = new Score();
+    this.character = new Character();
     // this.obstacle = new Obstacle();
     // this.platform = new Platform();
     // this.background = new Background();
@@ -97,12 +97,13 @@ class GamePlay {
           this.obstacleArray[i].velocity.y = 0;
           this.obstacleArray[i].velocity.x = 3;
         }
+
         // Character collision with object
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
-            character.position.x - character.size.x &&
+            this.character.position.x - this.character.size.x &&
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-            character.position.y + character.size.y
+            this.character.position.y + this.character.size.y
         ) {
           if (this.graceModeActive) {
             console.log(this.graceModeActive);
@@ -119,6 +120,35 @@ class GamePlay {
         }
       }
     }
+
+    // Character collision with platform
+    for (let p = 0; p < this.platformArray.length; p++) {
+      if (
+        round(this.character.position.y) + this.character.size.y <
+          this.platformArray[p].position.y + 3 &&
+        round(this.character.position.y) + this.character.size.y >
+          this.platformArray[p].position.y - 3 &&
+        this.character.position.x <
+          this.platformArray[p].position.x + this.platformArray[p].width &&
+        this.character.position.x + this.character.size.x >
+          this.platformArray[p].position.x &&
+        this.character.velocity.y >= 0
+      ) {
+        this.character.velocity.y = 0;
+        this.character.applyGravity = 0;
+        this.character.canJump = true;
+      }
+      if (
+        round(this.character.position.y) + this.character.size.y <
+          this.platformArray[p].position.y + 3 &&
+        round(this.character.position.y) + this.character.size.y >
+          this.platformArray[p].position.y - 3 &&
+        this.character.position.x >
+          this.platformArray[p].position.x + this.platformArray[p].width
+      ) {
+        this.character.applyGravity = 0.4;
+      }
+    }
   }
 
   public draw() {
@@ -132,6 +162,9 @@ class GamePlay {
       this.platformArray[i].draw();
     }
     this.lives.draw();
+    this.character.draw();
+    this.character.update();
+    this.score.draw();
   }
 
   public addNewObstacle() {
