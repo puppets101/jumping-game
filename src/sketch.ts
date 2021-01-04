@@ -6,6 +6,7 @@ let outrunFont: any;
 let pixelFont: any;
 
 let projectiles: Projectile;
+let backgroundImg: any;
 
 /**
  * Built in preload function in P5
@@ -19,6 +20,8 @@ function preload() {
 
   outrunFont = loadFont("./assets/fonts/Outrun_future.otf");
   pixelFont = loadFont("./assets/fonts/PressStart2P-Regular.ttf");
+  backgroundImg = loadImage("./assets/imgs/cyberpunk-street.png")
+
 }
 
 /**
@@ -43,7 +46,7 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  background("green");
+  background(backgroundImg);
   // menu.draw();
   game.update();
   game.draw();

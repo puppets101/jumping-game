@@ -13,7 +13,7 @@ class Character extends MovableEntity {
     super(createVector(), true, createVector(), 0.4);
     this.isAlive = true;
     this.size = createVector(50, 80);
-    this.position = createVector(100, 320);
+    this.position = createVector(100, 490);
     // this.prevKeyIsPressed = false;
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
@@ -45,8 +45,8 @@ class Character extends MovableEntity {
     this.velocity.y *= 0.9;
     this.position.y += this.velocity.y;
 
-    if (this.position.y > 320) {
-      this.position.y = 320;
+    if (this.position.y > 490) {
+      this.position.y = 490;
       this.velocity.y = 0;
       this.canJump = true;
     }
