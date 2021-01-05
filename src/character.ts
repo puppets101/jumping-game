@@ -4,7 +4,7 @@ class Character extends MovableEntity {
   // private prevKeyIsPressed: boolean;
   private liftForce: number;
   public canJump: boolean;
-
+ 
   constructor() // position: p5.Vector, // size: p5.Vector, // isAlive: boolean,
   // isVisible: boolean,
   // velocity: p5.Vector,
@@ -18,6 +18,7 @@ class Character extends MovableEntity {
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
     this.canJump = true;
+    
   }
 
   // private handleUserInput() {
@@ -54,6 +55,7 @@ class Character extends MovableEntity {
       this.position.y = 0;
       this.velocity.y = 0;
     }
+    
   }
 
   public show() {
@@ -65,4 +67,8 @@ class Character extends MovableEntity {
     this.update();
     this.show();
   }
-}
+
+
+  
+  };
+

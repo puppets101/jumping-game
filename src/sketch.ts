@@ -53,7 +53,12 @@ function keyPressed() {
   if (keyCode === UP_ARROW) {
     game.gamePlay.character.jump();
   }
+  if (keyCode === 32){
+    game.gamePlay.addNewProjectiles();
+    
+  }
 }
+
 
 /**
    * Built in windowResize listener function in P5

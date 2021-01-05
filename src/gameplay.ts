@@ -7,7 +7,7 @@ class GamePlay {
   // private lives: Lives;
   // private gameAudio: GameAudio;
   // private pauseScreen: PauseScreen;
-  // private projectile: Projectile;
+   //public projectile: Projectile;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
   private obstacleArray: Obstacle[];
@@ -15,7 +15,7 @@ class GamePlay {
   private obstacleInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
-
+  private projectileArray: Projectile[]
   constructor() {
     this.score = new Score();
     this.character = new Character();
@@ -25,7 +25,7 @@ class GamePlay {
     // this.lives = new Lives();
     // this.gameAudio = new GameAudio();
     // this.pauseScreen = new PauseScreen();
-    // this.projectile = new Projectile();
+    //this.projectile = new Projectile();
 
     /* this.platform1 = new Platform("high");
     this.platform2 = new Platform("low");
@@ -33,6 +33,7 @@ class GamePlay {
     this.platform4 = new Platform("low"); */
     this.obstacleArray = [];
     this.platformArray = [];
+    this.projectileArray = [];
     // this.movableEntities = [];
     this.obstacleInterval = 1000;
     setInterval(() => {
@@ -48,8 +49,10 @@ class GamePlay {
   gameOver() {}
 
   public update() {
+    this.projectileCollisions();
     this.checkCollisions();
-
+    
+    //this.projectile.shoot()
     // Uupdates all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].update();
@@ -58,6 +61,17 @@ class GamePlay {
       // Removes obstacles from array when out of screen
       if (this.obstacleArray[i].isVisible === false) {
         this.obstacleArray.splice(i, 1);
+      }
+    }
+    // uppdates prjectiles
+    for (let i = 0; i < this.projectileArray.length; i++) {
+      this.projectileArray[i].update();
+      this.projectileArray[i].draw();
+      
+
+      // 
+      if (this.projectileArray[i].isVisible === false) {
+        this.projectileArray.splice(i, 1);
       }
     }
 
@@ -72,7 +86,7 @@ class GamePlay {
       }
     }
   }
-
+  
   private checkCollisions() {
     // Compares the obstacle positions to the platform positions
     for (let i = 0; i < this.obstacleArray.length; i++) {
@@ -97,7 +111,7 @@ class GamePlay {
           this.obstacleArray[i].velocity.y = 0;
           this.obstacleArray[i].velocity.x = 3;
         }
-
+       
         // Character collision with object
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
@@ -149,8 +163,20 @@ class GamePlay {
         this.character.applyGravity = 0.4;
       }
     }
+   
   }
-
+  // projectile collision with object
+  public projectileCollisions(){
+      
+      for (let j = 0; j< this.obstacleArray.length; j++){
+        for(let i = 0; i < this.projectileArray.length; i++) {
+          if (this.projectileArray[i].position.x  == this.obstacleArray[j].position.x  && 
+            this.projectileArray[i].position.y + 5 > this.obstacleArray[j].position.y &&
+             this.projectileArray[i].position.y - 5 < this.obstacleArray[j].position.y + this.obstacleArray[j].height)
+          {this.obstacleArray.splice(j,1); this.projectileArray.splice(i,1)} 
+        }
+      }
+  }
   public draw() {
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
@@ -161,10 +187,16 @@ class GamePlay {
     for (let i = 0; i < this.platformArray.length; i++) {
       this.platformArray[i].draw();
     }
+    for (let i = 0; i < this.projectileArray.length; i++){
+      this.projectileArray[i].draw();
+    }
     this.lives.draw();
     this.character.draw();
     this.character.update();
     this.score.draw();
+    
+    
+    
   }
 
   public addNewObstacle() {
@@ -181,7 +213,10 @@ class GamePlay {
     let newPlatform = new Platform(randomHeight, randomPosition);
     this.platformArray.push(newPlatform);
   }
-
+  public addNewProjectiles(){
+    let newProjectile = new Projectile();
+    this.projectileArray.push(newProjectile);
+  }
   // for (const entity of this.movableEntities){
   //   if(entity instanceof ScrollableEntity) {
   //     entity.position.x -= 51;
