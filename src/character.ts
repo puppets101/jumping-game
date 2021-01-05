@@ -4,6 +4,8 @@ class Character extends MovableEntity {
   // private prevKeyIsPressed: boolean;
   private liftForce: number;
   public canJump: boolean;
+  private runningGif: p5.Image;
+  private runnerAnimation: any;
 
   constructor() // position: p5.Vector, // size: p5.Vector, // isAlive: boolean,
   // isVisible: boolean,
@@ -18,6 +20,10 @@ class Character extends MovableEntity {
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
     this.canJump = true;
+    this.runningGif = loadImage('./assets/sprites/runner.gif')
+    this.runnerAnimation = createImg('./assets/sprites/runner.gif')
+    // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
+    
   }
 
   // private handleUserInput() {
@@ -50,8 +56,12 @@ class Character extends MovableEntity {
   }
 
   public show() {
-    fill(255);
-    rect(this.position.x, this.position.y, this.size.x, this.size.y);
+    // fill(0);
+    // rect(this.position.x, this.position.y, this.size.x, this.size.y);
+    // image(this.runningGif, this.position.x, this.position.y, this.size.x, this.size.y)
+    this.runnerAnimation.size(120, 130); 
+    this.runnerAnimation.position(this.position.x - 30, this.position.y - 12);
+    
   }
 
   public draw() {
