@@ -11,7 +11,7 @@ class Platform extends MovableEntity {
     this.height = 20;
     this.width = 200;
     this.highOrLow = highOrLow;
-    this.platformAsset = createImg('./assets/imgs/neon.png')
+    // this.platformAsset = createImg('./assets/imgs/neon.png')
   }
 
   public update() {
@@ -41,7 +41,7 @@ class Platform extends MovableEntity {
     noStroke();
     rect(this.position.x, this.position.y, this.width, this.height);
     // image(this.pklatformAsset, this.position.x, this.position.y);
-    this.platformAsset.size(250, 100)
-    this.platformAsset.position(this.position.x -23, this.position.y - 40);
+    // this.platformAsset.size(250, 100)
+    // this.platformAsset.position(this.position.x -23, this.position.y - 40);
   }
 }

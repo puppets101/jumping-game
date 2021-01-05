@@ -162,6 +162,7 @@ class GamePlay {
   public draw() {
 
     this.background.draw();
+    
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].draw();
