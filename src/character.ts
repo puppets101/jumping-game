@@ -29,12 +29,9 @@ class Character extends MovableEntity {
 
   public jump() {
     if (this.canJump) {
-      console.log("jump");
       this.velocity.y += this.liftForce;
       this.applyGravity = 0.4;
       this.canJump = false;
-    } else {
-      console.log("jumping");
     }
   }
 
@@ -49,10 +46,6 @@ class Character extends MovableEntity {
       this.position.y = 490;
       this.velocity.y = 0;
       this.canJump = true;
-    }
-    if (this.position.y < 0) {
-      this.position.y = 0;
-      this.velocity.y = 0;
     }
   }
 
