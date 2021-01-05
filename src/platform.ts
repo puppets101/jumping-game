@@ -5,10 +5,10 @@ class Platform extends MovableEntity {
   private highOrLow: number;
 
   constructor(highOrLow: number, randomX: number) {
-    super(createVector(600 + randomX, 250), true, createVector(3, 0), 0); // Changing velocity.x alters speed
+    super(createVector(800 + randomX, 250), true, createVector(3, 0), 0); // Changing velocity.x alters speed
     this.color = color(0, 0, 0);
     this.height = 20;
-    this.width = 100;
+    this.width = 200;
     this.highOrLow = highOrLow;
   }
 
@@ -18,9 +18,9 @@ class Platform extends MovableEntity {
 
     // highOrLow value decides whether platform should have high or low yPosition
     if (this.highOrLow === 1) {
-      this.position.y = 250;
+      this.position.y = 420;
     } else if (this.highOrLow === 0) {
-      this.position.y = 150;
+      this.position.y = 260;
     }
 
     this.isOnScreen();

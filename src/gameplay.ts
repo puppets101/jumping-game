@@ -13,32 +13,33 @@ class GamePlay {
   private obstacleArray: Obstacle[];
   private platformArray: Platform[];
   private obstacleInterval: number;
+  private platformInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
 
   constructor() {
     this.score = new Score();
     this.character = new Character();
-    // this.obstacle = new Obstacle();
-    // this.platform = new Platform();
     // this.background = new Background();
-    // this.lives = new Lives();
     // this.gameAudio = new GameAudio();
     // this.pauseScreen = new PauseScreen();
     // this.projectile = new Projectile();
 
-    /* this.platform1 = new Platform("high");
-    this.platform2 = new Platform("low");
-    this.platform3 = new Platform("high");
-    this.platform4 = new Platform("low"); */
     this.obstacleArray = [];
     this.platformArray = [];
-    // this.movableEntities = [];
-    this.obstacleInterval = 1000;
+    this.platformInterval = 1000;
+    this.obstacleInterval = 1500;
+
+    // interval for creating platforms
+    setInterval(() => {
+      this.addNewPlatform();
+    }, this.platformInterval);
+
+    //interval for creating obstacles
     setInterval(() => {
       this.addNewObstacle();
-      this.addNewPlatform();
     }, this.obstacleInterval);
+
     this.lives = new Lives(createVector(), true);
     this.graceModeActive = false;
   }
@@ -48,6 +49,10 @@ class GamePlay {
   gameOver() {}
 
   public update() {
+   
+
+    console.log(this.obstacleInterval);
+
     this.checkCollisions();
 
     // Uupdates all obstacles
@@ -91,7 +96,7 @@ class GamePlay {
             this.platformArray[p].position.x <
               this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the lower platforms
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-            400
+            570
         ) {
           // check if obstacle lands on the ground
           this.obstacleArray[i].velocity.y = 0;
