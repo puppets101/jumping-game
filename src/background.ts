@@ -8,26 +8,30 @@ class Background extends MovableEntity {
 
 
   constructor(position: p5.Vector, isVisible: boolean, velocity: p5.Vector, applyGravity: number) {
-    // super(createVector(), isVisible, velocity, applyGravity)
     super(createVector(0, 0), true, createVector(3, 0), 0);
+    //img for background
     this.scrollingImage = loadImage("./assets/imgs/cyberpunk-street.png");
-    this.secondImg = width;
+    //instance 1 of picture
     this.firstImg = 0;
-    this.scrollSpeed = velocity.x; // Ändra till samma som kartans?
+    //instance 2 of picture
+    this.secondImg = width;
+    //scrollspeed, connect to the velocity of game if we want it to match up! 
+    this.scrollSpeed = velocity.x; 
   }
 
   update(){};
 
   draw() {
 
-    
-
+    //create two instacnes of the image
     image(this.scrollingImage, this.firstImg, 0, width, height);
     image(this.scrollingImage, this.secondImg, 0, width, height);
 
+    //move the images to the left by change the value of the picture instances
     this.firstImg -= this.scrollSpeed;
     this.secondImg -= this.scrollSpeed;
 
+    //reset position
     if (this.firstImg < -width) {
       this.firstImg = width;
     }
@@ -39,5 +43,5 @@ class Background extends MovableEntity {
 
 }
 
-
+//Thanks for the art /u/Ansimuz
 // https://www.reddit.com/r/gamedev/comments/5x7eg7/free_cyberpunk_pixel_art_assets_for_your_gamedev/
