@@ -49,9 +49,6 @@ class GamePlay {
   gameOver() {}
 
   public update() {
-   
-
-    console.log(this.obstacleInterval);
 
     this.checkCollisions();
 
@@ -114,7 +111,6 @@ class GamePlay {
             console.log(this.graceModeActive);
             return true;
           }
-          console.log("hit");
           // Create func to lose a life and add two seconds of grace mode
           this.lives.countLives();
           this.graceModeActive = true;
@@ -129,10 +125,10 @@ class GamePlay {
     // Character collision with platform
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
-        round(this.character.position.y) + this.character.size.y <
-          this.platformArray[p].position.y + 3 &&
-        round(this.character.position.y) + this.character.size.y >
-          this.platformArray[p].position.y - 3 &&
+        this.character.position.y + this.character.size.y <
+          this.platformArray[p].position.y + 4 &&
+        this.character.position.y + this.character.size.y >
+          this.platformArray[p].position.y - 4 &&
         this.character.position.x <
           this.platformArray[p].position.x + this.platformArray[p].width &&
         this.character.position.x + this.character.size.x >
@@ -144,10 +140,10 @@ class GamePlay {
         this.character.canJump = true;
       }
       if (
-        round(this.character.position.y) + this.character.size.y <
-          this.platformArray[p].position.y + 3 &&
-        round(this.character.position.y) + this.character.size.y >
-          this.platformArray[p].position.y - 3 &&
+        this.character.position.y + this.character.size.y <
+          this.platformArray[p].position.y + 4 &&
+        this.character.position.y + this.character.size.y >
+          this.platformArray[p].position.y - 4 &&
         this.character.position.x >
           this.platformArray[p].position.x + this.platformArray[p].width
       ) {
