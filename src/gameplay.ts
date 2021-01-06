@@ -7,7 +7,7 @@ class GamePlay {
   // private lives: Lives;
   // private gameAudio: GameAudio;
   // private pauseScreen: PauseScreen;
-   //public projectile: Projectile;
+  //public projectile: Projectile;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
   private obstacleArray: Obstacle[];
@@ -17,11 +17,9 @@ class GamePlay {
   private lives: Lives;
   private graceModeActive: boolean;
 
-  private projectileArray: Projectile[]
+  private projectileArray: Projectile[];
 
   private background: Background;
-  
-
 
   constructor() {
     this.score = new Score();
@@ -31,13 +29,17 @@ class GamePlay {
     // this.pauseScreen = new PauseScreen();
     //this.projectile = new Projectile();
 
-    this.background = new Background(createVector(0, 0), true, createVector(3, 0), 0)
+    this.background = new Background(
+      createVector(0, 0),
+      true,
+      createVector(3, 0),
+      0
+    );
     this.obstacleArray = [];
     this.platformArray = [];
 
     this.projectileArray = [];
     // this.movableEntities = [];
-
 
     this.platformInterval = 1000;
     this.obstacleInterval = 1500;
@@ -62,11 +64,10 @@ class GamePlay {
   gameOver() {}
 
   public update() {
-
     this.projectileCollisions();
 
     this.checkCollisions();
-    
+
     //this.projectile.shoot()
     // Uupdates all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
@@ -82,9 +83,8 @@ class GamePlay {
     for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].update();
       this.projectileArray[i].draw();
-      
 
-      // 
+      //
       if (this.projectileArray[i].isVisible === false) {
         this.projectileArray.splice(i, 1);
       }
@@ -101,9 +101,8 @@ class GamePlay {
       }
     }
   }
-  
+
   private checkCollisions() {
-    
     // Compares the obstacle positions to the platform positions
     for (let i = 0; i < this.obstacleArray.length; i++) {
       for (let p = 0; p < this.platformArray.length; p++) {
@@ -111,17 +110,17 @@ class GamePlay {
           (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.platformArray[p].position.y &&
             this.platformArray[p].position.x >
-            this.obstacleArray[i].position.x - this.platformArray[p].width &&
+              this.obstacleArray[i].position.x - this.platformArray[p].width &&
             this.platformArray[p].position.x <
-            this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the platforms
-            this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
+              this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the platforms
+          this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             570
         ) {
           // check if obstacle lands on the ground
           this.obstacleArray[i].velocity.y = 0;
           this.obstacleArray[i].velocity.x = 3;
         }
-       
+
         // Character collision with object
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
@@ -157,7 +156,8 @@ class GamePlay {
           this.platformArray[p].position.x &&
         this.character.velocity.y >= 0
       ) {
-        this.character.position.y = this.platformArray[p].position.y - this.character.size.y
+        this.character.position.y =
+          this.platformArray[p].position.y - this.character.size.y;
         this.character.velocity.y = 0;
         this.character.applyGravity = 0;
         this.character.canJump = true;
@@ -173,26 +173,30 @@ class GamePlay {
         this.character.applyGravity = 0.4;
       }
     }
-   
   }
   // projectile collision with object
-  public projectileCollisions(){
-    for (let j = 0; j< this.obstacleArray.length; j++){
-      for(let i = 0; i < this.projectileArray.length; i++) {
-        if (this.projectileArray[i].position.x >= this.obstacleArray[j].position.x  && 
-          this.projectileArray[i].position.y > this.obstacleArray[j].position.y  &&
-           this.projectileArray[i].position.y < this.obstacleArray[j].position.y + this.obstacleArray[j].height)
-           {this.obstacleArray.splice(j,1); this.projectileArray.splice(i,1); console.log('träff')} 
-          }
+  public projectileCollisions() {
+    for (let j = 0; j < this.obstacleArray.length; j++) {
+      for (let i = 0; i < this.projectileArray.length; i++) {
+        if (
+          this.projectileArray[i].position.x >=
+            this.obstacleArray[j].position.x &&
+          this.projectileArray[i].position.y >
+            this.obstacleArray[j].position.y &&
+          this.projectileArray[i].position.y <
+            this.obstacleArray[j].position.y + this.obstacleArray[j].height
+        ) {
+          this.obstacleArray.splice(j, 1);
+          this.projectileArray.splice(i, 1);
+          console.log("träff");
         }
       }
-      
-             
+    }
+  }
 
   public draw() {
-
     this.background.draw();
-    
+
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].draw();
@@ -202,16 +206,13 @@ class GamePlay {
     for (let i = 0; i < this.platformArray.length; i++) {
       this.platformArray[i].draw();
     }
-    for (let i = 0; i < this.projectileArray.length; i++){
+    for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].draw();
     }
     this.lives.draw();
     this.character.draw();
     this.character.update();
     this.score.draw();
-    
-    
-    
   }
 
   public addNewObstacle() {
@@ -228,7 +229,7 @@ class GamePlay {
     let newPlatform = new Platform(randomHeight, randomPosition);
     this.platformArray.push(newPlatform);
   }
-  public addNewProjectiles(){
+  public addNewProjectiles() {
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
   }
