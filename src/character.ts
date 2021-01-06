@@ -4,7 +4,10 @@ class Character extends MovableEntity {
   // private prevKeyIsPressed: boolean;
   private liftForce: number;
   public canJump: boolean;
- 
+
+
+  private runnerAnimation: any;
+
   constructor() // position: p5.Vector, // size: p5.Vector, // isAlive: boolean,
   // isVisible: boolean,
   // velocity: p5.Vector,
@@ -13,57 +16,73 @@ class Character extends MovableEntity {
     super(createVector(), true, createVector(), 0.4);
     this.isAlive = true;
     this.size = createVector(50, 80);
-    this.position = createVector(100, 320);
+    this.position = createVector(100, 490);
     // this.prevKeyIsPressed = false;
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
     this.canJump = true;
+    this.runnerAnimation = createImg('./assets/sprites/runner.gif');
+    // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
     
   }
 
+
+    
+  }
+  
   // private handleUserInput() {
-  //   if (key === " ") {
-  //     console.log("jump");
-  //     this.jump();
-  //   }
-  // }
+    //   if (key === " ") {
+      //     console.log("jump");
+      //     this.jump();
+      //   }
+      // }
+      public addSprite(){
+
+  }
+  
 
   public jump() {
     if (this.canJump) {
-      console.log("jump");
       this.velocity.y += this.liftForce;
       this.applyGravity = 0.4;
       this.canJump = false;
-    } else {
-      console.log("jumping");
     }
   }
 
-  public collide() {}
+  public collide() { }
 
   public update() {
+    
+
     this.velocity.y += this.applyGravity;
     this.velocity.y *= 0.9;
     this.position.y += this.velocity.y;
 
-    if (this.position.y > 320) {
-      this.position.y = 320;
+    if (this.position.y > 490) {
+      this.position.y = 490;
       this.velocity.y = 0;
       this.canJump = true;
     }
+
     if (this.position.y < 0) {
       this.position.y = 0;
       this.velocity.y = 0;
     }
-    
+
   }
 
   public show() {
-    fill(255);
-    rect(this.position.x, this.position.y, this.size.x, this.size.y);
+
+
+    // fill(0);
+    // rect(this.position.x, this.position.y, this.size.x, this.size.y);
+    this.runnerAnimation.size(120, 130);
+    this.runnerAnimation.position(this.position.x - 30, this.position.y - 12);
+
   }
 
   public draw() {
+
     this.update();
     this.show();
   }

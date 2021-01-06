@@ -1,18 +1,32 @@
 class Game {
+  // private menu: Menu;
+  public gamePlay: GamePlay;
+  private menu: Menu;
+  
+
+  constructor() {
+    this.gamePlay = new GamePlay();
+    this.menu = new Menu(true, "");
     
-    // private menu: Menu;
-    public gamePlay: GamePlay;
+  }
 
-    constructor() {
-    //     this.menu = new Menu(true);
-        this.gamePlay = new GamePlay();
+  update() {
+    if (this.menu.isMenuOpen) {
+      this.menu.update();
+      
+    } else {
+      
+      this.gamePlay.update();
     }
-        
-    update(){
-        this.gamePlay.update();
+  }
+  
+  draw() {
+    if (this.menu.isMenuOpen) {
+      this.menu.draw();
+      this.menu.update();
+      
+    } else {
+      this.gamePlay.draw();
     }
-
-    draw() {
-        this.gamePlay.draw();
-    }
+  }
 }

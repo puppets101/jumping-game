@@ -3,13 +3,15 @@ class Platform extends MovableEntity {
   public height: number;
   public width: number;
   private highOrLow: number;
+  private platformAsset: any;
 
   constructor(highOrLow: number, randomX: number) {
-    super(createVector(600 + randomX, 250), true, createVector(3, 0), 0); // Changing velocity.x alters speed
-    this.color = color(0, 0, 0);
+    super(createVector(800 + randomX, 250), true, createVector(3, 0), 0); // Changing velocity.x alters speed
+    this.color = color(0);
     this.height = 20;
-    this.width = 100;
+    this.width = 200;
     this.highOrLow = highOrLow;
+    // this.platformAsset = createImg('./assets/imgs/neon.png')
   }
 
   public update() {
@@ -18,9 +20,9 @@ class Platform extends MovableEntity {
 
     // highOrLow value decides whether platform should have high or low yPosition
     if (this.highOrLow === 1) {
-      this.position.y = 250;
+      this.position.y = 420;
     } else if (this.highOrLow === 0) {
-      this.position.y = 150;
+      this.position.y = 260;
     }
 
     this.isOnScreen();
@@ -38,5 +40,8 @@ class Platform extends MovableEntity {
     fill(this.color);
     noStroke();
     rect(this.position.x, this.position.y, this.width, this.height);
+    // image(this.pklatformAsset, this.position.x, this.position.y);
+    // this.platformAsset.size(250, 100)
+    // this.platformAsset.position(this.position.x -23, this.position.y - 40);
   }
 }
