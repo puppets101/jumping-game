@@ -36,7 +36,8 @@ function preload() {
   // https://trixelized.itch.io/starstring-fields
   platformAsset = loadImage('./assets/imgs/platform.png');
 
-  lifeAsset = loadImage('./assets/imgs/heart.png')
+  // https://www.artstation.com/thebyteman
+  lifeAsset = loadImage('./assets/sprites/heart.gif')
 
 }
 
