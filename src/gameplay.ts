@@ -167,16 +167,18 @@ class GamePlay {
   }
   // projectile collision with object
   public projectileCollisions(){
-      
-      for (let j = 0; j< this.obstacleArray.length; j++){
-        for(let i = 0; i < this.projectileArray.length; i++) {
-          if (this.projectileArray[i].position.x  == this.obstacleArray[j].position.x  && 
-            this.projectileArray[i].position.y + 5 > this.obstacleArray[j].position.y &&
-             this.projectileArray[i].position.y - 5 < this.obstacleArray[j].position.y + this.obstacleArray[j].height)
-          {this.obstacleArray.splice(j,1); this.projectileArray.splice(i,1)} 
+    for (let j = 0; j< this.obstacleArray.length; j++){
+      for(let i = 0; i < this.projectileArray.length; i++) {
+        if (this.projectileArray[i].position.x >= this.obstacleArray[j].position.x  && 
+          this.projectileArray[i].position.y > this.obstacleArray[j].position.y  &&
+           this.projectileArray[i].position.y < this.obstacleArray[j].position.y + this.obstacleArray[j].height)
+           {this.obstacleArray.splice(j,1); this.projectileArray.splice(i,1); console.log('träff')} 
+          }
         }
       }
-  }
+      
+             
+
   public draw() {
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {

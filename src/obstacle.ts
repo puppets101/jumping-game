@@ -6,7 +6,7 @@ class Obstacle extends MovableEntity {
     constructor() {
         super(createVector(500, 0), true, createVector(0, 10), 0); 
         this.color = color(0, 255, 255);
-        this.height = 30;
+        this.height = 60;
         this.width = 30;
     }
 
