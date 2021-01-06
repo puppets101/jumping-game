@@ -6,7 +6,7 @@ class Game {
 
   constructor() {
     this.gamePlay = new GamePlay();
-    this.menu = new Menu(false, "");
+    this.menu = new Menu(true, "");
     
   }
 
@@ -15,10 +15,11 @@ class Game {
       this.menu.update();
       
     } else {
+      
       this.gamePlay.update();
     }
   }
-
+  
   draw() {
     if (this.menu.isMenuOpen) {
       this.menu.draw();

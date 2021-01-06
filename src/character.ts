@@ -20,19 +20,21 @@ class Character extends MovableEntity {
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
     this.canJump = true;
-
     this.runnerAnimation = createImg('./assets/sprites/runner.gif');
     // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
 
+    
   }
-
+  
   // private handleUserInput() {
-  //   if (key === " ") {
-  //     console.log("jump");
-  //     this.jump();
-  //   }
-  // }
+    //   if (key === " ") {
+      //     console.log("jump");
+      //     this.jump();
+      //   }
+      // }
+      public addSprite(){
 
+  }
   
 
   public jump() {
@@ -46,6 +48,7 @@ class Character extends MovableEntity {
   public collide() { }
 
   public update() {
+    
 
     this.velocity.y += this.applyGravity;
     this.velocity.y *= 0.9;
