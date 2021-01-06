@@ -3,15 +3,15 @@ class Platform extends MovableEntity {
   public height: number;
   public width: number;
   private highOrLow: number;
-  private platformAsset: any;
+  private platformImg: any;
 
   constructor(highOrLow: number, randomX: number) {
     super(createVector(800 + randomX, 250), true, createVector(3, 0), 0); // Changing velocity.x alters speed
-    this.color = color(0);
+    this.color = color(176, 75, 35);
     this.height = 20;
     this.width = 200;
     this.highOrLow = highOrLow;
-    // this.platformAsset = createImg('./assets/imgs/neon.png')
+    this.platformImg = platformAsset;
   }
 
   public update() {
@@ -38,10 +38,10 @@ class Platform extends MovableEntity {
 
   public draw() {
     fill(this.color);
-    noStroke();
-    rect(this.position.x, this.position.y, this.width, this.height);
-    // image(this.pklatformAsset, this.position.x, this.position.y);
-    // this.platformAsset.size(250, 100)
-    // this.platformAsset.position(this.position.x -23, this.position.y - 40);
+    stroke(0);
+    strokeWeight(2);
+    rect(this.position.x, this.position.y, this.width, this.height, 10);
+
+    image(this.platformImg, this.position.x, this.position.y, 200, 20);
   }
 }

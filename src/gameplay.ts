@@ -44,8 +44,8 @@ class GamePlay {
     this.platformInterval = 1000;
     this.obstacleInterval = 1500;
 
+    // if(!menu.isMenuOpen){
     // interval for creating platforms
-
     setInterval(() => {
       this.addNewPlatform();
     }, this.platformInterval);
@@ -54,6 +54,9 @@ class GamePlay {
     setInterval(() => {
       this.addNewObstacle();
     }, this.obstacleInterval);
+
+    // }
+
 
     this.lives = new Lives(createVector(), true);
     this.graceModeActive = false;
@@ -112,7 +115,7 @@ class GamePlay {
             this.platformArray[p].position.x >
             this.obstacleArray[i].position.x - this.platformArray[p].width &&
             this.platformArray[p].position.x <
-            this.obstacleArray[i].position.x + this.obstacleArray[i].width) || // check if obstacle lands on one of the platforms
+            this.obstacleArray[i].position.x - this.obstacleArray[i].width * 0.5) || // check if obstacle lands on one of the platforms
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
           570
         ) {
@@ -170,7 +173,7 @@ class GamePlay {
         this.character.position.x >
         this.platformArray[p].position.x + this.platformArray[p].width
       ) {
-        this.character.applyGravity = 0.4;
+        this.character.applyGravity = 0.1;
       }
     }
   }
@@ -186,9 +189,12 @@ class GamePlay {
           this.projectileArray[i].position.y <
           this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
-          this.obstacleArray.splice(j, 1);
           this.projectileArray.splice(i, 1);
-          console.log("träff");
+
+          this.obstacleArray[j].droneAssetGif = droneDeathAsset; 
+          setTimeout(() => { this.obstacleArray.splice(j, 1) }, 400);
+          ;
+          // console.log("träff");
         }
       }
     }
@@ -215,12 +221,12 @@ class GamePlay {
     this.score.draw();
   }
 
-  // ADDS NED OBSTACLE 
+  // adds new OBSTACLE 
   public addNewObstacle() {
     let newObstacle = new Obstacle();
     this.obstacleArray.push(newObstacle);
   }
-  // ADDS NED platform 
+  // adds new platform 
   public addNewPlatform() {
     // Returns 1 or 0 – 1 sets a high platform, 0 sets a low platform
     const randomHeight = Math.round(Math.random());
@@ -231,7 +237,7 @@ class GamePlay {
     this.platformArray.push(newPlatform);
   }
 
-  // ADDS NED projectile 
+  // adds new projectile 
   public addNewProjectiles() {
 
     let newProjectile = new Projectile();
