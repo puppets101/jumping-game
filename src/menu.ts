@@ -47,8 +47,6 @@ class Menu implements Imenu {
 
     if (menu.menuState === "main") {
       this.prevMouseIsPressed = false;
-      // const mouseClicked = () => {
-      console.log(mouseX + '' mouseY);
       if (this.mainMenuOptions === 0) {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 400 && mouseY > 377) {
@@ -70,9 +68,7 @@ class Menu implements Imenu {
             }
           }
         }
-        // }
       };
-      // mouseClicked();
     }
     this.prevMouseIsPressed = mouseIsPressed;
   }
