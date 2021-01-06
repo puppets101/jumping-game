@@ -16,6 +16,8 @@ class GamePlay {
   private platformInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
+  private background: Background;
+  
 
   constructor() {
     this.score = new Score();
@@ -25,6 +27,7 @@ class GamePlay {
     // this.pauseScreen = new PauseScreen();
     // this.projectile = new Projectile();
 
+    this.background = new Background(createVector(0, 0), true, createVector(3, 0), 0)
     this.obstacleArray = [];
     this.platformArray = [];
     this.platformInterval = 1000;
@@ -35,7 +38,7 @@ class GamePlay {
       this.addNewPlatform();
     }, this.platformInterval);
 
-    //interval for creating obstacles
+    //interval for creating obstacles (delta time? Time to next spawn istället för interval***)
     setInterval(() => {
       this.addNewObstacle();
     }, this.obstacleInterval);
@@ -49,6 +52,14 @@ class GamePlay {
   gameOver() {}
 
   public update() {
+
+   
+ 
+   
+ 
+
+  console.log(this.obstacleInterval);
+
 
     this.checkCollisions();
 
@@ -76,6 +87,7 @@ class GamePlay {
   }
 
   private checkCollisions() {
+    
     // Compares the obstacle positions to the platform positions
     for (let i = 0; i < this.obstacleArray.length; i++) {
       for (let p = 0; p < this.platformArray.length; p++) {
@@ -116,7 +128,7 @@ class GamePlay {
       }
     }
 
-    // Character collision with platform
+    // Character collision with platform  TA BORT ROUND OCH +3 och sätt character pos till platformarray's y värde
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
         this.character.position.y + this.character.size.y <=
@@ -148,6 +160,8 @@ class GamePlay {
   }
 
   public draw() {
+
+    this.background.draw();
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].draw();
