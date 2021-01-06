@@ -6,7 +6,9 @@ class Game {
 
   constructor() {
     this.gamePlay = new GamePlay();
-    this.menu = new Menu(true, "");
+    
+    //change boolean value to false to run game without menu
+    this.menu = new Menu(false, "");
     
   }
 
