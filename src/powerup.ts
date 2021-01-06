@@ -5,7 +5,7 @@ class Powerup extends MovableEntity {
     //public powerupAsset: p5.Image;
 
     constructor() {
-        super(createVector(500, 0), true, createVector(0, 10), 0);
+        super(createVector(650, 0), true, createVector(0, 10), 0);
         this.color = color(220, 20, 60);
         this.height = 20;
         this.width = 20;

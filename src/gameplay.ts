@@ -1,7 +1,6 @@
 class GamePlay {
   private score: Score;
   public character: Character;
-  // private lives: Lives;
   // private gameAudio: GameAudio;
   // private pauseScreen: PauseScreen;
   // private drawableEntity: DrawableEntity;
@@ -54,7 +53,7 @@ class GamePlay {
       // interval for creating powerups
       setInterval(() => {
         this.addNewPowerup();
-      }, 2600);
+      }, 13633);
 
 
     this.lives = new Lives(createVector(), true);
@@ -156,7 +155,7 @@ class GamePlay {
       }
     }
 
-    // Character collision with platform  TA BORT ROUND OCH +3 och sätt character pos till platformarray's y värde
+    // Character collision with platform
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
         this.character.position.y + this.character.size.y <=
@@ -186,7 +185,39 @@ class GamePlay {
         this.character.applyGravity = 0.1;
       }
     }
+    
+    // Powerup collision with platform or ground
+    if(this.powerupArray.length > 0) {
+      for (let i = 0; i < this.powerupArray.length; i++) {
+        for (let p = 0; p < this.platformArray.length; p++) {
+          if (
+            (this.powerupArray[i].position.y + this.powerupArray[i].height ===
+              this.platformArray[p].position.y &&
+              this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 > this.platformArray[p].position.x &&
+              this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 < this.platformArray[p].position.x + this.platformArray[p].width) ||
+              this.powerupArray[i].position.y + this.powerupArray[i].height === 570
+          ) {
+            this.powerupArray[i].velocity.y = 0;
+            this.powerupArray[i].velocity.x = 3;
+          }
+        }  
+
+        // Character collision with powerup
+        if (
+          this.powerupArray[i].position.x  <
+          this.character.position.x + this.character.size.x &&
+          this.powerupArray[i].position.y <=
+          this.character.position.y + this.character.size.y &&
+          this.powerupArray[i].position.y + this.powerupArray[i].height >= this.character.position.y         
+        ) {
+            this.powerupArray.splice(i, 1);
+            this.lives.life ++;
+        }
+        
+    }
   }
+  }
+
   // projectile collision with object
   public projectileCollisions() {
     for (let j = 0; j < this.obstacleArray.length; j++) {
