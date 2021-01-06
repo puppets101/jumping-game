@@ -1,13 +1,9 @@
 class GamePlay {
   private score: Score;
   public character: Character;
-  // private obstacle: Obstacle;
-  // private platform: Platform;
-  // private background: Background;
   // private lives: Lives;
   // private gameAudio: GameAudio;
   // private pauseScreen: PauseScreen;
-  //public projectile: Projectile;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
   private obstacleArray: Obstacle[];
@@ -44,6 +40,7 @@ class GamePlay {
     this.obstacleInterval = 1500;
 
     // if(!menu.isMenuOpen){
+
     // interval for creating platforms
     setInterval(() => {
       this.addNewPlatform();
@@ -54,7 +51,10 @@ class GamePlay {
       this.addNewObstacle();
     }, this.obstacleInterval);
 
-    // }
+      // interval for creating powerups
+      setInterval(() => {
+        this.addNewPowerup();
+      }, 2600);
 
 
     this.lives = new Lives(createVector(), true);
@@ -254,6 +254,7 @@ class GamePlay {
     this.projectileArray.push(newProjectile);
   }
 
+  // adds new powerup
   public addNewPowerup() {
     let newPowerup = new Powerup();
     this.powerupArray.push(newPowerup);
