@@ -5,6 +5,8 @@ class Character extends MovableEntity {
   private liftForce: number;
   public canJump: boolean;
 
+  private runnerAnimation: any;
+
   constructor() // position: p5.Vector, // size: p5.Vector, // isAlive: boolean,
   // isVisible: boolean,
   // velocity: p5.Vector,
@@ -18,14 +20,22 @@ class Character extends MovableEntity {
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
     this.canJump = true;
-  }
+    this.runnerAnimation = createImg('./assets/sprites/runner.gif');
+    // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
 
+    
+  }
+  
   // private handleUserInput() {
-  //   if (key === " ") {
-  //     console.log("jump");
-  //     this.jump();
-  //   }
-  // }
+    //   if (key === " ") {
+      //     console.log("jump");
+      //     this.jump();
+      //   }
+      // }
+      public addSprite(){
+
+  }
+  
 
   public jump() {
     if (this.canJump) {
@@ -35,9 +45,11 @@ class Character extends MovableEntity {
     }
   }
 
-  public collide() {}
+  public collide() { }
 
   public update() {
+    
+
     this.velocity.y += this.applyGravity;
     this.velocity.y *= 0.9;
     this.position.y += this.velocity.y;
@@ -50,11 +62,17 @@ class Character extends MovableEntity {
   }
 
   public show() {
-    fill(255);
-    rect(this.position.x, this.position.y, this.size.x, this.size.y);
+
+
+    // fill(0);
+    // rect(this.position.x, this.position.y, this.size.x, this.size.y);
+    this.runnerAnimation.size(120, 130);
+    this.runnerAnimation.position(this.position.x - 30, this.position.y - 12);
+
   }
 
   public draw() {
+
     this.update();
     this.show();
   }
