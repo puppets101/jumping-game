@@ -61,7 +61,7 @@ function keyPressed() {
   if (keyCode === UP_ARROW) {
     game.gamePlay.character.jump();
   }
-  if (keyCode === 32){
+  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1){
     game.gamePlay.addNewProjectiles();
     
   }

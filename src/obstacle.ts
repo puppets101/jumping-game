@@ -7,7 +7,7 @@ class Obstacle extends MovableEntity {
     constructor() {
         super(createVector(500, 0), true, createVector(0, 10), 0);
         this.color = color(0, 255, 255);
-        this.height = 60;
+        this.height = 50;
         this.width = 30;
 
         this.droneAssetGif = droneAsset;
@@ -23,7 +23,7 @@ class Obstacle extends MovableEntity {
         // fill(this.color)
         // rect(this.position.x, this.position.y, this.width, this.height)
 
-        image(this.droneAssetGif, this.position.x -37, this.position.y - 33, 100, 100)
+        image(this.droneAssetGif, this.position.x -37, this.position.y - 25, 100, 100)
     }
 
     private isOnScreen() {
