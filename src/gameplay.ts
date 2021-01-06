@@ -112,10 +112,8 @@ class GamePlay {
         if (
           (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.platformArray[p].position.y &&
-            this.platformArray[p].position.x >
-            this.obstacleArray[i].position.x - this.platformArray[p].width &&
-            this.platformArray[p].position.x <
-            this.obstacleArray[i].position.x - this.obstacleArray[i].width * 0.5) || // check if obstacle lands on one of the platforms
+            this.obstacleArray[i].position.x + this.obstacleArray[i].width * 0.5 > this.platformArray[p].position.x &&
+            this.obstacleArray[i].position.x + this.obstacleArray[i].width * 0.5 < this.platformArray[p].position.x + this.platformArray[p].width) || // check if obstacle lands on one of the platforms
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
           570
         ) {
