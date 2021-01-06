@@ -24,24 +24,20 @@ class Menu implements Imenu {
     this.mainMenuOptions = 0;
     this.prevMouseIsPressed = false;
 
-
-
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/main.png");
     //instance 1 of picture
     this.firstImg = 0;
     //instance 2 of picture
     this.secondImg = width;
-    //scrollspeed, connect to the velocity of game if we want it to match up! 
+    //scrollspeed, connect to the velocity of game if we want it to match up!
     this.scrollSpeed = 1;
-
-
   }
-  public startGame() { }
-  public quit() { }
+  public startGame() {}
+  public quit() {}
 
   public update() {
-    //handles the users click  
+    //handles the users click
 
     // console.log(menu.menuState);
 
@@ -68,14 +64,12 @@ class Menu implements Imenu {
             }
           }
         }
-      };
+      }
     }
     this.prevMouseIsPressed = mouseIsPressed;
   }
 
-
   private movingBackground() {
-
     //create two instacnes of the image
     image(this.scrollingImage, this.firstImg, 0, width, height);
     image(this.scrollingImage, this.secondImg, 0, width, height);
@@ -93,11 +87,7 @@ class Menu implements Imenu {
     }
   }
 
-
-
   public draw() {
-    
-
     if (this.isMenuOpen === true) {
       // if statement to decide what menus to open
       if (this.menuState === "main") {
@@ -128,8 +118,6 @@ class Menu implements Imenu {
         fill(128, 0, 0);
         textAlign(CENTER);
         text("Exit", 400, 460);
-
-
       } else if (this.menuState === "pause") {
         //show pause menu
       } else if (this.menuState === "gameOver") {

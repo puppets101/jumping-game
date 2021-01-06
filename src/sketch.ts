@@ -7,9 +7,8 @@ let pixelFont: any;
 
 let projectiles: Projectile;
 
-
 let droneAsset: p5.Image;
-let droneDeathAsset: p5.Image
+let droneDeathAsset: p5.Image;
 let runnerAsset: p5.Image;
 let platformAsset: p5.Image;
 
@@ -25,16 +24,14 @@ function preload() {
 
   outrunFont = loadFont("./assets/fonts/Outrun_future.otf");
   pixelFont = loadFont("./assets/fonts/PressStart2P-Regular.ttf");
-  
 
   // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
-  runnerAsset = loadImage('./assets/sprites/runner.gif'); 
-  droneAsset = loadImage('./assets/sprites/drone.gif');
-  droneDeathAsset = loadImage('./assets/sprites/droneDeath.gif')
+  runnerAsset = loadImage("./assets/sprites/runner.gif");
+  droneAsset = loadImage("./assets/sprites/drone.gif");
+  droneDeathAsset = loadImage("./assets/sprites/droneDeath.gif");
 
   // https://trixelized.itch.io/starstring-fields
-  platformAsset = loadImage('./assets/imgs/platform.png');
-
+  platformAsset = loadImage("./assets/imgs/platform.png");
 }
 
 /**
@@ -59,6 +56,8 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
+  menu.update();
+  menu.draw();
   game.update();
   game.draw();
 }
@@ -70,12 +69,10 @@ function keyPressed() {
   if (keyCode === DOWN_ARROW) {
     game.gamePlay.character.fall();
   }
-  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1){
+  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
     game.gamePlay.addNewProjectiles();
-    
   }
 }
-
 
 /**
    * Built in windowResize listener function in P5
