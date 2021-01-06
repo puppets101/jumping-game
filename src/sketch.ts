@@ -6,8 +6,10 @@ let outrunFont: any;
 let pixelFont: any;
 
 let projectiles: Projectile;
-let backgroundImg: any;
 
+
+let droneAsset: p5.Image;
+let runnerAsset: p5.Image;
 
 /**
  * Built in preload function in P5
@@ -22,6 +24,10 @@ function preload() {
   outrunFont = loadFont("./assets/fonts/Outrun_future.otf");
   pixelFont = loadFont("./assets/fonts/PressStart2P-Regular.ttf");
   
+
+  // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
+  runnerAsset = loadImage('./assets/sprites/runner.gif'); 
+  droneAsset = loadImage('./assets/imgs/drone.gif');
 
 }
 

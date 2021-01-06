@@ -4,7 +4,7 @@ class Character extends MovableEntity {
   private liftForce: number;
   public canJump: boolean;
 
-  private runnerAnimation: any;
+  private runnerAnimation: p5.Image;
 
   constructor() {
     super(createVector(), true, createVector(), 0.4);
@@ -14,9 +14,12 @@ class Character extends MovableEntity {
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
     this.canJump = true;
-    this.runnerAnimation = createImg("./assets/sprites/runner.gif");
-    // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
+
+    this.runnerAnimation = runnerAsset;
+
+    
   }
+
 
   public jump() {
     if (this.canJump) {
@@ -41,10 +44,14 @@ class Character extends MovableEntity {
   }
 
   public show() {
-    // fill(0);
-    // rect(this.position.x, this.position.y, this.size.x, this.size.y);
-    this.runnerAnimation.size(120, 130);
-    this.runnerAnimation.position(this.position.x - 30, this.position.y - 12);
+
+
+
+    // fill(255);
+    // rect(this.position.x, this.position.y, this.size.x, this.size.y)
+    image(this.runnerAnimation, this.position.x - 28, this.position.y -5, 110, 120 )
+
+
   }
 
   public draw() {
