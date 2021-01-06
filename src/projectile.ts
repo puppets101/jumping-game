@@ -1,28 +1,47 @@
 class Projectile extends MovableEntity {
-  protected color: string;
-  protected diameter: number;
-
-  constructor(_color: string, _diameter: number,_position: p5.Vector, _isVisible: boolean,_velocity: p5.Vector, _applyGravity: number) {
-    super(_position, _isVisible,_velocity,_applyGravity);
-    this.color = _color;
-    this.diameter = _diameter;
+  public color: string;
+  public diameter: number;
+ 
+  
+  //protected position: p5.Vector
+  //protected isVisible: Boolean
+  
+    constructor() {
+    super(createVector(), true, createVector(), 0); //_position, _isVisible,_velocity,_applyGravity//
+    this.color = 'red';
+    this.diameter = 10;
+    this.position = createVector(game.gamePlay.character.position.x, game.gamePlay.character.position.y + 50)//,game.gamePlay.character.position.y
+    this.isVisible = true;
+    
+    
     
   }
-  public shoot() {
-    if (keyCode === LEFT_ARROW) {
-      fill(this.color)
-      ellipse(this.position.x, this.position.y, this.diameter)
-      this.position.x = this.position.x += 5
-    }
-  };
-
+  
   public update() {
-   
+   this.position.x += 10
+    this.projectileOnScreen()
   }
 
+   private projectileOnScreen() {
+     if (this.position.x  > width) {
+       this.isVisible = false;
+     } else {
+       this.isVisible = true;
+     }
+   }
+   
+     
   public draw() {
     //createVector(this.position.x, this.position.y)
     fill(this.color)
     ellipse(this.position.x, this.position.y, this.diameter)
+    
+    
+    
   }
 }
+   
+  
+
+   
+

@@ -5,6 +5,7 @@ class Character extends MovableEntity {
   private liftForce: number;
   public canJump: boolean;
 
+
   private runnerAnimation: any;
 
   constructor() // position: p5.Vector, // size: p5.Vector, // isAlive: boolean,
@@ -22,6 +23,9 @@ class Character extends MovableEntity {
     this.canJump = true;
     this.runnerAnimation = createImg('./assets/sprites/runner.gif');
     // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
+    
+  }
+
 
     
   }
@@ -59,6 +63,12 @@ class Character extends MovableEntity {
       this.velocity.y = 0;
       this.canJump = true;
     }
+
+    if (this.position.y < 0) {
+      this.position.y = 0;
+      this.velocity.y = 0;
+    }
+
   }
 
   public show() {
@@ -76,4 +86,8 @@ class Character extends MovableEntity {
     this.update();
     this.show();
   }
-}
+
+
+  
+  };
+
