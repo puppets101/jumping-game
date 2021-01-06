@@ -43,7 +43,7 @@ class Menu implements Imenu {
   public update() {
     //handles the users click  
 
-    console.log(menu.menuState);
+    // console.log(menu.menuState);
 
     if (menu.menuState === "main") {
       this.prevMouseIsPressed = false;

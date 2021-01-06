@@ -2,7 +2,7 @@ class Obstacle extends MovableEntity {
     protected color: p5.Color;
     public height: number;
     public width: number;
-    private droneAssetGif: p5.Image;
+    public droneAssetGif: p5.Image;
 
     constructor() {
         super(createVector(500, 0), true, createVector(0, 10), 0);

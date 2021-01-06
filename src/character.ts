@@ -24,8 +24,13 @@ class Character extends MovableEntity {
   public jump() {
     if (this.canJump) {
       this.velocity.y += this.liftForce;
-      this.applyGravity = 0.4;
+      this.applyGravity = 0.1;
       this.canJump = false;
+    }
+  }
+  public fall() {
+    if (this.velocity.y !== 0){
+      this.applyGravity = 0.8;
     }
   }
 

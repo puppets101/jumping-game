@@ -13,13 +13,6 @@ class Game {
   }
 
   update() {
-    if (this.menu.isMenuOpen) {
-      this.menu.update();
-      
-    } else {
-      
-      this.gamePlay.update();
-    }
   }
   
   draw() {
@@ -27,8 +20,9 @@ class Game {
       this.menu.draw();
       this.menu.update();
       
-    } else {
+    } else if(!this.menu.isMenuOpen) {
       this.gamePlay.draw();
+      this.gamePlay.update();
     }
   }
 }
