@@ -12,6 +12,7 @@ class GamePlay {
   // private movableEntity: MovableEntity;
   private obstacleArray: Obstacle[];
   private platformArray: Platform[];
+  private powerupArray: Powerup[];
   private obstacleInterval: number;
   private platformInterval: number;
   private lives: Lives;
@@ -24,10 +25,8 @@ class GamePlay {
   constructor() {
     this.score = new Score();
     this.character = new Character();
-    // this.background = new Background();
     // this.gameAudio = new GameAudio();
     // this.pauseScreen = new PauseScreen();
-    //this.projectile = new Projectile();
 
     this.background = new Background(
       createVector(0, 0),
@@ -37,7 +36,7 @@ class GamePlay {
     );
     this.obstacleArray = [];
     this.platformArray = [];
-
+    this.powerupArray = [];
     this.projectileArray = [];
     // this.movableEntities = [];
 
@@ -71,8 +70,8 @@ class GamePlay {
 
     this.checkCollisions();
 
-    //this.projectile.shoot()
-    // Uupdates all obstacles
+
+    // Updates all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].update();
       this.obstacleArray[i].draw();
@@ -82,7 +81,7 @@ class GamePlay {
         this.obstacleArray.splice(i, 1);
       }
     }
-    // uppdates prjectiles
+    // uppdates projectiles
     for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].update();
       this.projectileArray[i].draw();
@@ -101,6 +100,17 @@ class GamePlay {
       // Removes obstacles from array when out of screen
       if (this.platformArray[i].isVisible === false) {
         this.platformArray.splice(i, 1);
+      }
+    }
+
+    // Updates powerups
+    for (let i = 0; i < this.powerupArray.length; i++) {
+      this.powerupArray[i].update();
+      this.powerupArray[i].draw();
+
+      // Removes powerups from array when out of screen
+      if (this.powerupArray[i].isVisible === false) {
+        this.powerupArray.splice(i, 1);
       }
     }
   }
@@ -242,6 +252,11 @@ class GamePlay {
 
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
+  }
+
+  public addNewPowerup() {
+    let newPowerup = new Powerup();
+    this.powerupArray.push(newPowerup);
   }
   // for (const entity of this.movableEntities){
   //   if(entity instanceof ScrollableEntity) {
