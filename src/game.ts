@@ -6,7 +6,7 @@ class Game {
 
   constructor() {
     this.gamePlay = new GamePlay();
-    this.menu = new Menu(true, "");
+    this.menu = new Menu(false, "");
     
   }
 
