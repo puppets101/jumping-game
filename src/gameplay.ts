@@ -1,17 +1,13 @@
 class GamePlay {
   private score: Score;
   public character: Character;
-  // private obstacle: Obstacle;
-  // private platform: Platform;
-  // private background: Background;
-  // private lives: Lives;
   // private gameAudio: GameAudio;
   // private pauseScreen: PauseScreen;
-  //public projectile: Projectile;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
   private obstacleArray: Obstacle[];
   private platformArray: Platform[];
+  private powerupArray: Powerup[];
   private obstacleInterval: number;
   private platformInterval: number;
   private lives: Lives;
@@ -24,10 +20,8 @@ class GamePlay {
   constructor() {
     this.score = new Score();
     this.character = new Character();
-    // this.background = new Background();
     // this.gameAudio = new GameAudio();
     // this.pauseScreen = new PauseScreen();
-    //this.projectile = new Projectile();
 
     this.background = new Background(
       createVector(0, 0),
@@ -37,7 +31,7 @@ class GamePlay {
     );
     this.obstacleArray = [];
     this.platformArray = [];
-
+    this.powerupArray = [];
     this.projectileArray = [];
     // this.movableEntities = [];
 
@@ -45,6 +39,7 @@ class GamePlay {
     this.obstacleInterval = 1500;
 
     // if(!menu.isMenuOpen){
+
     // interval for creating platforms
     setInterval(() => {
       this.addNewPlatform();
@@ -55,7 +50,10 @@ class GamePlay {
       this.addNewObstacle();
     }, this.obstacleInterval);
 
-    // }
+      // interval for creating powerups
+      setInterval(() => {
+        this.addNewPowerup();
+      }, 13633);
 
 
     this.lives = new Lives(createVector(), true);
@@ -71,8 +69,8 @@ class GamePlay {
 
     this.checkCollisions();
 
-    //this.projectile.shoot()
-    // Uupdates all obstacles
+
+    // Updates all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].update();
       this.obstacleArray[i].draw();
@@ -82,7 +80,7 @@ class GamePlay {
         this.obstacleArray.splice(i, 1);
       }
     }
-    // uppdates prjectiles
+    // uppdates projectiles
     for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].update();
       this.projectileArray[i].draw();
@@ -101,6 +99,17 @@ class GamePlay {
       // Removes obstacles from array when out of screen
       if (this.platformArray[i].isVisible === false) {
         this.platformArray.splice(i, 1);
+      }
+    }
+
+    // Updates powerups
+    for (let i = 0; i < this.powerupArray.length; i++) {
+      this.powerupArray[i].update();
+      this.powerupArray[i].draw();
+
+      // Removes powerups from array when out of screen
+      if (this.powerupArray[i].isVisible === false) {
+        this.powerupArray.splice(i, 1);
       }
     }
   }
@@ -144,7 +153,7 @@ class GamePlay {
       }
     }
 
-    // Character collision with platform  TA BORT ROUND OCH +3 och sätt character pos till platformarray's y värde
+    // Character collision with platform
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
         this.character.position.y + this.character.size.y <=
@@ -174,7 +183,39 @@ class GamePlay {
         this.character.applyGravity = 0.1;
       }
     }
+    
+    // Powerup collision with platform or ground
+    if(this.powerupArray.length > 0) {
+      for (let i = 0; i < this.powerupArray.length; i++) {
+        for (let p = 0; p < this.platformArray.length; p++) {
+          if (
+            (this.powerupArray[i].position.y + this.powerupArray[i].height ===
+              this.platformArray[p].position.y &&
+              this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 > this.platformArray[p].position.x &&
+              this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 < this.platformArray[p].position.x + this.platformArray[p].width) ||
+              this.powerupArray[i].position.y + this.powerupArray[i].height === 570
+          ) {
+            this.powerupArray[i].velocity.y = 0;
+            this.powerupArray[i].velocity.x = 3;
+          }
+        }  
+
+        // Character collision with powerup
+        if (
+          this.powerupArray[i].position.x  <
+          this.character.position.x + this.character.size.x &&
+          this.powerupArray[i].position.y <=
+          this.character.position.y + this.character.size.y &&
+          this.powerupArray[i].position.y + this.powerupArray[i].height >= this.character.position.y         
+        ) {
+            this.powerupArray.splice(i, 1);
+            this.lives.life ++;
+        }
+        
+    }
   }
+  }
+
   // projectile collision with object
   public projectileCollisions() {
     for (let j = 0; j < this.obstacleArray.length; j++) {
@@ -240,6 +281,12 @@ class GamePlay {
 
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
+  }
+
+  // adds new powerup
+  public addNewPowerup() {
+    let newPowerup = new Powerup();
+    this.powerupArray.push(newPowerup);
   }
   // for (const entity of this.movableEntities){
   //   if(entity instanceof ScrollableEntity) {

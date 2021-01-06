@@ -12,6 +12,7 @@ let droneAsset: p5.Image;
 let droneDeathAsset: p5.Image
 let runnerAsset: p5.Image;
 let platformAsset: p5.Image;
+let lifeAsset: p5.Image;
 
 /**
  * Built in preload function in P5
@@ -34,6 +35,8 @@ function preload() {
 
   // https://trixelized.itch.io/starstring-fields
   platformAsset = loadImage('./assets/imgs/platform.png');
+
+  lifeAsset = loadImage('./assets/imgs/heart.png')
 
 }
 
