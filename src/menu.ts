@@ -53,6 +53,8 @@ class Menu implements Imenu {
             if (mouseIsPressed) {
               console.log("1");
               this.isMenuOpen = false;
+              console.log(this.isMenuOpen);
+              
             }
           }
           if (mouseY < 425 && mouseY > 410) {

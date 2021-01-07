@@ -65,19 +65,21 @@ function setup() {
 function draw() {
   game.update();
   game.draw();
+  
+  
 }
 
 function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    game.gamePlay.character.jump();
-  }
-  if (keyCode === DOWN_ARROW) {
-    game.gamePlay.character.fall();
-  }
-  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1){
-    game.gamePlay.addNewProjectiles();
-    
-  }
+    if (keyCode === UP_ARROW) {
+      game.gamePlay.character.jump();
+    }
+    if (keyCode === DOWN_ARROW) {
+      game.gamePlay.character.fall();
+    }
+    if (keyCode === 32 && game.gamePlay.projectileArray.length < 1){
+      game.gamePlay.addNewProjectiles();
+      
+    }
 }
 
 
