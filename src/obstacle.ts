@@ -4,8 +4,8 @@ class Obstacle extends MovableEntity {
     public width: number;
     public image: p5.Image;
 
-    constructor(image: p5.Image) {
-        super(createVector(500, 0), true, createVector(0, 10), 0);
+    constructor(image: p5.Image, x: number, y: number) {
+        super(createVector(x, y), true, createVector(0, 10), 0);
         this.color = color(0, 255, 255);
         this.height = 50;
         this.width = 30;

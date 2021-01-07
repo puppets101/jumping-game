@@ -274,7 +274,7 @@ class GamePlay {
 
   // adds new OBSTACLE 
   public addNewObstacle() {
-    let newObstacle = new Obstacle(droneAsset);
+    let newObstacle = new Obstacle(droneAsset, 500, 0);
     this.obstacleArray.push(newObstacle);
   }
   // adds new platform 
