@@ -24,34 +24,29 @@ class Menu implements Imenu {
     this.mainMenuOptions = 0;
     this.prevMouseIsPressed = false;
 
-
-
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/main.png");
     //instance 1 of picture
     this.firstImg = 0;
     //instance 2 of picture
     this.secondImg = width;
-    //scrollspeed, connect to the velocity of game if we want it to match up! 
+    //scrollspeed, connect to the velocity of game if we want it to match up!
     this.scrollSpeed = 1;
-
-
   }
-  public startGame() { }
-  public quit() { }
+  public startGame() {}
+  public quit() {}
 
   public update() {
-    //handles the users click  
 
-    // console.log(menu.menuState);
+    //handles the users click
+    if (menu.menuState === "main") {
 
-    if (this.menuState === "main") {
       this.prevMouseIsPressed = false;
       if (this.mainMenuOptions === 0) {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 400 && mouseY > 377) {
             if (mouseIsPressed) {
-              console.log("1");
+              console.log("Game started");
               this.isMenuOpen = false;
               console.log(this.isMenuOpen);
               
@@ -59,25 +54,23 @@ class Menu implements Imenu {
           }
           if (mouseY < 425 && mouseY > 410) {
             if (mouseIsPressed) {
-              console.log("2");
-              this.menuState = "gameOver";
+              console.log("Credits");
+              this.menuState = "main";
             }
           }
           if (mouseY < 460 && mouseY > 440) {
             if (mouseIsPressed) {
-              console.log("3");
+              console.log("Exit to title screen");
               this.menuState = "";
             }
           }
         }
-      };
+      }
     }
     this.prevMouseIsPressed = mouseIsPressed;
   }
 
-
   private movingBackground() {
-
     //create two instacnes of the image
     image(this.scrollingImage, this.firstImg, 0, width, height);
     image(this.scrollingImage, this.secondImg, 0, width, height);
@@ -95,11 +88,7 @@ class Menu implements Imenu {
     }
   }
 
-
-
   public draw() {
-    
-
     if (this.isMenuOpen === true) {
       // if statement to decide what menus to open
       if (this.menuState === "main") {
@@ -130,8 +119,6 @@ class Menu implements Imenu {
         fill(128, 0, 0);
         textAlign(CENTER);
         text("Exit", 400, 460);
-
-
       } else if (this.menuState === "pause") {
         //show pause menu
       } else if (this.menuState === "gameOver") {

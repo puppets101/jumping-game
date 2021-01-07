@@ -41,17 +41,19 @@ class GamePlay {
     this.platformInterval = 1000;
     this.platformTimer = this.platformInterval
 
+
     this.obstacleInterval = 1500;
     this.obstacleTimer = this.obstacleInterval;
 
     this.powerupTimer = 13633;
+
     this.lives = new Lives(createVector(), true);
     this.graceModeActive = false;
   }
 
-  pauseGame() { }
+  pauseGame() {}
 
-  gameOver() { }
+  gameOver() {}
 
   public update() {
 
@@ -77,7 +79,6 @@ class GamePlay {
     this.projectileCollisions();
 
     this.checkCollisions();
-
 
     // Updates all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
@@ -130,10 +131,18 @@ class GamePlay {
         if (
           (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.platformArray[p].position.y &&
+
+            this.platformArray[p].position.x >
+              this.obstacleArray[i].position.x - this.platformArray[p].width &&
+            this.platformArray[p].position.x <
+              this.obstacleArray[i].position.x -
+                this.obstacleArray[i].width * 0.5) || // check if obstacle lands on one of the platforms
+
             this.obstacleArray[i].position.x + this.obstacleArray[i].width * 0.5 > this.platformArray[p].position.x &&
             this.obstacleArray[i].position.x + this.obstacleArray[i].width * 0.5 < this.platformArray[p].position.x + this.platformArray[p].width) || // check if obstacle lands on one of the platforms
+
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-          570
+            570
         ) {
           // check if obstacle lands on the ground
           this.obstacleArray[i].velocity.y = 0;
@@ -143,9 +152,9 @@ class GamePlay {
         // Character collision with object
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
-          this.character.position.x - this.character.size.x &&
+            this.character.position.x - this.character.size.x &&
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-          this.character.position.y + this.character.size.y
+            this.character.position.y + this.character.size.y
         ) {
           if (this.graceModeActive) {
             console.log(this.graceModeActive);
@@ -166,13 +175,13 @@ class GamePlay {
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
         this.character.position.y + this.character.size.y <=
-        this.platformArray[p].position.y + this.platformArray[p].height &&
+          this.platformArray[p].position.y + this.platformArray[p].height &&
         this.character.position.y + this.character.size.y >=
-        this.platformArray[p].position.y &&
+          this.platformArray[p].position.y &&
         this.character.position.x <=
-        this.platformArray[p].position.x + this.platformArray[p].width &&
+          this.platformArray[p].position.x + this.platformArray[p].width &&
         this.character.position.x + this.character.size.x >=
-        this.platformArray[p].position.x &&
+          this.platformArray[p].position.x &&
         this.character.velocity.y >= 0
       ) {
         this.character.position.y =
@@ -183,11 +192,11 @@ class GamePlay {
       }
       if (
         this.character.position.y + this.character.size.y <=
-        this.platformArray[p].position.y + this.platformArray[p].height &&
+          this.platformArray[p].position.y + this.platformArray[p].height &&
         this.character.position.y + this.character.size.y >=
-        this.platformArray[p].position.y &&
+          this.platformArray[p].position.y &&
         this.character.position.x >
-        this.platformArray[p].position.x + this.platformArray[p].width
+          this.platformArray[p].position.x + this.platformArray[p].width
       ) {
         this.character.applyGravity = 0.1;
       }
@@ -231,11 +240,11 @@ class GamePlay {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
           this.projectileArray[i].position.x >=
-          this.obstacleArray[j].position.x &&
+            this.obstacleArray[j].position.x &&
           this.projectileArray[i].position.y >
-          this.obstacleArray[j].position.y &&
+            this.obstacleArray[j].position.y &&
           this.projectileArray[i].position.y <
-          this.obstacleArray[j].position.y + this.obstacleArray[j].height
+            this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
@@ -246,6 +255,7 @@ class GamePlay {
           // setTimeout(() => {  }, 400);
           ;
           console.log("träff");
+
         }
       }
     }
@@ -272,12 +282,12 @@ class GamePlay {
     this.score.draw();
   }
 
-  // adds new OBSTACLE 
+  // adds new OBSTACLE
   public addNewObstacle() {
     let newObstacle = new Obstacle();
     this.obstacleArray.push(newObstacle);
   }
-  // adds new platform 
+  // adds new platform
   public addNewPlatform() {
     // Returns 1 or 0 – 1 sets a high platform, 0 sets a low platform
     const randomHeight = Math.round(Math.random());
@@ -288,7 +298,7 @@ class GamePlay {
     this.platformArray.push(newPlatform);
   }
 
-  // adds new projectile 
+  // adds new projectile
   public addNewProjectiles() {
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
