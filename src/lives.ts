@@ -36,10 +36,18 @@ class Lives extends DrawableEntity {
         image(this.lifeAsset, this.position.x - 35, this.position.y, 30, 30);
         image(this.lifeAsset, this.position.x - 70, this.position.y, 30, 30);  
         break;    
-      default :
+      case 4 :
         image(this.lifeAsset, this.position.x, this.position.y, 30, 30);
         image(this.lifeAsset, this.position.x - 35, this.position.y, 30, 30);
         image(this.lifeAsset, this.position.x - 70, this.position.y, 30, 30);  
+        image(this.lifeAsset, this.position.x - 105, this.position.y, 30, 30);         
+        break;  
+      case 4 :
+        image(this.lifeAsset, this.position.x, this.position.y, 30, 30);
+        image(this.lifeAsset, this.position.x - 35, this.position.y, 30, 30);
+        image(this.lifeAsset, this.position.x - 70, this.position.y, 30, 30);  
+        image(this.lifeAsset, this.position.x - 105, this.position.y, 30, 30);   
+        image(this.lifeAsset, this.position.x - 140, this.position.y, 30, 30);                
         break;  
     }
     
