@@ -9,7 +9,7 @@ class Powerup extends MovableEntity {
         this.color = color(220, 20, 60);
         this.height = 30;
         this.width = 30;
-        this.powerupAsset = lifeAsset;
+        this.powerupAsset = powerupLifeAsset;
     }
 
 public update() {
