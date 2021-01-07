@@ -26,7 +26,7 @@ function preload() {
   // Tyvärr har jag inte fått till den globala typningen för
   // inladdningen av ljud men fungerar bra enligt nedan..
   // sound = (window as any).loadSound('../assets/mySound.wav');
-  
+
   outrunFont = loadFont("./assets/fonts/Outrun_future.otf");
   pixelFont = loadFont("./assets/fonts/PressStart2P-Regular.ttf");
 
@@ -40,9 +40,9 @@ function preload() {
 
   platformAsset = loadImage('./assets/imgs/platform.png');
 
-  
-  
-  
+
+
+
   shootSound = loadSound("./assets/sound/shoot-sound.wav")
   backgroundSound = loadSound("./assets/sound/background-sound.wav")
 
@@ -63,7 +63,7 @@ function setup() {
   createCanvas(800, 600); // bestäm storlek
   frameRate(60);
 
-  
+
   game = new Game();
   menu = new Menu(true, "");
 
@@ -77,7 +77,7 @@ function setup() {
 function draw() {
   game.update();
   game.draw();
-  
+
 }
 
 function keyPressed() {
@@ -88,20 +88,20 @@ function keyPressed() {
   if (keyCode === DOWN_ARROW) {
     game.gamePlay.character.fall();
   }
-  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1){
+  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
     game.gamePlay.addNewProjectiles();
     shootSound.play();
   }
 }
 
-  
+
 
 
 /**
    * Built in windowResize listener function in P5
 
   function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);} 
+  resizeCanvas(windowWidth, windowHeight);}
    */
 
 

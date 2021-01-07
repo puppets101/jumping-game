@@ -1,8 +1,8 @@
 class GamePlay {
   private score: Score;
   public character: Character;
+  private pauseScreen: PauseScreen;
   // private gameAudio: GameAudio;
-  // private pauseScreen: PauseScreen;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
   private obstacleArray: Obstacle[];
@@ -25,8 +25,8 @@ class GamePlay {
     this.score = new Score();
     this.character = new Character();
     // this.gameAudio = new GameAudio();
-    // this.pauseScreen = new PauseScreen();
 
+    this.pauseScreen = new PauseScreen(menu)
     this.background = new Background(
       createVector(0, 0),
       true,
@@ -53,16 +53,21 @@ class GamePlay {
     this.graceModeActive = false;
   }
 
-  pauseGame() {}
-
-  gameOver() {}
+  gameOver() { }
 
   loadGameSound() {
     backgroundSound.loop()
     backgroundSound.setVolume(0.1)
   }
 
+
   public update() {
+    if (keyIsPressed) {
+      if (keyCode === 27) {
+        this.pauseScreen.draw();
+        console.log("qwe");
+      }
+    }
 
     if (!this.playBackgroundSound) {
       this.loadGameSound();
@@ -137,6 +142,8 @@ class GamePlay {
     }
   }
 
+
+
   private checkCollisions() {
     // Compares the obstacle positions to the platform positions
     for (let i = 0; i < this.obstacleArray.length; i++) {
@@ -145,13 +152,13 @@ class GamePlay {
           (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.platformArray[p].position.y &&
             this.obstacleArray[i].position.x +
-              this.obstacleArray[i].width * 0.5 >
-              this.platformArray[p].position.x &&
+            this.obstacleArray[i].width * 0.5 >
+            this.platformArray[p].position.x &&
             this.obstacleArray[i].position.x +
-              this.obstacleArray[i].width * 0.5 <
-              this.platformArray[p].position.x + this.platformArray[p].width) || // <-- check if obstacle lands on one of the platforms
+            this.obstacleArray[i].width * 0.5 <
+            this.platformArray[p].position.x + this.platformArray[p].width) || // <-- check if obstacle lands on one of the platforms
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-            570
+          570
           // <-- check if obstacle lands on the ground
         ) {
           this.obstacleArray[i].velocity.y = 0;
@@ -161,9 +168,9 @@ class GamePlay {
         // Character collision with object
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
-            this.character.position.x - this.character.size.x &&
+          this.character.position.x - this.character.size.x &&
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-            this.character.position.y + this.character.size.y
+          this.character.position.y + this.character.size.y
         ) {
           if (this.graceModeActive) {
             console.log(this.graceModeActive);
@@ -184,13 +191,13 @@ class GamePlay {
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
         this.character.position.y + this.character.size.y <=
-          this.platformArray[p].position.y + this.platformArray[p].height &&
+        this.platformArray[p].position.y + this.platformArray[p].height &&
         this.character.position.y + this.character.size.y >=
-          this.platformArray[p].position.y &&
+        this.platformArray[p].position.y &&
         this.character.position.x <=
-          this.platformArray[p].position.x + this.platformArray[p].width &&
+        this.platformArray[p].position.x + this.platformArray[p].width &&
         this.character.position.x + this.character.size.x >=
-          this.platformArray[p].position.x &&
+        this.platformArray[p].position.x &&
         this.character.velocity.y >= 0
       ) {
         this.character.position.y =
@@ -201,11 +208,11 @@ class GamePlay {
       }
       if (
         this.character.position.y + this.character.size.y <=
-          this.platformArray[p].position.y + this.platformArray[p].height &&
+        this.platformArray[p].position.y + this.platformArray[p].height &&
         this.character.position.y + this.character.size.y >=
-          this.platformArray[p].position.y &&
+        this.platformArray[p].position.y &&
         this.character.position.x >
-          this.platformArray[p].position.x + this.platformArray[p].width
+        this.platformArray[p].position.x + this.platformArray[p].width
       ) {
         this.character.applyGravity = 0.1;
       }
@@ -219,14 +226,14 @@ class GamePlay {
             (this.powerupArray[i].position.y + this.powerupArray[i].height ===
               this.platformArray[p].position.y &&
               this.powerupArray[i].position.x +
-                this.powerupArray[i].width * 0.5 >
-                this.platformArray[p].position.x &&
+              this.powerupArray[i].width * 0.5 >
+              this.platformArray[p].position.x &&
               this.powerupArray[i].position.x +
-                this.powerupArray[i].width * 0.5 <
-                this.platformArray[p].position.x +
-                  this.platformArray[p].width) ||
+              this.powerupArray[i].width * 0.5 <
+              this.platformArray[p].position.x +
+              this.platformArray[p].width) ||
             this.powerupArray[i].position.y + this.powerupArray[i].height ===
-              570
+            570
           ) {
             this.powerupArray[i].velocity.y = 0;
             this.powerupArray[i].velocity.x = 3;
@@ -236,11 +243,11 @@ class GamePlay {
         // Character collision with powerup
         if (
           this.powerupArray[i].position.x <
-            this.character.position.x + this.character.size.x &&
+          this.character.position.x + this.character.size.x &&
           this.powerupArray[i].position.y <=
-            this.character.position.y + this.character.size.y &&
+          this.character.position.y + this.character.size.y &&
           this.powerupArray[i].position.y + this.powerupArray[i].height >=
-            this.character.position.y
+          this.character.position.y
         ) {
           this.powerupArray.splice(i, 1);
           this.lives.life++;
@@ -255,11 +262,11 @@ class GamePlay {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
           this.projectileArray[i].position.x >=
-            this.obstacleArray[j].position.x &&
+          this.obstacleArray[j].position.x &&
           this.projectileArray[i].position.y >
-            this.obstacleArray[j].position.y &&
+          this.obstacleArray[j].position.y &&
           this.projectileArray[i].position.y <
-            this.obstacleArray[j].position.y + this.obstacleArray[j].height
+          this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
