@@ -254,7 +254,9 @@ class GamePlay {
           this.score.score += 10;
 
           // FIX DEATH ANIMATION 
-          this.obstacleArray[j].image = droneDeathAsset;
+          if(this.obstacleArray[j].image === droneAsset) {
+            this.obstacleArray[j].image = droneDeathAsset;
+          }
           this.obstacleArray.splice(j, 1);
           // setTimeout(() => {  }, 400);
           ;
