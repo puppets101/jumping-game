@@ -14,13 +14,13 @@ class Menu implements Imenu {
   private secondImg: number;
   private scrollSpeed: number;
 
-  constructor(_isMenuOpen: boolean, _menuState: string) {
+  constructor(isMenuOpen: boolean, menuState: string) {
     this.menuAudio = new MenuAudio();
     this.gameOver = new GameOver(this);
     this.pauseScreen = new PauseScreen(this);
     this.titleScreen = new TitleScreen(this);
-    this.isMenuOpen = _isMenuOpen;
-    this.menuState = _menuState;
+    this.isMenuOpen = isMenuOpen;
+    this.menuState = menuState;
     this.mainMenuOptions = 0;
     this.prevMouseIsPressed = false;
 
@@ -33,14 +33,22 @@ class Menu implements Imenu {
     //scrollspeed, connect to the velocity of game if we want it to match up!
     this.scrollSpeed = 1;
   }
-  public startGame() {}
-  public quit() {}
+  public startGame() { }
+  public quit() { }
+
+  public pauseGame() {
+    menu.isMenuOpen = true;
+    menu.menuState = "pause";
+    
+    console.log(this.isMenuOpen);
+    
+    
+  }
 
   public update() {
 
     //handles the users click
-    if (menu.menuState === "main") {
-
+    if (game.menu.menuState === "main") {
       this.prevMouseIsPressed = false;
       if (this.mainMenuOptions === 0) {
         if (mouseX < 500 && mouseX > 300) {
@@ -49,13 +57,13 @@ class Menu implements Imenu {
               console.log("Game started");
               this.isMenuOpen = false;
               console.log(this.isMenuOpen);
-              
+
             }
           }
           if (mouseY < 425 && mouseY > 410) {
             if (mouseIsPressed) {
               console.log("Credits");
-              this.menuState = "main";
+              this.menuState = "credits";
             }
           }
           if (mouseY < 460 && mouseY > 440) {
@@ -119,15 +127,25 @@ class Menu implements Imenu {
         fill(128, 0, 0);
         textAlign(CENTER);
         text("Exit", 400, 460);
+
       } else if (this.menuState === "pause") {
-        //show pause menu
+        this.pauseScreen.draw();
+        // Continue game from pause logic
+        if(keyIsPressed){
+          if (keyCode === 13) {
+            this.isMenuOpen = false;
+          }
+        }
+
       } else if (this.menuState === "gameOver") {
         this.gameOver.draw();
+
       } else {
+        // Logic for the title menu 
         this.titleScreen.draw();
-        //move this to titlescreen class????????????????????????????????????? cant reach the menuState var in there atm
         if (keyIsPressed === true) {
           this.menuState = "main";
+          
         }
       }
     }
