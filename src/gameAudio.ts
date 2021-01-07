@@ -1,5 +1,5 @@
 class GameAudio extends DrawableEntity {
- protected playBackgroundAudio: boolean;
+ public playBackgroundAudio: boolean;
 
   constructor(_position: p5.Vector, _isVisible: boolean) {
     
@@ -27,6 +27,7 @@ class GameAudio extends DrawableEntity {
 
   }
   public draw(){
+    console.log(game.menu.menuState)
     this.toggleAudio();
 
     // tried to access trought lifes, but no work

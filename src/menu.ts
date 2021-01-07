@@ -8,6 +8,8 @@ class Menu implements Imenu {
   private mainMenuOptions: number;
   private prevMouseIsPressed: boolean;
 
+  public playBackgroundAudio: boolean;
+
   //for moving background (same code as background-class)
   private scrollingImage: p5.Image;
   private firstImg: number;
@@ -23,6 +25,9 @@ class Menu implements Imenu {
     this.menuState = _menuState;
     this.mainMenuOptions = 0;
     this.prevMouseIsPressed = false;
+
+
+    this.playBackgroundAudio = true;
 
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/main.png");
@@ -40,25 +45,30 @@ class Menu implements Imenu {
 
     //handles the users click
     if (menu.menuState === "main") {
-
       this.prevMouseIsPressed = false;
       if (this.mainMenuOptions === 0) {
         if (mouseX < 500 && mouseX > 300) {
-          if (mouseY < 400 && mouseY > 377) {
+          if (mouseY < 415 && mouseY > 392) {
             if (mouseIsPressed) {
               console.log("Game started");
               this.isMenuOpen = false;
+              // Starts gameaudio
+              if(this.playBackgroundAudio) {
+                this.playBackgroundAudio = false;
+                backgroundSound.loop();
+                backgroundSound.setVolume(0.1);
+                }
               // console.log(this.isMenuOpen);
               
             }
           }
-          if (mouseY < 425 && mouseY > 410) {
+          if (mouseY < 440 && mouseY > 425) {
             if (mouseIsPressed) {
               console.log("Credits");
               this.menuState = "main";
             }
           }
-          if (mouseY < 460 && mouseY > 440) {
+          if (mouseY < 475 && mouseY > 455) {
             if (mouseIsPressed) {
               console.log("Exit to title screen");
               this.menuState = "";
@@ -123,6 +133,8 @@ class Menu implements Imenu {
         //show pause menu
       } else if (this.menuState === "gameOver") {
         this.gameOver.draw();
+        backgroundSound.stop();
+        this.playBackgroundAudio = true;
       } else {
         this.titleScreen.draw();
         //move this to titlescreen class????????????????????????????????????? cant reach the menuState var in there atm

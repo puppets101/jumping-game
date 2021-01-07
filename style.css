@@ -1,0 +1,19 @@
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background: black;
+    overflow: hidden;
+}
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -2rem;
+    display: block;
+
+    border: 15px solid grey;
+    border-radius: 10px;
+}

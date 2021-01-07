@@ -1,7 +1,7 @@
 class GamePlay {
   private score: Score;
   public character: Character;
-  private gameAudio: GameAudio;
+  // private gameAudio: GameAudio;
   // private pauseScreen: PauseScreen;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
@@ -19,11 +19,13 @@ class GamePlay {
   private obstacleTimer: number;
   private platformTimer: number;
   private powerupTimer: number;
+// Audio
+  private playBackgroundAudio: boolean;
 
   constructor() {
     this.score = new Score();
     this.character = new Character();
-    this.gameAudio = new GameAudio(createVector(100,100), true, true);
+   // this.gameAudio = new GameAudio(createVector(100,100), true);
     // this.pauseScreen = new PauseScreen();
 
     this.background = new Background(
@@ -32,7 +34,7 @@ class GamePlay {
       createVector(3, 0),
       0
     );
-
+    this.playBackgroundAudio = true;
     this.obstacleArray = [];
     this.platformArray = [];
     this.powerupArray = [];
@@ -55,8 +57,20 @@ class GamePlay {
 
   gameOver() {}
 
-  public update() {
+  // public toggleAudio() {
+  //   if(this.playBackgroundAudio) {
+  //     this.playBackgroundAudio = false;
+  //     backgroundSound.loop();
+  //     backgroundSound.setVolume(0.1);
+  //     console.log(game.gamePlay.lives.life)
+  //     }
+  //     if(game.gamePlay.lives.life === 0){
+  //       console.log("KUK")
+  //     }
+  // }
 
+  public update() {
+    //this.toggleAudio();
 
     // Adds new platforms
     this.platformTimer -= deltaTime;
@@ -265,7 +279,7 @@ class GamePlay {
 
   public draw() {
     this.background.draw();
-    this.gameAudio.draw();
+    //this.gameAudio.draw();
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].draw();
