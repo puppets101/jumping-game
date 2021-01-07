@@ -10,6 +10,7 @@ let droneAsset: p5.Image;
 let droneDeathAsset: p5.Image;
 let runnerAsset: p5.Image;
 let platformAsset: p5.Image;
+let powerupLifeAsset: p5.Image;
 let lifeAsset: p5.Image;
 
 /**
@@ -35,7 +36,9 @@ function preload() {
   platformAsset = loadImage('./assets/imgs/platform.png');
 
   // https://www.artstation.com/thebyteman
-  lifeAsset = loadImage('./assets/sprites/heart.gif')
+  powerupLifeAsset = loadImage('./assets/sprites/heart.gif')
+
+  lifeAsset = loadImage('./assets/imgs/heart.png')
 
 
 }

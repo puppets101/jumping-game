@@ -22,6 +22,8 @@ class Lives extends DrawableEntity {
 
   public draw() {
     switch(this.life) {
+      case 0:
+        break;
       case 1: 
         image(this.lifeAsset, this.position.x, this.position.y, 30, 30);
         break;
@@ -32,7 +34,13 @@ class Lives extends DrawableEntity {
       case 3 :
         image(this.lifeAsset, this.position.x, this.position.y, 30, 30);
         image(this.lifeAsset, this.position.x - 35, this.position.y, 30, 30);
-        image(this.lifeAsset, this.position.x - 70, this.position.y, 30, 30);        
+        image(this.lifeAsset, this.position.x - 70, this.position.y, 30, 30);  
+        break;    
+      default :
+        image(this.lifeAsset, this.position.x, this.position.y, 30, 30);
+        image(this.lifeAsset, this.position.x - 35, this.position.y, 30, 30);
+        image(this.lifeAsset, this.position.x - 70, this.position.y, 30, 30);  
+        break;  
     }
     
     //fill("red");
