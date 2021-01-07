@@ -14,17 +14,15 @@ class Menu implements Imenu {
   private secondImg: number;
   private scrollSpeed: number;
 
-  constructor(_isMenuOpen: boolean, _menuState: string) {
+  constructor(isMenuOpen: boolean, menuState: string) {
     this.menuAudio = new MenuAudio();
     this.gameOver = new GameOver(this);
     this.pauseScreen = new PauseScreen(this);
     this.titleScreen = new TitleScreen(this);
-    this.isMenuOpen = _isMenuOpen;
-    this.menuState = _menuState;
+    this.isMenuOpen = isMenuOpen;
+    this.menuState = menuState;
     this.mainMenuOptions = 0;
     this.prevMouseIsPressed = false;
-
-
 
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/main.png");
@@ -32,50 +30,55 @@ class Menu implements Imenu {
     this.firstImg = 0;
     //instance 2 of picture
     this.secondImg = width;
-    //scrollspeed, connect to the velocity of game if we want it to match up! 
+    //scrollspeed, connect to the velocity of game if we want it to match up!
     this.scrollSpeed = 1;
-
-
   }
   public startGame() { }
   public quit() { }
 
+  public pauseGame() {
+    menu.isMenuOpen = true;
+    menu.menuState = "pause";
+    
+    console.log(this.isMenuOpen);
+    
+    
+  }
+
   public update() {
-    //handles the users click  
 
-    // console.log(menu.menuState);
-
-    if (menu.menuState === "main") {
+    //handles the users click
+    if (game.menu.menuState === "main") {
       this.prevMouseIsPressed = false;
       if (this.mainMenuOptions === 0) {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 400 && mouseY > 377) {
             if (mouseIsPressed) {
-              console.log("1");
+              console.log("Game started");
               this.isMenuOpen = false;
+              console.log(this.isMenuOpen);
+
             }
           }
           if (mouseY < 425 && mouseY > 410) {
             if (mouseIsPressed) {
-              console.log("2");
-              this.menuState = "gameOver";
+              console.log("Credits");
+              this.menuState = "credits";
             }
           }
           if (mouseY < 460 && mouseY > 440) {
             if (mouseIsPressed) {
-              console.log("3");
+              console.log("Exit to title screen");
               this.menuState = "";
             }
           }
         }
-      };
+      }
     }
     this.prevMouseIsPressed = mouseIsPressed;
   }
 
-
   private movingBackground() {
-
     //create two instacnes of the image
     image(this.scrollingImage, this.firstImg, 0, width, height);
     image(this.scrollingImage, this.secondImg, 0, width, height);
@@ -93,11 +96,7 @@ class Menu implements Imenu {
     }
   }
 
-
-
   public draw() {
-    
-
     if (this.isMenuOpen === true) {
       // if statement to decide what menus to open
       if (this.menuState === "main") {
@@ -129,16 +128,24 @@ class Menu implements Imenu {
         textAlign(CENTER);
         text("Exit", 400, 460);
 
-
       } else if (this.menuState === "pause") {
-        //show pause menu
+        this.pauseScreen.draw();
+        // Continue game from pause logic
+        if(keyIsPressed){
+          if (keyCode === 13) {
+            this.isMenuOpen = false;
+          }
+        }
+
       } else if (this.menuState === "gameOver") {
         this.gameOver.draw();
+
       } else {
+        // Logic for the title menu 
         this.titleScreen.draw();
-        //move this to titlescreen class????????????????????????????????????? cant reach the menuState var in there atm
         if (keyIsPressed === true) {
           this.menuState = "main";
+          
         }
       }
     }

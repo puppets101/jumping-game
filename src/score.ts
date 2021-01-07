@@ -1,12 +1,12 @@
 class Score extends DrawableEntity {
-  private score: number;
+  public score: number;
 
   constructor() {
     super(createVector(), true);
     this.score = 0;
   }
 
-  countScore() {
+  public countScore() {
     fill("black");
     noStroke();
     this.score = this.score + deltaTime / 500;

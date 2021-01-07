@@ -33,8 +33,6 @@ class TitleScreen {
     
     image(this.titleScreen, 0, 0, width, height);
     
-      // game.update();
-      // game.draw();
       //text for the logo
       textFont(outrunFont);
       textSize(50);
