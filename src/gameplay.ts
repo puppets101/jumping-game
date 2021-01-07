@@ -16,6 +16,9 @@ class GamePlay {
   public projectileArray: Projectile[];
 
   private background: Background;
+  private obstacleTimer: number;
+  private platformTimer: number;
+  private powerupTimer: number;
 
   constructor() {
     this.score = new Score();
@@ -36,26 +39,12 @@ class GamePlay {
     // this.movableEntities = [];
 
     this.platformInterval = 1000;
+    this.platformTimer = this.platformInterval
+
     this.obstacleInterval = 1500;
+    this.obstacleTimer = this.obstacleInterval;
 
-    // if(!menu.isMenuOpen){
-
-    // interval for creating platforms
-    setInterval(() => {
-      this.addNewPlatform();
-    }, this.platformInterval);
-
-    //interval for creating obstacles (delta time? Time to next spawn istället för interval***)
-    setInterval(() => {
-      this.addNewObstacle();
-    }, this.obstacleInterval);
-
-      // interval for creating powerups
-      setInterval(() => {
-        this.addNewPowerup();
-      }, 13633);
-
-
+    this.powerupTimer = 13633;
     this.lives = new Lives(createVector(), true);
     this.graceModeActive = false;
   }
@@ -65,6 +54,26 @@ class GamePlay {
   gameOver() { }
 
   public update() {
+
+    // Adds new platforms
+    this.platformTimer -= deltaTime;
+    if (this.platformTimer < 0) {
+      this.addNewPlatform();
+      this.platformTimer = this.platformInterval;
+    }
+    // Adds new obstacles 
+    this.obstacleTimer -= deltaTime;
+    if (this.obstacleTimer < 0) {
+      this.addNewObstacle();
+      this.obstacleTimer = this.obstacleInterval;
+    }
+    // Adds new powerups 
+    this.powerupTimer -= deltaTime;
+    if (this.powerupTimer < 0) {
+      this.addNewPowerup();
+      this.powerupTimer = 13633;
+    }
+
     this.projectileCollisions();
 
     this.checkCollisions();
@@ -183,9 +192,9 @@ class GamePlay {
         this.character.applyGravity = 0.1;
       }
     }
-    
+
     // Powerup collision with platform or ground
-    if(this.powerupArray.length > 0) {
+    if (this.powerupArray.length > 0) {
       for (let i = 0; i < this.powerupArray.length; i++) {
         for (let p = 0; p < this.platformArray.length; p++) {
           if (
@@ -193,27 +202,27 @@ class GamePlay {
               this.platformArray[p].position.y &&
               this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 > this.platformArray[p].position.x &&
               this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 < this.platformArray[p].position.x + this.platformArray[p].width) ||
-              this.powerupArray[i].position.y + this.powerupArray[i].height === 570
+            this.powerupArray[i].position.y + this.powerupArray[i].height === 570
           ) {
             this.powerupArray[i].velocity.y = 0;
             this.powerupArray[i].velocity.x = 3;
           }
-        }  
+        }
 
         // Character collision with powerup
         if (
-          this.powerupArray[i].position.x  <
+          this.powerupArray[i].position.x <
           this.character.position.x + this.character.size.x &&
           this.powerupArray[i].position.y <=
           this.character.position.y + this.character.size.y &&
-          this.powerupArray[i].position.y + this.powerupArray[i].height >= this.character.position.y         
+          this.powerupArray[i].position.y + this.powerupArray[i].height >= this.character.position.y
         ) {
-            this.powerupArray.splice(i, 1);
-            this.lives.life ++;
+          this.powerupArray.splice(i, 1);
+          this.lives.life++;
         }
-        
+
+      }
     }
-  }
   }
 
   // projectile collision with object
@@ -229,11 +238,14 @@ class GamePlay {
           this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
           this.projectileArray.splice(i, 1);
+          this.score.score += 10;
 
-          this.obstacleArray[j].droneAssetGif = droneDeathAsset; 
-          setTimeout(() => { this.obstacleArray.splice(j, 1) }, 400);
+          // FIX DEATH ANIMATION 
+          this.obstacleArray[j].droneAssetGif = droneDeathAsset;
+          this.obstacleArray.splice(j, 1);
+          // setTimeout(() => {  }, 400);
           ;
-          // console.log("träff");
+          console.log("träff");
         }
       }
     }
@@ -278,7 +290,6 @@ class GamePlay {
 
   // adds new projectile 
   public addNewProjectiles() {
-
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
   }
