@@ -39,8 +39,7 @@ class GamePlay {
     // this.movableEntities = [];
 
     this.platformInterval = 1000;
-    this.platformTimer = this.platformInterval
-
+    this.platformTimer = this.platformInterval;
 
     this.obstacleInterval = 1500;
     this.obstacleTimer = this.obstacleInterval;
@@ -56,20 +55,19 @@ class GamePlay {
   gameOver() {}
 
   public update() {
-
     // Adds new platforms
     this.platformTimer -= deltaTime;
     if (this.platformTimer < 0) {
       this.addNewPlatform();
       this.platformTimer = this.platformInterval;
     }
-    // Adds new obstacles 
+    // Adds new obstacles
     this.obstacleTimer -= deltaTime;
     if (this.obstacleTimer < 0) {
       this.addNewObstacle();
       this.obstacleTimer = this.obstacleInterval;
     }
-    // Adds new powerups 
+    // Adds new powerups
     this.powerupTimer -= deltaTime;
     if (this.powerupTimer < 0) {
       this.addNewPowerup();
@@ -131,20 +129,16 @@ class GamePlay {
         if (
           (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.platformArray[p].position.y &&
-
-            this.platformArray[p].position.x >
-              this.obstacleArray[i].position.x - this.platformArray[p].width &&
-            this.platformArray[p].position.x <
-              this.obstacleArray[i].position.x -
-                this.obstacleArray[i].width * 0.5) || // check if obstacle lands on one of the platforms
-
-            this.obstacleArray[i].position.x + this.obstacleArray[i].width * 0.5 > this.platformArray[p].position.x &&
-            this.obstacleArray[i].position.x + this.obstacleArray[i].width * 0.5 < this.platformArray[p].position.x + this.platformArray[p].width) || // check if obstacle lands on one of the platforms
-
+            this.obstacleArray[i].position.x +
+              this.obstacleArray[i].width * 0.5 >
+              this.platformArray[p].position.x &&
+            this.obstacleArray[i].position.x +
+              this.obstacleArray[i].width * 0.5 <
+              this.platformArray[p].position.x + this.platformArray[p].width) || // <-- check if obstacle lands on one of the platforms
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             570
+          // <-- check if obstacle lands on the ground
         ) {
-          // check if obstacle lands on the ground
           this.obstacleArray[i].velocity.y = 0;
           this.obstacleArray[i].velocity.x = 3;
         }
@@ -209,9 +203,15 @@ class GamePlay {
           if (
             (this.powerupArray[i].position.y + this.powerupArray[i].height ===
               this.platformArray[p].position.y &&
-              this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 > this.platformArray[p].position.x &&
-              this.powerupArray[i].position.x + this.powerupArray[i].width * 0.5 < this.platformArray[p].position.x + this.platformArray[p].width) ||
-            this.powerupArray[i].position.y + this.powerupArray[i].height === 570
+              this.powerupArray[i].position.x +
+                this.powerupArray[i].width * 0.5 >
+                this.platformArray[p].position.x &&
+              this.powerupArray[i].position.x +
+                this.powerupArray[i].width * 0.5 <
+                this.platformArray[p].position.x +
+                  this.platformArray[p].width) ||
+            this.powerupArray[i].position.y + this.powerupArray[i].height ===
+              570
           ) {
             this.powerupArray[i].velocity.y = 0;
             this.powerupArray[i].velocity.x = 3;
@@ -221,15 +221,15 @@ class GamePlay {
         // Character collision with powerup
         if (
           this.powerupArray[i].position.x <
-          this.character.position.x + this.character.size.x &&
+            this.character.position.x + this.character.size.x &&
           this.powerupArray[i].position.y <=
-          this.character.position.y + this.character.size.y &&
-          this.powerupArray[i].position.y + this.powerupArray[i].height >= this.character.position.y
+            this.character.position.y + this.character.size.y &&
+          this.powerupArray[i].position.y + this.powerupArray[i].height >=
+            this.character.position.y
         ) {
           this.powerupArray.splice(i, 1);
           this.lives.life++;
         }
-
       }
     }
   }
@@ -249,13 +249,11 @@ class GamePlay {
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
 
-          // FIX DEATH ANIMATION 
+          // FIX DEATH ANIMATION
           this.obstacleArray[j].droneAssetGif = droneDeathAsset;
           this.obstacleArray.splice(j, 1);
           // setTimeout(() => {  }, 400);
-          ;
           console.log("träff");
-
         }
       }
     }
