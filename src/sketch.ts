@@ -5,6 +5,9 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 
+let shootSound: p5.SoundFile;
+let backgroundSound: p5.SoundFile;
+
 let projectiles: Projectile;
 
 
@@ -23,23 +26,24 @@ function preload() {
   // Tyvärr har jag inte fått till den globala typningen för
   // inladdningen av ljud men fungerar bra enligt nedan..
   // sound = (window as any).loadSound('../assets/mySound.wav');
-
+  
   outrunFont = loadFont("./assets/fonts/Outrun_future.otf");
   pixelFont = loadFont("./assets/fonts/PressStart2P-Regular.ttf");
   
-
+  
   // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
   runnerAsset = loadImage('./assets/sprites/runner.gif'); 
   droneAsset = loadImage('./assets/sprites/drone.gif');
   droneDeathAsset = loadImage('./assets/sprites/droneDeath.gif')
-
+  
   // https://trixelized.itch.io/starstring-fields
   platformAsset = loadImage('./assets/imgs/platform.png');
-
+  
   lifeAsset = loadImage('./assets/imgs/heart.png')
-
+  
+  shootSound = loadSound("./assets/sound/shoot-sound.wav")
+  backgroundSound = loadSound("./assets/sound/background-sound.wav")
 }
-
 /**
  * Built in setup function in P5
  * This is a good place to create your first class object
@@ -50,10 +54,11 @@ function setup() {
   createCanvas(800, 600); // bestäm storlek
   frameRate(60);
   menu = new Menu(true, "");
-
+  
   // noCursor();
-
+  
   game = new Game();
+
 }
 
 /**
@@ -75,7 +80,7 @@ function keyPressed() {
   }
   if (keyCode === 32 && game.gamePlay.projectileArray.length < 1){
     game.gamePlay.addNewProjectiles();
-    
+    shootSound.play();
   }
 }
 
@@ -86,3 +91,5 @@ function keyPressed() {
   function windowResized() {
   resizeCanvas(windowWidth, windowHeight);} 
    */
+
+

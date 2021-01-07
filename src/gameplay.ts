@@ -12,6 +12,7 @@ class GamePlay {
   private platformInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
+  private playBackgroundSound: boolean;
 
   public projectileArray: Projectile[];
 
@@ -29,12 +30,14 @@ class GamePlay {
       createVector(3, 0),
       0
     );
+
+    this.playBackgroundSound = false;
     this.obstacleArray = [];
     this.platformArray = [];
     this.powerupArray = [];
     this.projectileArray = [];
-    // this.movableEntities = [];
 
+    // this.movableEntities = [];
     this.platformInterval = 1000;
     this.obstacleInterval = 1500;
 
@@ -64,7 +67,16 @@ class GamePlay {
 
   gameOver() { }
 
+  loadGameSound() {
+    backgroundSound.loop()
+    backgroundSound.setVolume(0.1)
+  }
+
   public update() {
+    if (!this.playBackgroundSound) {
+      this.loadGameSound();
+      this.playBackgroundSound = true;
+    }
     this.projectileCollisions();
 
     this.checkCollisions();
