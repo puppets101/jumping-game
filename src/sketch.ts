@@ -95,8 +95,13 @@ function keyPressed() {
   }
   if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
     game.gamePlay.addNewProjectiles();
+
     shootSound.play();
+
   }
+  
+  
+  
 }
 
 
