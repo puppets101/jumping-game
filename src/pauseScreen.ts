@@ -24,7 +24,7 @@ class PauseScreen {
         game.menu.menuState = "pause";
         // this.continueGame();
 
-        background('rgba(0,30,0, 0.01)');
+        // background('rgba(0,30,0, 0.01)');
         textFont(outrunFont);
         textSize(50);
         fill(128, 0, 0);

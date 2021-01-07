@@ -17,21 +17,21 @@ class GameOver {
     if (
       !this.prevMouseIsPressedGO &&
       mouseIsPressed &&
-      menu.menuState === "gameOver"
+      game.menu.menuState === "gameOver"
     ) {
       const mouseClickedGO = () => {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 385 && mouseY > 366) {
             if (mouseIsPressed) {
               console.log("Game Restarted");
-              menu.isMenuOpen = false;
+              game.menu.isMenuOpen = false;
             }
           }
           if (mouseY < 429 && mouseY > 405) {
             if (mouseIsPressed) {
               console.log("Go to main");
-              menu.isMenuOpen = true;
-              menu.menuState = "main";
+              game.menu.isMenuOpen = true;
+              game.menu.menuState = "main";
             }
           }
         }
