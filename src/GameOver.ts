@@ -13,23 +13,24 @@ class GameOver {
   public playAgain() {}
   public quit() {}
   public update() {
-    // handles the users click 
+    // handles the users click
     if (
-      (!this.prevMouseIsPressedGO && mouseIsPressed) &&
+      !this.prevMouseIsPressedGO &&
+      mouseIsPressed &&
       menu.menuState === "gameOver"
     ) {
-
       const mouseClickedGO = () => {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 385 && mouseY > 366) {
             if (mouseIsPressed) {
-              console.log("1");
+              console.log("Game Restarted");
               menu.isMenuOpen = false;
             }
           }
           if (mouseY < 429 && mouseY > 405) {
             if (mouseIsPressed) {
-              console.log("2");
+              console.log("Go to main");
+              menu.isMenuOpen = true;
               menu.menuState = "main";
             }
           }

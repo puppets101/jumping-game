@@ -8,14 +8,15 @@ class Lives extends DrawableEntity {
   public countLives() {
     this.life--;
     if (this.life === 0) {
-      // character.isAlive = false;
-      // TODO - Implement logic to show game over menu
+      console.log("game over");
+      game.gamePlay.character.isAlive = false;
+      game.menu.isMenuOpen = true;
+      game.menu.menuState = "gameOver";
+      game.gamePlay = new GamePlay();
     }
   }
 
-  public update() {
-    this.countLives();
-  }
+  public update() {}
 
   public draw() {
     fill("red");
