@@ -304,8 +304,10 @@ class GamePlay {
 
   // adds new powerup
   public addNewPowerup() {
-    let newPowerup = new Powerup();
-    this.powerupArray.push(newPowerup);
+    if(this.lives.life <5) {
+      let newPowerup = new Powerup();
+      this.powerupArray.push(newPowerup);
+    }
   }
   // for (const entity of this.movableEntities){
   //   if(entity instanceof ScrollableEntity) {
