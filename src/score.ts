@@ -1,5 +1,5 @@
 class Score extends DrawableEntity {
-  private score: number;
+  public score: number;
 
   constructor() {
     super(createVector(), true);

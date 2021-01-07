@@ -37,8 +37,10 @@ class Menu implements Imenu {
   public quit() {}
 
   public update() {
+
     //handles the users click
     if (menu.menuState === "main") {
+
       this.prevMouseIsPressed = false;
       if (this.mainMenuOptions === 0) {
         if (mouseX < 500 && mouseX > 300) {
@@ -46,6 +48,8 @@ class Menu implements Imenu {
             if (mouseIsPressed) {
               console.log("Game started");
               this.isMenuOpen = false;
+              console.log(this.isMenuOpen);
+              
             }
           }
           if (mouseY < 425 && mouseY > 410) {

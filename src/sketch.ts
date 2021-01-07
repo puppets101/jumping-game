@@ -5,12 +5,12 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 
-let projectiles: Projectile;
 
 let droneAsset: p5.Image;
 let droneDeathAsset: p5.Image;
 let runnerAsset: p5.Image;
 let platformAsset: p5.Image;
+let lifeAsset: p5.Image;
 
 /**
  * Built in preload function in P5
@@ -31,7 +31,13 @@ function preload() {
   droneDeathAsset = loadImage("./assets/sprites/droneDeath.gif");
 
   // https://trixelized.itch.io/starstring-fields
-  platformAsset = loadImage("./assets/imgs/platform.png");
+
+  platformAsset = loadImage('./assets/imgs/platform.png');
+
+  // https://www.artstation.com/thebyteman
+  lifeAsset = loadImage('./assets/sprites/heart.gif')
+
+
 }
 
 /**
@@ -43,11 +49,9 @@ function preload() {
 function setup() {
   createCanvas(800, 600); // bestäm storlek
   frameRate(60);
-  menu = new Menu(true, "");
-
-  // noCursor();
-
+  
   game = new Game();
+  menu = new Menu(true, "");
 }
 
 /**
@@ -58,18 +62,22 @@ function setup() {
 function draw() {
   game.update();
   game.draw();
+  
 }
 
 function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    game.gamePlay.character.jump();
-  }
-  if (keyCode === DOWN_ARROW) {
-    game.gamePlay.character.fall();
-  }
-  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
-    game.gamePlay.addNewProjectiles();
-  }
+
+  
+    if (keyCode === UP_ARROW) {
+      game.gamePlay.character.jump();
+    }
+    if (keyCode === DOWN_ARROW) {
+      game.gamePlay.character.fall();
+    }
+    if (keyCode === 32 && game.gamePlay.projectileArray.length < 1){
+      game.gamePlay.addNewProjectiles();
+      
+    }
 }
 
 /**
