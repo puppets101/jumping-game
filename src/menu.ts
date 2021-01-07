@@ -59,7 +59,6 @@ class Menu implements Imenu {
                 backgroundSound.setVolume(0.1);
                 }
               // console.log(this.isMenuOpen);
-              
             }
           }
           if (mouseY < 440 && mouseY > 425) {

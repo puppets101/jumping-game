@@ -34,7 +34,9 @@ class GamePlay {
       createVector(3, 0),
       0
     );
+    // Audio
     this.playBackgroundAudio = true;
+
     this.obstacleArray = [];
     this.platformArray = [];
     this.powerupArray = [];
@@ -57,20 +59,9 @@ class GamePlay {
 
   gameOver() {}
 
-  // public toggleAudio() {
-  //   if(this.playBackgroundAudio) {
-  //     this.playBackgroundAudio = false;
-  //     backgroundSound.loop();
-  //     backgroundSound.setVolume(0.1);
-  //     console.log(game.gamePlay.lives.life)
-  //     }
-  //     if(game.gamePlay.lives.life === 0){
-  //       console.log("KUK")
-  //     }
-  // }
+ 
 
   public update() {
-    //this.toggleAudio();
 
     // Adds new platforms
     this.platformTimer -= deltaTime;
@@ -115,6 +106,7 @@ class GamePlay {
       if (this.projectileArray[i].isVisible === false) {
         this.projectileArray.splice(i, 1);
       }
+      
     }
 
     // Updates all platforms
@@ -318,6 +310,12 @@ class GamePlay {
   public addNewProjectiles() {
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
+
+    if (game.menu.menuState === "main"){
+      if(keyCode === 32){
+        shootSound.play()
+      }
+    }
   }
 
   // adds new powerup
