@@ -5,9 +5,9 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 
-
+let prototypeAsset: p5.Image;
 let droneAsset: p5.Image;
-let droneDeathAsset: p5.Image
+let droneDeathAsset: p5.Image;
 let runnerAsset: p5.Image;
 let platformAsset: p5.Image;
 let lifeAsset: p5.Image;
@@ -27,15 +27,16 @@ function preload() {
   
 
   // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
-  runnerAsset = loadImage('./assets/sprites/runner.gif'); 
+  runnerAsset = loadImage('./assets/sprites/runner.gif');
+  prototypeAsset = loadImage('./assets/sprites/prototype.gif');
   droneAsset = loadImage('./assets/sprites/drone.gif');
-  droneDeathAsset = loadImage('./assets/sprites/droneDeath.gif')
+  droneDeathAsset = loadImage('./assets/sprites/droneDeath.gif');
 
   // https://trixelized.itch.io/starstring-fields
   platformAsset = loadImage('./assets/imgs/platform.png');
 
   // https://www.artstation.com/thebyteman
-  lifeAsset = loadImage('./assets/sprites/heart.gif')
+  lifeAsset = loadImage('./assets/sprites/heart.gif');
 
 }
 

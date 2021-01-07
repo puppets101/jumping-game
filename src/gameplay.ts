@@ -241,7 +241,7 @@ class GamePlay {
           this.score.score += 10;
 
           // FIX DEATH ANIMATION 
-          this.obstacleArray[j].droneAssetGif = droneDeathAsset;
+          this.obstacleArray[j].image = droneDeathAsset;
           this.obstacleArray.splice(j, 1);
           // setTimeout(() => {  }, 400);
           ;
@@ -274,7 +274,7 @@ class GamePlay {
 
   // adds new OBSTACLE 
   public addNewObstacle() {
-    let newObstacle = new Obstacle();
+    let newObstacle = new Obstacle(droneAsset);
     this.obstacleArray.push(newObstacle);
   }
   // adds new platform 
