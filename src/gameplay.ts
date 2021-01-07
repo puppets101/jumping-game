@@ -72,6 +72,7 @@ class GamePlay {
 
 
   public update() {
+
     if (keyIsPressed) {
       if (keyCode === 27) {
         this.pauseScreen.draw();
@@ -113,17 +114,15 @@ class GamePlay {
 
 
     this.projectileCollisions();
-    this. superProjectileCollisions()
+    this.superProjectileCollisions()
     this.checkCollisions();
-
     this.superWeaponCheck()
+    this.checkEnemyDeath();
 
 
     // Updates all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].update();
-      this.obstacleArray[i].draw();
-
       // Removes obstacles from array when out of screen
       if (this.obstacleArray[i].isVisible === false) {
         this.obstacleArray.splice(i, 1);
@@ -132,8 +131,6 @@ class GamePlay {
     // uppdates projectiles
     for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].update();
-      this.projectileArray[i].draw();
-
       //
       if (this.projectileArray[i].isVisible === false) {
         this.projectileArray.splice(i, 1);
@@ -143,8 +140,6 @@ class GamePlay {
     // Updates all platforms
     for (let i = 0; i < this.platformArray.length; i++) {
       this.platformArray[i].update();
-      this.platformArray[i].draw();
-
       // Removes obstacles from array when out of screen
       if (this.platformArray[i].isVisible === false) {
         this.platformArray.splice(i, 1);
@@ -154,8 +149,6 @@ class GamePlay {
     // Updates powerups
     for (let i = 0; i < this.powerupArray.length; i++) {
       this.powerupArray[i].update();
-      this.powerupArray[i].draw();
-
       // Removes powerups from array when out of screen
       if (this.powerupArray[i].isVisible === false) {
         this.powerupArray.splice(i, 1);
@@ -163,7 +156,13 @@ class GamePlay {
     }
   }
 
-
+  private checkEnemyDeath() {
+    for (let i = 0; i < this.obstacleArray.length; i++) {
+      if (this.obstacleArray[i].isDead === true) {
+        this.obstacleArray.splice(i, 1);
+      }
+    }
+  }
 
   private checkCollisions() {
     // Compares the drone enemy positions to the platform positions
@@ -187,6 +186,7 @@ class GamePlay {
         }
 
         // Character collision with object
+
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
           this.character.position.x - this.character.size.x &&
@@ -205,6 +205,7 @@ class GamePlay {
           }, 2000);
           return true;
         }
+
       }
     }
 
@@ -293,18 +294,13 @@ class GamePlay {
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
 
-          // FIX DEATH ANIMATION 
-          if(this.obstacleArray[j].image === droneAsset) {
-            this.obstacleArray[j].image = droneDeathAsset;
-          }
-
-          this.obstacleArray.splice(j, 1);
-          // setTimeout(() => {  }, 400);
           console.log("träff");
+          this.obstacleArray[j].isShot = true;
         }
       }
     }
   }
+
   // superProjectile collision with object
   public superProjectileCollisions() {
     for (let j = 0; j < this.obstacleArray.length; j++) {
@@ -320,11 +316,8 @@ class GamePlay {
          
         ) {
           this.projectileArray.splice(i, 1);
-
-          this.obstacleArray[j].droneAssetGif = droneDeathAsset; 
-          setTimeout(() => { this.obstacleArray.splice(j, 1) }, 400);
-          ;
-          
+          this.score.score += 10;
+          this.obstacleArray[j].isShot = true;
         }
       }
     }
@@ -333,7 +326,7 @@ class GamePlay {
    public superWeaponCheck(){
      if(this.lives.life >= 4){
        this.super = true;
-     }else this.super = false;
+     } else this.super = false;
    }
 
   public draw() {
@@ -361,13 +354,15 @@ class GamePlay {
 
   // adds new droneEnemy 
   public addNewDroneEnemy() {
-    let droneEnemy = new Obstacle(droneAsset, 500, 0, 0, 10);
+    console.log("drone")
+    let droneEnemy = new Obstacle(droneAsset, droneDeathAsset, 500, 0, 0, 10);
     this.obstacleArray.push(droneEnemy);
   }
 
   // adds new prototype enemy 
   public addNewPrototypeEnemy() {
-    let prototypeEnemy = new Obstacle(prototypeAsset, 800, 520, 5, 0);
+    console.log("prototype")
+    let prototypeEnemy = new Obstacle(prototypeAsset, prototypeDeathAsset, 800, 520, 5, 0);
     this.obstacleArray.push(prototypeEnemy);
   }
 
