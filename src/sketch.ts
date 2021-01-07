@@ -5,14 +5,11 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 
-
-let prototypeAsset: p5.Image;
-
 let shootSound: p5.SoundFile;
 let backgroundSound: p5.SoundFile;
 
-
-
+let prototypeAsset: p5.Image;
+let prototypeDeathAsset: p5.Image;
 let droneAsset: p5.Image;
 let droneDeathAsset: p5.Image;
 let runnerAsset: p5.Image;
@@ -38,6 +35,7 @@ function preload() {
 
   runnerAsset = loadImage('./assets/sprites/runner.gif');
   prototypeAsset = loadImage('./assets/sprites/prototype.gif');
+  prototypeDeathAsset = loadImage('./assets/sprites/prototypeDeath.gif');
   droneAsset = loadImage('./assets/sprites/drone.gif');
   droneDeathAsset = loadImage('./assets/sprites/droneDeath.gif');
 
