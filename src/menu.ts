@@ -48,7 +48,7 @@ class Menu implements Imenu {
             if (mouseIsPressed) {
               console.log("Game started");
               this.isMenuOpen = false;
-              console.log(this.isMenuOpen);
+              // console.log(this.isMenuOpen);
               
             }
           }

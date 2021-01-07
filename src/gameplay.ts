@@ -1,7 +1,7 @@
 class GamePlay {
   private score: Score;
   public character: Character;
-  // private gameAudio: GameAudio;
+  private gameAudio: GameAudio;
   // private pauseScreen: PauseScreen;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
@@ -10,9 +10,8 @@ class GamePlay {
   private powerupArray: Powerup[];
   private obstacleInterval: number;
   private platformInterval: number;
-  private lives: Lives;
+  public lives: Lives;
   private graceModeActive: boolean;
-  private playBackgroundSound: boolean;
 
   public projectileArray: Projectile[];
 
@@ -24,7 +23,7 @@ class GamePlay {
   constructor() {
     this.score = new Score();
     this.character = new Character();
-    // this.gameAudio = new GameAudio();
+    this.gameAudio = new GameAudio(createVector(100,100), true, true);
     // this.pauseScreen = new PauseScreen();
 
     this.background = new Background(
@@ -34,7 +33,6 @@ class GamePlay {
       0
     );
 
-    this.playBackgroundSound = false;
     this.obstacleArray = [];
     this.platformArray = [];
     this.powerupArray = [];
@@ -57,17 +55,8 @@ class GamePlay {
 
   gameOver() {}
 
-  loadGameSound() {
-    backgroundSound.loop()
-    backgroundSound.setVolume(0.1)
-  }
-
   public update() {
 
-    if (!this.playBackgroundSound) {
-      this.loadGameSound();
-      this.playBackgroundSound = true;
-    }
 
     // Adds new platforms
     this.platformTimer -= deltaTime;
@@ -276,7 +265,7 @@ class GamePlay {
 
   public draw() {
     this.background.draw();
-
+    this.gameAudio.draw();
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].draw();
