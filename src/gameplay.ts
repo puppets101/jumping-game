@@ -12,7 +12,7 @@ class GamePlay {
   private platformInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
-
+  public super: Boolean
   public projectileArray: Projectile[];
 
   private background: Background;
@@ -34,7 +34,7 @@ class GamePlay {
     this.powerupArray = [];
     this.projectileArray = [];
     // this.movableEntities = [];
-
+      this.super = false;
     this.platformInterval = 1000;
     this.obstacleInterval = 1500;
 
@@ -66,9 +66,9 @@ class GamePlay {
 
   public update() {
     this.projectileCollisions();
-
+    this. superProjectileCollisions()
     this.checkCollisions();
-
+    this.superWeaponCheck()
 
     // Updates all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
@@ -227,6 +227,7 @@ class GamePlay {
           this.obstacleArray[j].position.y &&
           this.projectileArray[i].position.y <
           this.obstacleArray[j].position.y + this.obstacleArray[j].height
+         
         ) {
           this.projectileArray.splice(i, 1);
 
@@ -238,6 +239,36 @@ class GamePlay {
       }
     }
   }
+  // superProjectile collision with object
+  public superProjectileCollisions() {
+    for (let j = 0; j < this.obstacleArray.length; j++) {
+      for (let i = 0; i < this.projectileArray.length; i++) {
+        if (
+          // superProjectile
+          this.projectileArray[i].superPosition.x >=
+          this.obstacleArray[j].position.x &&
+          this.projectileArray[i].superPosition.y >
+          this.obstacleArray[j].position.y &&
+          this.projectileArray[i].superPosition.y <
+          this.obstacleArray[j].position.y + this.obstacleArray[j].height
+         
+        ) {
+          this.projectileArray.splice(i, 1);
+
+          this.obstacleArray[j].droneAssetGif = droneDeathAsset; 
+          setTimeout(() => { this.obstacleArray.splice(j, 1) }, 400);
+          ;
+          
+        }
+      }
+    }
+  }
+  // check if superWeapon is avalible 
+   public superWeaponCheck(){
+     if(this.lives.life >= 4){
+       this.super = true;
+     }else this.super = false;
+   }
 
   public draw() {
     this.background.draw();
@@ -251,6 +282,7 @@ class GamePlay {
     for (let i = 0; i < this.platformArray.length; i++) {
       this.platformArray[i].draw();
     }
+    
     for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].draw();
     }
