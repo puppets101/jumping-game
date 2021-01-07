@@ -56,8 +56,6 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  menu.update();
-  menu.draw();
   game.update();
   game.draw();
 }
