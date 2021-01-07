@@ -314,6 +314,9 @@ class GamePlay {
     if (game.menu.menuState === "main"){
       if(keyCode === 32){
         shootSound.play()
+
+        // man kommer inte till "main" när man klickar på "again" i gameover.
+        console.log(game.menu.menuState)
       }
     }
   }
