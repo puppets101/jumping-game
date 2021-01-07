@@ -46,7 +46,7 @@ class GamePlay {
 
     this.powerupTimer = 13633;
 
-    this.lives = new Lives(createVector(), true);
+    this.lives = new Lives();
     this.graceModeActive = false;
   }
 
