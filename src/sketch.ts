@@ -5,8 +5,6 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 
-let projectiles: Projectile;
-
 
 let droneAsset: p5.Image;
 let droneDeathAsset: p5.Image
@@ -50,11 +48,9 @@ function preload() {
 function setup() {
   createCanvas(800, 600); // bestäm storlek
   frameRate(60);
-  menu = new Menu(true, "");
-
-  // noCursor();
-
+  
   game = new Game();
+  menu = new Menu(true, "");
 }
 
 /**
@@ -66,10 +62,10 @@ function draw() {
   game.update();
   game.draw();
   
-  
 }
 
 function keyPressed() {
+  
     if (keyCode === UP_ARROW) {
       game.gamePlay.character.jump();
     }

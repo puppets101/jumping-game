@@ -45,7 +45,7 @@ class Menu implements Imenu {
 
     // console.log(menu.menuState);
 
-    if (menu.menuState === "main") {
+    if (this.menuState === "main") {
       this.prevMouseIsPressed = false;
       if (this.mainMenuOptions === 0) {
         if (mouseX < 500 && mouseX > 300) {

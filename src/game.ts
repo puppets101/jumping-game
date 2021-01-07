@@ -16,7 +16,7 @@ class Game {
   }
   
   draw() {
-    
+       
     if (this.menu.isMenuOpen) {
       this.menu.draw();
       this.menu.update();
