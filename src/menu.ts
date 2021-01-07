@@ -29,7 +29,7 @@ class Menu implements Imenu {
     //instance 1 of picture
     this.firstImg = 0;
     //instance 2 of picture
-    this.secondImg = width;
+    this.secondImg = 1264;
     //scrollspeed, connect to the velocity of game if we want it to match up!
     this.scrollSpeed = 1;
   }
@@ -39,10 +39,10 @@ class Menu implements Imenu {
   public pauseGame() {
     menu.isMenuOpen = true;
     menu.menuState = "pause";
-    
+
     console.log(this.isMenuOpen);
-    
-    
+
+
   }
 
   public update() {
@@ -80,19 +80,19 @@ class Menu implements Imenu {
 
   private movingBackground() {
     //create two instacnes of the image
-    image(this.scrollingImage, this.firstImg, 0, width, height);
-    image(this.scrollingImage, this.secondImg, 0, width, height);
+    image(this.scrollingImage, this.firstImg, 0, 1264, height);
+    image(this.scrollingImage, this.secondImg, 0, 1264, height);
 
     //move the images to the left by change the value of the picture instances
     this.firstImg -= this.scrollSpeed;
     this.secondImg -= this.scrollSpeed;
 
     //reset position
-    if (this.firstImg < -width) {
-      this.firstImg = width;
+    if (this.firstImg < -width - 464) {
+      this.firstImg = width + 464;
     }
-    if (this.secondImg < -width) {
-      this.secondImg = width;
+    if (this.secondImg < -width - 464) {
+      this.secondImg = width + 464;
     }
   }
 
@@ -131,9 +131,51 @@ class Menu implements Imenu {
       } else if (this.menuState === "pause") {
         this.pauseScreen.draw();
         // Continue game from pause logic
-        if(keyIsPressed){
+        if (keyIsPressed) {
           if (keyCode === 13) {
             this.isMenuOpen = false;
+          }
+        }
+      }
+      else if (this.menuState === "credits") {
+        background('black');
+        textFont(outrunFont);
+        textSize(50);
+        fill(128, 0, 0);
+        stroke(0);
+        strokeWeight(1);
+        textAlign(CENTER);
+        text("Cyberjump", 400, 70);
+
+        // text for press any key
+        textFont(pixelFont);
+        textSize(20);
+        fill(128, 0, 0);
+        textAlign(CENTER);
+        text("Project made for a", 400, 120);
+        text("school assignment 2020.", 400, 140);
+        textAlign(CENTER);
+        text("Developers Github handles:", 400, 180);
+        textAlign(CENTER);
+        text("lilgujj", 400, 210);
+        textAlign(CENTER);
+        text("lisapaajarvi", 400, 240);
+        textAlign(CENTER);
+        text("mariahelenanoren", 400, 270);
+        textAlign(CENTER);
+        text("olofWallgren", 400, 300);
+        textAlign(CENTER);
+        text("puppets101", 400, 330);
+        textAlign(CENTER);
+        text("zazzzi", 400, 360);
+        text("Art made by:", 400, 400);
+        text("Art made by:", 400, 430);
+        text("Press ESC to return to menu", 400, 550);
+        noStroke();
+
+        if (keyIsPressed){
+          if(keyCode === 27){
+            game.menu.menuState = "main";
           }
         }
 
@@ -145,7 +187,7 @@ class Menu implements Imenu {
         this.titleScreen.draw();
         if (keyIsPressed === true) {
           this.menuState = "main";
-          
+
         }
       }
     }
