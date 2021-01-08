@@ -75,6 +75,13 @@ class GamePlay {
       this.loadGameSound();
       this.playBackgroundSound = true;
     }
+    if (keyIsPressed) {
+      if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
+        game.gamePlay.createProjectile();
+
+        shootSound.play();
+      }
+    }
 
     // Method calls
     this.checkPlatformInterval();
@@ -91,7 +98,7 @@ class GamePlay {
     this.superWeaponCheck();
     this.checkEnemyDeath();
 
-    if(this.character.isAlive === false) {
+    if (this.character.isAlive === false) {
       this.isGameOver = true;
     }
   }
@@ -144,7 +151,6 @@ class GamePlay {
   private updatePowerupLife() {
     for (let i = 0; i < this.powerupArray.length; i++) {
       this.powerupArray[i].update();
-
 
       // Removes powerups from array when out of screen
       if (this.powerupArray[i].isVisible === false) {
@@ -270,7 +276,7 @@ class GamePlay {
           this.graceModeActive = true;
           setTimeout(() => {
             this.graceModeActive = false;
-          }, 2000);
+          }, 1000);
           return true;
         }
       }
@@ -303,7 +309,7 @@ class GamePlay {
         this.character.position.x >
           this.platformArray[p].position.x + this.platformArray[p].width
       ) {
-        this.character.applyGravity = 0.1;
+        this.character.applyGravity = 0.4;
       }
     }
 
@@ -407,7 +413,7 @@ class GamePlay {
     // Draws all powerups (lives)
     for (let i = 0; i < this.powerupArray.length; i++) {
       this.powerupArray[i].draw();
-    } 
+    }
     this.lives.draw();
     this.character.draw();
     this.score.draw();
