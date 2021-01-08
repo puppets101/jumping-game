@@ -9,7 +9,7 @@ class Menu implements Imenu {
   private textSize2: number
   private textSize3: number
 
-  //for moving background (same code as background-class)
+  //for moving background (same code as background-class but doubled to get the parallax effect)
   private scrollingImage1: p5.Image;
   private scrollingImage2: p5.Image;
   private firstImg1: number;
@@ -29,74 +29,62 @@ class Menu implements Imenu {
     this.textSize2 = 20;
     this.textSize3 = 20;
 
-    //img for background
-    this.scrollingImage2 = loadImage("./assets/imgs/mainBuildings.png");
+    //img for backgrounds 
     this.scrollingImage1 = loadImage("./assets/imgs/mainSkylight.png");
-    //instance 1 of picture
+    this.scrollingImage2 = loadImage("./assets/imgs/mainBuildings.png");
+    //instance 1 of picture (for both foreground and background)
     this.firstImg1 = 0;
     this.firstImg2 = 0;
-    //instance 2 of picture
+    //instance 2 of picture (for both foreground and background)
     this.secondImg1 = 1264;
     this.secondImg2 = 1264;
-    //scrollspeed, connect to the velocity of game if we want it to match up!
+    //scrollspeed, different for the two images to get that sexy parallax effect mmmm yeah
     this.scrollSpeed1 = 1;
     this.scrollSpeed2 = 3;
   }
-  public startGame() { }
-  public quit() { }
-
-  /* public pauseGame() {
-    this.menuState = "pause";
-  } */
 
   public update() {
 
-    //handles the users click
-    const checkForUserInput = () => {
-      if (this.menuState === "main") {
-        if (mouseX < 500 && mouseX > 300) {
-          if (mouseY < 400 && mouseY > 377) {
-            this.textSize1 = 30;
-            if (mouseIsPressed) {
-              console.log("Game started");
-              this.menuState = "close"
-            }
-          } else if (mouseY < 425 && mouseY > 410) {
-            this.textSize2 = 30;
-            if (mouseIsPressed) {
-              console.log("Credits");
-              this.menuState = "credits";
-            }
-          } else if (mouseY < 460 && mouseY > 440) {
-            this.textSize3 = 30;
-            if (mouseIsPressed) {
-              console.log("Exit to title screen");
-              this.menuState = "title";
-            }
-          } else {
-            this.textSize1 = 20;
-            this.textSize2 = 20;
-            this.textSize3 = 20;
+    //handles the users click and changes the text size on hover
+    if (this.menuState === "main") {
+      if (mouseX < 500 && mouseX > 300) {
+        if (mouseY < 400 && mouseY > 377) {
+          this.textSize1 = 30;
+          if (mouseIsPressed) {
+            console.log("Game started");
+            this.menuState = "close"
+          }
+        } else if (mouseY < 425 && mouseY > 410) {
+          this.textSize2 = 30;
+          if (mouseIsPressed) {
+            console.log("Credits");
+            this.menuState = "credits";
+          }
+        } else if (mouseY < 460 && mouseY > 440) {
+          this.textSize3 = 30;
+          if (mouseIsPressed) {
+            console.log("Exit to title screen");
+            this.menuState = "title";
           }
         } else {
           this.textSize1 = 20;
           this.textSize2 = 20;
           this.textSize3 = 20;
         }
+      } else {
+        this.textSize1 = 20;
+        this.textSize2 = 20;
+        this.textSize3 = 20;
       }
-    }
-    // set timeout här? Fråga david
-    if (this.menuState === 'main') {
-      setTimeout(checkForUserInput, 2000);
     }
   }
 
   private movingBackground() {
-    //create two instacnes of the image
+    //create two instances of the image for skyline image
     image(this.scrollingImage1, this.firstImg1, 0, 1264, height + 20);
     image(this.scrollingImage1, this.secondImg1, 0, 1264, height + 20);
 
-    //move the images to the left by change the value of the picture instances
+    //move the images to the left by changing the value of the picture instances
     this.firstImg1 -= this.scrollSpeed1;
     this.secondImg1 -= this.scrollSpeed1;
 
@@ -109,7 +97,7 @@ class Menu implements Imenu {
     }
 
 
-    //create two instacnes of the image
+    //create two instances of the image for building image
     image(this.scrollingImage2, this.firstImg2, 0, 1264, height);
     image(this.scrollingImage2, this.secondImg2, 0, 1264, height);
 
@@ -169,6 +157,7 @@ class Menu implements Imenu {
       }
     }
     else if (this.menuState === "credits") {
+      // layout for credits
       background('black');
       textFont(outrunFont);
       textSize(50);
@@ -178,7 +167,6 @@ class Menu implements Imenu {
       textAlign(CENTER);
       text("Cyberjump", 400, 70);
 
-      // text for press any key
       textFont(pixelFont);
       textSize(20);
       fill(128, 0, 0);
@@ -204,6 +192,7 @@ class Menu implements Imenu {
       text("Press ESC to return to menu", 400, 550);
       noStroke();
 
+      // return to main from credits
       if (keyIsPressed) {
         if (keyCode === 27) {
           this.menuState = "main";
@@ -214,8 +203,8 @@ class Menu implements Imenu {
       this.gameOver.draw();
 
     } else if (this.menuState === "title") {
-      // Logic for the title menu 
       this.titleScreen.draw();
+      //go to main menu from title menu
       if (keyIsPressed === true) {
         this.menuState = "main";
       }
