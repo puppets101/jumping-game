@@ -16,42 +16,38 @@ class GameOver {
   }
 
   public update() {
-    console.log(game.finalScore);
-    
+
+
     // handles the users click
     if (this.menu.menuState === "gameOver") {
-      const mouseClickedGO = () => {
-        if (mouseX < 500 && mouseX > 300) {
-          if (mouseY < 385 && mouseY > 366) {
-            this.textSize1 = 30;
-            if (mouseIsPressed) {
-              console.log("Game Restarted");
-              this.menu.menuState = "restart"
-              // game.gamePlay.finalScore = 0;
-            }
+      if (mouseY < 477 && mouseY > 458) {
+        if (mouseX < 325 && mouseX > 205) {
+          this.textSize1 = 30;
+          if (mouseIsPressed) {
+            console.log("Game Restarted");
+            this.menu.menuState = "restart"
           }
-          else if (mouseY < 429 && mouseY > 405) {
-            this.textSize2 = 30;
-            if (mouseIsPressed) {
-              console.log("Go to main");
-              this.menu.menuState = "main";
-              // game.gamePlay.finalScore = 0;
-            }
-          } else {
-            this.textSize1 = 20;
-            this.textSize2 = 20;
+        }
+        else if (mouseX < 575 && mouseX > 493) {
+          this.textSize2 = 30;
+          if (mouseIsPressed) {
+            console.log("Go to main");
+            this.menu.menuState = "main";
           }
         } else {
           this.textSize1 = 20;
           this.textSize2 = 20;
         }
-      };
-      mouseClickedGO();
+      } else {
+        this.textSize1 = 20;
+        this.textSize2 = 20;
+      }
     }
   }
+
   public draw() {
     this.update();
-    //main menu layout
+    //game over layout
     background("black");
 
     textFont(pixelFont);
@@ -76,12 +72,12 @@ class GameOver {
     textSize(this.textSize1);
     fill(128, 0, 0);
     textAlign(CENTER);
-    text("Again?", 400, 390);
+    text("Again?", 266, 480);
 
     textFont(pixelFont);
     textSize(this.textSize2);
     fill(128, 0, 0);
     textAlign(CENTER);
-    text("Quit", 400, 430);
+    text("Quit", 533, 480);
   }
 }
