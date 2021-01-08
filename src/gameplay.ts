@@ -87,6 +87,7 @@ class GamePlay {
     this.updatePowerupLife();
     this.projectileCollisions();
     this.superProjectileCollisions();
+    this.superProjectileCollisionsLow()
     this.checkCollisions();
     this.superWeaponCheck();
     this.checkEnemyDeath();
@@ -377,6 +378,26 @@ class GamePlay {
           this.projectileArray[i].superPosition.y >
             this.obstacleArray[j].position.y &&
           this.projectileArray[i].superPosition.y <
+            this.obstacleArray[j].position.y + this.obstacleArray[j].height
+        ) {
+          this.projectileArray.splice(i, 1);
+
+          this.score.score += 10;
+          this.obstacleArray[j].isShot = true;
+        }
+      }
+    }
+  }
+  public superProjectileCollisionsLow() {
+    for (let j = 0; j < this.obstacleArray.length; j++) {
+      for (let i = 0; i < this.projectileArray.length; i++) {
+        if (
+          // superProjectile
+          this.projectileArray[i].superPositionLow.x >=
+            this.obstacleArray[j].position.x &&
+          this.projectileArray[i].superPositionLow.y >
+            this.obstacleArray[j].position.y &&
+          this.projectileArray[i].superPositionLow.y <
             this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
           this.projectileArray.splice(i, 1);
