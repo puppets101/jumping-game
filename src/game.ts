@@ -5,21 +5,44 @@ class Game {
 
   constructor() {
     this.gamePlay = new GamePlay();
-
+    
     //change boolean value to false to run game without menu
-    this.menu = new Menu(true, "");
+    this.menu = new Menu("title");
   }
 
-  update() {}
+  update() {
+    console.log(this.menu.menuState)
+    if (keyIsPressed && this.menu.menuState === "close") {
+      if (keyCode === 27) {
+        this.menu.menuState = "pause"
+      }
+    }
+    if (this.menu.menuState !== "close") {
+      this.menu.update();
+    } else if (this.menu.menuState === "close") {
+      this.gamePlay.update();
+    }
+
+    if (this.gamePlay.isGameOver === true) {
+      this.menu.menuState = "gameOver"
+      this.gamePlay = new GamePlay();
+      this.gamePlay.isGameOver = false;
+    } else if (this.menu.menuState === "restart") {
+      this.gamePlay = new GamePlay();
+      this.gamePlay.isGameOver = false;
+      this.menu.menuState = "close"
+    }
+  }
 
   draw() {
        
-    if (this.menu.isMenuOpen) {
+    if (this.menu.menuState !== "close" && this.menu.menuState !== "pause") {
       this.menu.draw();
-      this.menu.update();
-    } else if (!this.menu.isMenuOpen) {
+    } else if (this.menu.menuState === "pause") {
       this.gamePlay.draw();
-      this.gamePlay.update();
+      this.menu.draw();
+    } else if (this.menu.menuState === "close") {
+      this.gamePlay.draw();
     }
   }
 }

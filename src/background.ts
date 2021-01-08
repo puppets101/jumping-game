@@ -19,14 +19,7 @@ class Background extends MovableEntity {
     this.scrollSpeed = velocity.x; 
   }
 
-  update(){};
-
-  draw() {
-
-    //create two instacnes of the image
-    image(this.scrollingImage, this.firstImg, 0, 2166, height);
-    image(this.scrollingImage, this.secondImg, 0, 2166, height);
-
+  update(){
     //move the images to the left by change the value of the picture instances
     this.firstImg -= this.scrollSpeed;
     this.secondImg -= this.scrollSpeed;
@@ -38,6 +31,13 @@ class Background extends MovableEntity {
     if (this.secondImg < -width - 1366) {
       this.secondImg = width + 1366;
     }
+  };
+
+  draw() {
+
+    //create two instacnes of the image
+    image(this.scrollingImage, this.firstImg, 0, 2166, height);
+    image(this.scrollingImage, this.secondImg, 0, 2166, height);
 
   }
 

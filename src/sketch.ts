@@ -1,7 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
 
-let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 
@@ -65,7 +64,6 @@ function setup() {
   frameRate(60);
 
   game = new Game();
-  menu = new Menu(true, "");
 }
 
 /**

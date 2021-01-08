@@ -26,9 +26,8 @@ class TitleScreen {
  // TACK FÖR ART https://www.reddit.com/r/cyberpunkgame/comments/9big46/cyberpunk_2077_pixel_art_oc/
   draw() {
 
-    //move this to titlescreen class????????????????????????????????????? cant reach the menuState var in there atm
     if (keyIsPressed === true) {
-      menu.menuState = "main";
+      this.menu.menuState = "main";
     }
     
     image(this.titleScreen, 0, 0, width, height);

@@ -7,11 +7,7 @@ class Score extends DrawableEntity {
   }
 
   public countScore() {
-    fill("black");
-    noStroke();
     this.score = this.score + deltaTime / 500;
-    text(round(this.score), 40, 50);
-    textFont(pixelFont);
   }
 
   public update() {
@@ -19,6 +15,9 @@ class Score extends DrawableEntity {
   }
 
   public draw() {
-    this.update();
+    fill("black");
+    noStroke();
+    text(round(this.score), 40, 50);
+    textFont(pixelFont);
   }
 }
