@@ -2,33 +2,48 @@ class GameOver {
   backGroundColor: String;
   menuOptions: String;
   private menu: Imenu;
+  private textSize1: number;
+  private textSize2: number;
 
 
   constructor(menu: Imenu) {
     this.menuOptions = "";
     this.backGroundColor = "";
     this.menu = menu;
+    this.textSize1 = 20;
+    this.textSize2 = 20;
 
   }
 
   public update() {
+    console.log(game.finalScore);
+    
     // handles the users click
     if (this.menu.menuState === "gameOver") {
       const mouseClickedGO = () => {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 385 && mouseY > 366) {
+            this.textSize1 = 30;
             if (mouseIsPressed) {
               console.log("Game Restarted");
               this.menu.menuState = "restart"
-
+              // game.gamePlay.finalScore = 0;
             }
           }
-          if (mouseY < 429 && mouseY > 405) {
+          else if (mouseY < 429 && mouseY > 405) {
+            this.textSize2 = 30;
             if (mouseIsPressed) {
               console.log("Go to main");
               this.menu.menuState = "main";
+              // game.gamePlay.finalScore = 0;
             }
+          } else {
+            this.textSize1 = 20;
+            this.textSize2 = 20;
           }
+        } else {
+          this.textSize1 = 20;
+          this.textSize2 = 20;
         }
       };
       mouseClickedGO();
@@ -55,10 +70,16 @@ class GameOver {
     textSize(20);
     fill(128, 0, 0);
     textAlign(CENTER);
+    text(Math.round(game.finalScore), 400, 280);
+
+    textFont(pixelFont);
+    textSize(this.textSize1);
+    fill(128, 0, 0);
+    textAlign(CENTER);
     text("Again?", 400, 390);
 
     textFont(pixelFont);
-    textSize(20);
+    textSize(this.textSize2);
     fill(128, 0, 0);
     textAlign(CENTER);
     text("Quit", 400, 430);

@@ -1,5 +1,5 @@
 class GamePlay {
-  private score: Score;
+  public score: Score;
   public character: Character;
   // private gameAudio: GameAudio;
   private obstacleArray: Obstacle[];
@@ -25,6 +25,7 @@ class GamePlay {
   private difficultyTimer: number;
   public isGameOver = false;
   private scrollSpeed;
+ 
 
   constructor() {
     this.score = new Score();
@@ -105,6 +106,7 @@ class GamePlay {
     this.superWeaponCheck();
     this.checkEnemyDeath();
     this.updateDifficulty();
+   
 
     if (this.character.isAlive === false) {
       this.isGameOver = true;

@@ -5,6 +5,9 @@ class Menu implements Imenu {
   protected pauseScreen: PauseScreen;
   protected titleScreen: TitleScreen;
   public menuState: MenuState;
+  private textSize1: number
+  private textSize2: number
+  private textSize3: number
 
   //for moving background (same code as background-class)
   private scrollingImage: p5.Image;
@@ -18,6 +21,9 @@ class Menu implements Imenu {
     this.pauseScreen = new PauseScreen(this);
     this.titleScreen = new TitleScreen(this);
     this.menuState = menuState;
+    this.textSize1 = 20;
+    this.textSize2 = 20;
+    this.textSize3 = 20;
 
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/main.png");
@@ -42,23 +48,32 @@ class Menu implements Imenu {
       if (this.menuState === "main") {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 400 && mouseY > 377) {
+            this.textSize1 = 30;
             if (mouseIsPressed) {
               console.log("Game started");
               this.menuState = "close"
             }
-          }
-          if (mouseY < 425 && mouseY > 410) {
+          } else if (mouseY < 425 && mouseY > 410) {
+            this.textSize2 = 30;
             if (mouseIsPressed) {
               console.log("Credits");
               this.menuState = "credits";
             }
-          }
-          if (mouseY < 460 && mouseY > 440) {
+          } else if (mouseY < 460 && mouseY > 440) {
+            this.textSize3 = 30;
             if (mouseIsPressed) {
               console.log("Exit to title screen");
               this.menuState = "title";
             }
+          } else {
+            this.textSize1 = 20;
+            this.textSize2 = 20;
+            this.textSize3 = 20;
           }
+        } else {
+          this.textSize1 = 20;
+          this.textSize2 = 20;
+          this.textSize3 = 20;
         }
       }
     }
@@ -101,19 +116,19 @@ class Menu implements Imenu {
 
       stroke(0);
       textFont(pixelFont);
-      textSize(20);
+      textSize(this.textSize1);
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Start game", 400, 400);
 
       textFont(pixelFont);
-      textSize(20);
+      textSize(this.textSize2);
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Credits", 400, 430);
 
       textFont(pixelFont);
-      textSize(20);
+      textSize(this.textSize3);
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Exit", 400, 460);
