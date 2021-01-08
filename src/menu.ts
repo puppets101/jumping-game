@@ -29,7 +29,7 @@ class Menu implements Imenu {
     this.textSize2 = 20;
     this.textSize3 = 20;
 
-    //img for backgrounds 
+    //imgs for backgrounds 
     this.scrollingImage1 = loadImage("./assets/imgs/mainSkylight.png");
     this.scrollingImage2 = loadImage("./assets/imgs/mainBuildings.png");
     //instance 1 of picture (for both foreground and background)
@@ -95,7 +95,6 @@ class Menu implements Imenu {
     if (this.secondImg1 < -width - 464) {
       this.secondImg1 = width + 464;
     }
-
 
     //create two instances of the image for building image
     image(this.scrollingImage2, this.firstImg2, 0, 1264, height);
