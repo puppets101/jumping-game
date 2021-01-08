@@ -14,10 +14,7 @@ class Character extends MovableEntity {
     this.velocity = createVector(0, 0);
     this.liftForce = -30;
     this.canJump = true;
-
-    this.runnerAnimation = runnerAsset;
-
-    
+    this.runnerAnimation = runnerAsset;    
   }
 
 
@@ -34,8 +31,6 @@ class Character extends MovableEntity {
     }
   }
 
-  public collide() {}
-
   public update() {
     this.velocity.y += this.applyGravity;
     this.velocity.y *= 0.9;
@@ -48,19 +43,7 @@ class Character extends MovableEntity {
     }
   }
 
-  public show() {
-
-
-
-    // fill(255);
-    // rect(this.position.x, this.position.y, this.size.x, this.size.y)
-    image(this.runnerAnimation, this.position.x - 28, this.position.y -5, 110, 120 )
-
-
-  }
-
   public draw() {
-    this.update();
-    this.show();
+    image(this.runnerAnimation, this.position.x - 28, this.position.y -5, 110, 120 )
   }
 }
