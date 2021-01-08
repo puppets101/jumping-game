@@ -16,6 +16,8 @@ class GameOver {
   }
 
   public update() {
+    console.log(game.finalScore);
+    
     // handles the users click
     if (this.menu.menuState === "gameOver") {
       const mouseClickedGO = () => {
@@ -25,6 +27,7 @@ class GameOver {
             if (mouseIsPressed) {
               console.log("Game Restarted");
               this.menu.menuState = "restart"
+              // game.gamePlay.finalScore = 0;
             }
           }
           else if (mouseY < 429 && mouseY > 405) {
@@ -32,6 +35,7 @@ class GameOver {
             if (mouseIsPressed) {
               console.log("Go to main");
               this.menu.menuState = "main";
+              // game.gamePlay.finalScore = 0;
             }
           } else {
             this.textSize1 = 20;
@@ -61,6 +65,12 @@ class GameOver {
     fill(128, 0, 0);
     textAlign(CENTER);
     text("You died", 400, 250);
+
+    textFont(pixelFont);
+    textSize(20);
+    fill(128, 0, 0);
+    textAlign(CENTER);
+    text(Math.round(game.finalScore), 400, 280);
 
     textFont(pixelFont);
     textSize(this.textSize1);
