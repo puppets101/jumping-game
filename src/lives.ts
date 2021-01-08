@@ -1,8 +1,9 @@
 class Lives extends DrawableEntity {
   public life: number;
   public lifeAsset: p5.Image
+  
   constructor() {
-    super(createVector(750, 50), true);
+    super(createVector(750, 30), true);
     this.life = 3;
     this.lifeAsset = lifeAsset;
   }
