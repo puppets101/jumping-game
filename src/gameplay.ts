@@ -69,6 +69,7 @@ class GamePlay {
   public update() {
     this.background.update();
     this.score.update();
+    this.character.update();
 
     if (!this.playBackgroundSound) {
       this.loadGameSound();
@@ -118,7 +119,7 @@ class GamePlay {
       this.platformArray[i].update();
       this.platformArray[i].draw();
 
-      // Removes obstacles from array when out of screen
+      // Removes platforms from array when out of screen
       if (this.platformArray[i].isVisible === false) {
         this.platformArray.splice(i, 1);
       }
@@ -143,7 +144,7 @@ class GamePlay {
   private updatePowerupLife() {
     for (let i = 0; i < this.powerupArray.length; i++) {
       this.powerupArray[i].update();
-      this.powerupArray[i].draw();
+
 
       // Removes powerups from array when out of screen
       if (this.powerupArray[i].isVisible === false) {
@@ -399,13 +400,16 @@ class GamePlay {
     for (let i = 0; i < this.platformArray.length; i++) {
       this.platformArray[i].draw();
     }
-
+    // Draws all projectiles
     for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].draw();
     }
+    // Draws all powerups (lives)
+    for (let i = 0; i < this.powerupArray.length; i++) {
+      this.powerupArray[i].draw();
+    } 
     this.lives.draw();
     this.character.draw();
-    this.character.update();
     this.score.draw();
   }
 }
