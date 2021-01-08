@@ -3,18 +3,20 @@ class Powerup extends MovableEntity {
     public height: number;
     public width: number;
     public powerupAsset: p5.Image;
+    public scrollSpeed: number;
 
-    constructor() {
+    constructor(scrollSpeed: number) {
         super(createVector(650, 0), true, createVector(0, 10), 0);
         this.color = color(220, 20, 60);
         this.height = 30;
         this.width = 30;
         this.powerupAsset = powerupLifeAsset;
+        this.scrollSpeed = scrollSpeed;
     }
 
 public update() {
     this.position.y += this.velocity.y;
-    this.position.x -= this.velocity.x;
+    this.position.x -= (this.velocity.x + this.scrollSpeed);
     this.isOnScreen()
 }
 

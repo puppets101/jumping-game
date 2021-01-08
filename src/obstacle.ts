@@ -7,8 +7,9 @@ class Obstacle extends MovableEntity {
     public isShot: boolean;
     public isDead: boolean;
     public deathTimer: number;
+    public scrollSpeed: number;
 
-    constructor(image: p5.Image, deathImage: p5.Image, x: number, y: number,velocityX: number, velocityY: number) {
+    constructor(image: p5.Image, deathImage: p5.Image, x: number, y: number,velocityX: number, velocityY: number, scrollSpeed: number) {
         super(createVector(x, y), true, createVector(velocityX, velocityY), 0);
         this.color = color(0, 255, 255);
         this.height = 50;
@@ -19,11 +20,12 @@ class Obstacle extends MovableEntity {
 
         this.image = image;
         this.deathImage = deathImage;
+        this.scrollSpeed = scrollSpeed;
     }
 
     public update() {
         this.position.y += this.velocity.y;
-        this.position.x -= this.velocity.x;
+        this.position.x -= (this.velocity.x + this.scrollSpeed);
         this.isOnScreen()
         if(this.isShot) {
             this.deathTimer -= deltaTime;
