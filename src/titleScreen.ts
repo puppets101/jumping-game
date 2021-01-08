@@ -1,28 +1,23 @@
 class TitleScreen {
-  private backstory: string;
+  private backstory: string[];
   private menu: Imenu;
   private fade: number;
   private fadeAmount: number;
   private titleScreen: p5.Image;
 
   constructor(menu: Imenu) {
-    this.backstory = "";
+    this.backstory = ["Neo-Tokyo, Earth, 2076.", "The latest Intergalactic War and subsequent waves of Alien Invasion have left humanity at the verge of extinction, its cities deserted and crawling with Alien life forms on the lookout for any remaining signs of human activity.", "Your only chance of survival is to keep running, avoiding all contact while shooting as many Aliens as you can.", "Do you have what it takes to stay alive?"];
     this.menu = menu;
 
     //fade in and out for the press any key text
     this.fadeAmount = 1;
     this.fade = 40;
 
-
     //add the video to the variable titleScreen
     this.titleScreen = loadImage("./assets/imgs/titleGif.gif");
-    
-    
+        
   }
 
-  pressAnyKey() {
-    // if key is pressed -- menuState = main
-  }
  // TACK FÖR ART https://www.reddit.com/r/cyberpunkgame/comments/9big46/cyberpunk_2077_pixel_art_oc/
   draw() {
 
@@ -45,6 +40,15 @@ class TitleScreen {
       fill(128, 0, 0, this.fade);
       textAlign(CENTER);
       text("Press any key", 400, 500);
+
+      // text for backstory
+      textSize(13);
+      fill(212,235,242);
+      textAlign(LEFT);
+      text(this.backstory[0], 50, 250);
+      text(this.backstory[1], 50, 275, 700, 300);
+      text(this.backstory[2], 50, 375, 700, 300);     
+      text(this.backstory[3], 50, 450);      
 
       // making the text fade in and out
       if (this.fade <= 40) {

@@ -28,12 +28,6 @@ class Menu implements Imenu {
     //scrollspeed, connect to the velocity of game if we want it to match up!
     this.scrollSpeed = 1;
   }
-  public startGame() { }
-  public quit() { }
-
-  /* public pauseGame() {
-    this.menuState = "pause";
-  } */
 
   public update() {
 
@@ -119,7 +113,8 @@ class Menu implements Imenu {
       text("Exit", 400, 460);
       noStroke();
 
-    } else if (this.menuState === "pause") {
+    } 
+    else if (this.menuState === "pause") {
       this.pauseScreen.draw();
       // Continue game from pause logic
       if (keyIsPressed) {
@@ -169,11 +164,12 @@ class Menu implements Imenu {
           this.menuState = "main";
         }
       }
-
-    } else if (this.menuState === "gameOver") {
+    } 
+    else if (this.menuState === "gameOver") {
       this.gameOver.draw();
 
-    } else if (this.menuState === "title") {
+    } 
+    else if (this.menuState === "title") {
       // Logic for the title menu 
       this.titleScreen.draw();
       if (keyIsPressed === true) {
