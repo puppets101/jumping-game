@@ -10,10 +10,14 @@ class Menu implements Imenu {
   private textSize3: number
 
   //for moving background (same code as background-class)
-  private scrollingImage: p5.Image;
-  private firstImg: number;
-  private secondImg: number;
-  private scrollSpeed: number;
+  private scrollingImage1: p5.Image;
+  private scrollingImage2: p5.Image;
+  private firstImg1: number;
+  private firstImg2: number;
+  private secondImg1: number;
+  private secondImg2: number;
+  private scrollSpeed1: number;
+  private scrollSpeed2: number;
 
   constructor(menuState: MenuState) {
     this.menuAudio = new MenuAudio();
@@ -26,13 +30,17 @@ class Menu implements Imenu {
     this.textSize3 = 20;
 
     //img for background
-    this.scrollingImage = loadImage("./assets/imgs/main.png");
+    this.scrollingImage2 = loadImage("./assets/imgs/mainBuildings.png");
+    this.scrollingImage1 = loadImage("./assets/imgs/mainSkylight.png");
     //instance 1 of picture
-    this.firstImg = 0;
+    this.firstImg1 = 0;
+    this.firstImg2 = 0;
     //instance 2 of picture
-    this.secondImg = 1264;
+    this.secondImg1 = 1264;
+    this.secondImg2 = 1264;
     //scrollspeed, connect to the velocity of game if we want it to match up!
-    this.scrollSpeed = 1;
+    this.scrollSpeed1 = 1;
+    this.scrollSpeed2 = 3;
   }
   public startGame() { }
   public quit() { }
@@ -85,19 +93,36 @@ class Menu implements Imenu {
 
   private movingBackground() {
     //create two instacnes of the image
-    image(this.scrollingImage, this.firstImg, 0, 1264, height);
-    image(this.scrollingImage, this.secondImg, 0, 1264, height);
+    image(this.scrollingImage1, this.firstImg1, 0, 1264, height + 20);
+    image(this.scrollingImage1, this.secondImg1, 0, 1264, height + 20);
 
     //move the images to the left by change the value of the picture instances
-    this.firstImg -= this.scrollSpeed;
-    this.secondImg -= this.scrollSpeed;
+    this.firstImg1 -= this.scrollSpeed1;
+    this.secondImg1 -= this.scrollSpeed1;
 
     //reset position
-    if (this.firstImg < -width - 464) {
-      this.firstImg = width + 464;
+    if (this.firstImg1 < -width - 464) {
+      this.firstImg1 = width + 464;
     }
-    if (this.secondImg < -width - 464) {
-      this.secondImg = width + 464;
+    if (this.secondImg1 < -width - 464) {
+      this.secondImg1 = width + 464;
+    }
+
+
+    //create two instacnes of the image
+    image(this.scrollingImage2, this.firstImg2, 0, 1264, height);
+    image(this.scrollingImage2, this.secondImg2, 0, 1264, height);
+
+    //move the images to the left by change the value of the picture instances
+    this.firstImg2 -= this.scrollSpeed2;
+    this.secondImg2 -= this.scrollSpeed2;
+
+    //reset position
+    if (this.firstImg2 < -width - 464) {
+      this.firstImg2 = width + 464;
+    }
+    if (this.secondImg2 < -width - 464) {
+      this.secondImg2 = width + 464;
     }
   }
 
@@ -106,7 +131,7 @@ class Menu implements Imenu {
     if (this.menuState === "main") {
       //main menu layout
       this.movingBackground();
-      strokeWeight(1);
+      strokeWeight(1.5);
       stroke(0);
       textFont(outrunFont);
       textSize(50);
@@ -174,8 +199,8 @@ class Menu implements Imenu {
       text("puppets101", 400, 330);
       textAlign(CENTER);
       text("zazzzi", 400, 360);
-      text("Art made by:", 400, 400);
-      text("Art made by:", 400, 430);
+      text("Art assets by:", 400, 400);
+      text("OcO, thebyteman, ansimuz", 400, 430);
       text("Press ESC to return to menu", 400, 550);
       noStroke();
 

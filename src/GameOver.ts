@@ -70,7 +70,7 @@ class GameOver {
     textSize(20);
     fill(128, 0, 0);
     textAlign(CENTER);
-    text(Math.round(game.finalScore), 400, 280);
+    text("Score:" + " " + Math.round(game.finalScore), 400, 280);
 
     textFont(pixelFont);
     textSize(this.textSize1);
