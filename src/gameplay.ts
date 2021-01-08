@@ -373,10 +373,11 @@ class GamePlay {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
           // superProjectile
-          this.projectileArray[i].superPosition.x >=
-            this.obstacleArray[j].position.x &&
+          this.projectileArray[i].superPosition.x > this.obstacleArray[j].position.x && 
+           this.projectileArray[i].superPosition.x < this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
+            this.obstacleArray[j].position.x  &&
           this.projectileArray[i].superPosition.y >
-            this.obstacleArray[j].position.y &&
+            this.obstacleArray[j].position.y  &&
           this.projectileArray[i].superPosition.y <
             this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
@@ -388,6 +389,7 @@ class GamePlay {
       }
     }
   }
+  // superProjectile collision with object
   public superProjectileCollisionsLow() {
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
