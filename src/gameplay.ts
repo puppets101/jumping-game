@@ -8,7 +8,7 @@ class GamePlay {
   private droneInterval: number;
   private prototypeInterval: number;
   private platformInterval: number;
-  private scrollInterval: number;
+  private difficultyInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: Boolean;
@@ -22,7 +22,7 @@ class GamePlay {
   private prototypeTimer: number;
   private platformTimer: number;
   private powerupTimer: number;
-  private scrollTimer: number;
+  private difficultyTimer: number;
   public isGameOver = false;
   private scrollSpeed;
 
@@ -58,8 +58,8 @@ class GamePlay {
     this.prototypeInterval = 2500;
     this.prototypeTimer = this.prototypeInterval;
 
-    this.scrollInterval = 10000;
-    this.scrollTimer = this.scrollInterval;
+    this.difficultyInterval = 10000;
+    this.difficultyTimer = this.difficultyInterval;
 
     this.powerupTimer = 13633;
 
@@ -96,33 +96,38 @@ class GamePlay {
     this.checkCollisions();
     this.superWeaponCheck();
     this.checkEnemyDeath();
-    this.updateScrollSpeed();
+    this.updateDifficulty();
 
     if(this.character.isAlive === false) {
       this.isGameOver = true;
     }
   }
 
-  private updateScrollSpeed() {
-    this.scrollTimer -= deltaTime;
-    if (this.scrollTimer < 0) {
+  private updateDifficulty() {
+    this.difficultyTimer -= deltaTime;
+    if (this.difficultyTimer < 0) {
 
-      // Changes scrollspeed for current objects
-      this.background.scrollSpeed += 0.2
+      // Increases spawn interval for objects
+      this.droneInterval *= 0.95;
+      this.prototypeInterval *= 0.95;
+      this.platformInterval *= 0.95;
+
+      // Increases scrollspeed for current objects
+      this.background.scrollSpeed += 0.25
       for (let i = 0; i < this.platformArray.length; i++) {
-        this.platformArray[i].scrollSpeed += 0.2
+        this.platformArray[i].scrollSpeed += 0.25
       }
       for (let i = 0; i < this.obstacleArray.length; i++) {
-        this.obstacleArray[i].scrollSpeed += 0.2
+        this.obstacleArray[i].scrollSpeed += 0.25
       }
       for (let i = 0; i < this.powerupArray.length; i++) {
-        this.powerupArray[i].scrollSpeed += 0.2
+        this.powerupArray[i].scrollSpeed += 0.25
       }
 
-      // Changes scrollspeed for future objects
-      this.scrollSpeed += 0.2;
+      // Increases scrollspeed for future objects
+      this.scrollSpeed += 0.25;
       // Resets interval
-      this.scrollTimer = this.scrollInterval;
+      this.difficultyTimer = this.difficultyInterval;
     }
   }
 
