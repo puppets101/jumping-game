@@ -1,7 +1,6 @@
 class GamePlay {
   private score: Score;
   public character: Character;
-  private pauseScreen: PauseScreen;
   // private gameAudio: GameAudio;
   // private drawableEntity: DrawableEntity;
   // private movableEntity: MovableEntity;
@@ -24,13 +23,13 @@ class GamePlay {
   private prototypeTimer: number;
   private platformTimer: number;
   private powerupTimer: number;
+  public isGameOver = false;
 
   constructor() {
     this.score = new Score();
     this.character = new Character();
     // this.gameAudio = new GameAudio();
 
-    this.pauseScreen = new PauseScreen(menu);
     this.background = new Background(
       createVector(0, 0),
       true,
@@ -68,12 +67,8 @@ class GamePlay {
   }
 
   public update() {
-    if (keyIsPressed) {
-      if (keyCode === 27) {
-        this.pauseScreen.draw();
-        console.log("qwe");
-      }
-    }
+    this.background.update();
+    this.score.update();
 
     if (!this.playBackgroundSound) {
       this.loadGameSound();
@@ -94,6 +89,10 @@ class GamePlay {
     this.checkCollisions();
     this.superWeaponCheck();
     this.checkEnemyDeath();
+
+    if(this.character.isAlive === false) {
+      this.isGameOver = true;
+    }
   }
 
   private createPlatform() {

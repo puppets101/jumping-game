@@ -7,7 +7,7 @@ class PauseScreen {
     private fadeAmount: number;
 
 
-    constructor(imenu: Imenu) {
+    constructor(menu: Imenu) {
         this.menuOptions = "";
         this.bgColor = "";
         this.menu = menu;
@@ -17,14 +17,10 @@ class PauseScreen {
 
     draw() {
         // console.log(keyCode);
-        // console.log(menu.isMenuOpen);
 
-
-        game.menu.isMenuOpen = true;
-        game.menu.menuState = "pause";
         // this.continueGame();
 
-        // background('rgba(0,30,0, 0.01)');
+        background('rgba(0,0,0,0.5)');
         textFont(outrunFont);
         textSize(50);
         fill(128, 0, 0);

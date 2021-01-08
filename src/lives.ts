@@ -12,9 +12,6 @@ class Lives extends DrawableEntity {
     if (this.life === 0) {
       console.log("game over");
       game.gamePlay.character.isAlive = false;
-      game.menu.isMenuOpen = true;
-      game.menu.menuState = "gameOver";
-      game.gamePlay = new GamePlay();
     }
   }
 

@@ -1,10 +1,10 @@
+type MenuState = "pause" | "main" | "gameOver" | "credits" | "title" | "close" | "restart"
 class Menu implements Imenu {
   protected menuAudio: MenuAudio;
   protected gameOver: GameOver;
   protected pauseScreen: PauseScreen;
   protected titleScreen: TitleScreen;
-  public isMenuOpen: boolean;
-  public menuState: string;
+  public menuState: MenuState;
   private mainMenuOptions: number;
   private prevMouseIsPressed: boolean;
 
@@ -14,12 +14,11 @@ class Menu implements Imenu {
   private secondImg: number;
   private scrollSpeed: number;
 
-  constructor(isMenuOpen: boolean, menuState: string) {
+  constructor(menuState: MenuState) {
     this.menuAudio = new MenuAudio();
     this.gameOver = new GameOver(this);
     this.pauseScreen = new PauseScreen(this);
     this.titleScreen = new TitleScreen(this);
-    this.isMenuOpen = isMenuOpen;
     this.menuState = menuState;
     this.mainMenuOptions = 0;
     this.prevMouseIsPressed = false;
@@ -36,14 +35,9 @@ class Menu implements Imenu {
   public startGame() { }
   public quit() { }
 
-  public pauseGame() {
-    menu.isMenuOpen = true;
-    menu.menuState = "pause";
-
-    console.log(this.isMenuOpen);
-
-
-  }
+  /* public pauseGame() {
+    this.menuState = "pause";
+  } */
 
   public update() {
 
@@ -55,8 +49,7 @@ class Menu implements Imenu {
           if (mouseY < 400 && mouseY > 377) {
             if (mouseIsPressed) {
               console.log("Game started");
-              this.isMenuOpen = false;
-              console.log(this.isMenuOpen);
+              this.menuState = "close"
 
             }
           }
@@ -69,7 +62,7 @@ class Menu implements Imenu {
           if (mouseY < 460 && mouseY > 440) {
             if (mouseIsPressed) {
               console.log("Exit to title screen");
-              this.menuState = "";
+              this.menuState = "title";
             }
           }
         }
@@ -97,98 +90,95 @@ class Menu implements Imenu {
   }
 
   public draw() {
-    if (this.isMenuOpen === true) {
-      // if statement to decide what menus to open
-      if (this.menuState === "main") {
-        //main menu layout
-        this.movingBackground();
-        strokeWeight(1);
-        stroke(0);
-        textFont(outrunFont);
-        textSize(50);
-        fill(128, 0, 0);
-        textAlign(CENTER);
-        text("Cyberjump", 400, 200);
+    // if statement to decide what menus to open
+    if (this.menuState === "main") {
+      //main menu layout
+      this.movingBackground();
+      strokeWeight(1);
+      stroke(0);
+      textFont(outrunFont);
+      textSize(50);
+      fill(128, 0, 0);
+      textAlign(CENTER);
+      text("Cyberjump", 400, 200);
 
-        textFont(pixelFont);
-        textSize(20);
-        fill(128, 0, 0);
-        textAlign(CENTER);
-        text("Start game", 400, 400);
+      textFont(pixelFont);
+      textSize(20);
+      fill(128, 0, 0);
+      textAlign(CENTER);
+      text("Start game", 400, 400);
 
-        textFont(pixelFont);
-        textSize(20);
-        fill(128, 0, 0);
-        textAlign(CENTER);
-        text("Credits", 400, 430);
+      textFont(pixelFont);
+      textSize(20);
+      fill(128, 0, 0);
+      textAlign(CENTER);
+      text("Credits", 400, 430);
 
-        textFont(pixelFont);
-        textSize(20);
-        fill(128, 0, 0);
-        textAlign(CENTER);
-        text("Exit", 400, 460);
+      textFont(pixelFont);
+      textSize(20);
+      fill(128, 0, 0);
+      textAlign(CENTER);
+      text("Exit", 400, 460);
 
-      } else if (this.menuState === "pause") {
-        this.pauseScreen.draw();
-        // Continue game from pause logic
-        if (keyIsPressed) {
-          if (keyCode === 13) {
-            this.isMenuOpen = false;
-          }
+    } else if (this.menuState === "pause") {
+      this.pauseScreen.draw();
+      // Continue game from pause logic
+      if (keyIsPressed) {
+        if (keyCode === 13) {
+          this.menuState = "close"
         }
       }
-      else if (this.menuState === "credits") {
-        background('black');
-        textFont(outrunFont);
-        textSize(50);
-        fill(128, 0, 0);
-        stroke(0);
-        strokeWeight(1);
-        textAlign(CENTER);
-        text("Cyberjump", 400, 70);
+    }
+    else if (this.menuState === "credits") {
+      background('black');
+      textFont(outrunFont);
+      textSize(50);
+      fill(128, 0, 0);
+      stroke(0);
+      strokeWeight(1);
+      textAlign(CENTER);
+      text("Cyberjump", 400, 70);
 
-        // text for press any key
-        textFont(pixelFont);
-        textSize(20);
-        fill(128, 0, 0);
-        textAlign(CENTER);
-        text("Project made for a", 400, 120);
-        text("school assignment 2020.", 400, 140);
-        textAlign(CENTER);
-        text("Developers Github handles:", 400, 180);
-        textAlign(CENTER);
-        text("lilgujj", 400, 210);
-        textAlign(CENTER);
-        text("lisapaajarvi", 400, 240);
-        textAlign(CENTER);
-        text("mariahelenanoren", 400, 270);
-        textAlign(CENTER);
-        text("olofWallgren", 400, 300);
-        textAlign(CENTER);
-        text("puppets101", 400, 330);
-        textAlign(CENTER);
-        text("zazzzi", 400, 360);
-        text("Art made by:", 400, 400);
-        text("Art made by:", 400, 430);
-        text("Press ESC to return to menu", 400, 550);
-        noStroke();
+      // text for press any key
+      textFont(pixelFont);
+      textSize(20);
+      fill(128, 0, 0);
+      textAlign(CENTER);
+      text("Project made for a", 400, 120);
+      text("school assignment 2020.", 400, 140);
+      textAlign(CENTER);
+      text("Developers Github handles:", 400, 180);
+      textAlign(CENTER);
+      text("lilgujj", 400, 210);
+      textAlign(CENTER);
+      text("lisapaajarvi", 400, 240);
+      textAlign(CENTER);
+      text("mariahelenanoren", 400, 270);
+      textAlign(CENTER);
+      text("olofWallgren", 400, 300);
+      textAlign(CENTER);
+      text("puppets101", 400, 330);
+      textAlign(CENTER);
+      text("zazzzi", 400, 360);
+      text("Art made by:", 400, 400);
+      text("Art made by:", 400, 430);
+      text("Press ESC to return to menu", 400, 550);
+      noStroke();
 
-        if (keyIsPressed){
-          if(keyCode === 27){
-            game.menu.menuState = "main";
-          }
-        }
-
-      } else if (this.menuState === "gameOver") {
-        this.gameOver.draw();
-
-      } else {
-        // Logic for the title menu 
-        this.titleScreen.draw();
-        if (keyIsPressed === true) {
+      if (keyIsPressed){
+        if(keyCode === 27){
           this.menuState = "main";
-
         }
+      }
+
+    } else if (this.menuState === "gameOver") {
+      this.gameOver.draw();
+
+    } else if (this.menuState === "title") {
+      // Logic for the title menu 
+      this.titleScreen.draw();
+      if (keyIsPressed === true) {
+        this.menuState = "main";
       }
     }
   }
