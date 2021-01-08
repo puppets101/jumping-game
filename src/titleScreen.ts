@@ -8,7 +8,7 @@ class TitleScreen {
 
   constructor(menu: Imenu) {
     this.backstory = ["Neo-Tokyo, Earth, 2076.", "The latest Intergalactic War and subsequent waves of Alien Invasion have left humanity at the verge of extinction, its cities deserted and crawling with Alien life forms on the lookout for any remaining signs of human activity.", "Your only chance of survival is to keep running, avoiding all contact while shooting as many Aliens as you can.", "Do you have what it takes to stay alive?"];
-    this.backstoryTimer = 15000;
+    this.backstoryTimer = 0;
     this.menu = menu;
 
     //fade in and out for the press any key text
@@ -57,21 +57,37 @@ class TitleScreen {
   }
   private drawBackstoryInIntervals() {
     textSize(13);
-    fill(212,235,242);
-    textAlign(LEFT);this.backstoryTimer -= deltaTime;
+    textAlign(LEFT);
+    this.backstoryTimer += deltaTime;
 
-    if (this.backstoryTimer < 14000) {
+    if (this.backstoryTimer > 1000) {
+      fill(212,235,242,this.getBackstoryAlpha(1000));
       text(this.backstory[0], 50, 250);
     }
-    if (this.backstoryTimer < 11000) {
+    if (this.backstoryTimer > 4000) {
+      fill(212,235,242,this.getBackstoryAlpha(4000));
       text(this.backstory[1], 50, 275, 700, 300);
     }
-    if (this.backstoryTimer < 5000) {
+    if (this.backstoryTimer > 10000) {
+      fill(212,235,242,this.getBackstoryAlpha(10000));
       text(this.backstory[2], 50, 375, 700, 300);   
     }
-    if (this.backstoryTimer < 0) {  
+    if (this.backstoryTimer > 15000) {  
+      fill(212,235,242,this.getBackstoryAlpha(15000));
       text(this.backstory[3], 50, 450);  
     }
+  }
+  private getBackstoryAlpha(textStartTime: number) {
+    let alpha = 0;
+    const fadeDuration = 1500;
+    const fadeTime = this.backstoryTimer - textStartTime;
+    if (fadeTime >= 0) {
+      alpha = fadeTime / (fadeDuration/256);
+      if (alpha > 255) {
+        alpha = 255;
+      }
+    }
+    return alpha;
   }
 }
 
