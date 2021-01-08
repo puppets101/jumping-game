@@ -68,7 +68,6 @@ class GamePlay {
   }
 
   public update() {
-
     if (keyIsPressed) {
       if (keyCode === 27) {
         this.pauseScreen.draw();
@@ -142,7 +141,6 @@ class GamePlay {
     }
   }
 
-
   private updatePowerupLife() {
     for (let i = 0; i < this.powerupArray.length; i++) {
       this.powerupArray[i].update();
@@ -189,9 +187,8 @@ class GamePlay {
     }
   }
 
-
   private createNewDroneEnemy() {
-    let droneEnemy = new Obstacle(droneAsset, 500, 0, 0, 10);
+    let droneEnemy = new Obstacle(droneAsset, droneDeathAsset, 500, 0, 0, 10);
     this.obstacleArray.push(droneEnemy);
   }
 
@@ -204,7 +201,14 @@ class GamePlay {
   }
 
   public createNewPrototypeEnemy() {
-    let prototypeEnemy = new Obstacle(prototypeAsset, 800, 520, 5, 0);
+    let prototypeEnemy = new Obstacle(
+      prototypeAsset,
+      prototypeDeathAsset,
+      800,
+      520,
+      5,
+      0
+    );
     this.obstacleArray.push(prototypeEnemy);
   }
 
@@ -213,7 +217,7 @@ class GamePlay {
     if (this.lives.life >= 4) {
       this.isSuperWeaponAvalible = true;
     } else {
-      this.isSuperWeaponAvalible = false;    
+      this.isSuperWeaponAvalible = false;
     }
   }
 
@@ -269,7 +273,6 @@ class GamePlay {
           }, 2000);
           return true;
         }
-
       }
     }
 
