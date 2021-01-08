@@ -5,8 +5,6 @@ class Menu implements Imenu {
   protected pauseScreen: PauseScreen;
   protected titleScreen: TitleScreen;
   public menuState: MenuState;
-  private mainMenuOptions: number;
-  private prevMouseIsPressed: boolean;
 
   //for moving background (same code as background-class)
   private scrollingImage: p5.Image;
@@ -20,8 +18,6 @@ class Menu implements Imenu {
     this.pauseScreen = new PauseScreen(this);
     this.titleScreen = new TitleScreen(this);
     this.menuState = menuState;
-    this.mainMenuOptions = 0;
-    this.prevMouseIsPressed = false;
 
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/main.png");
@@ -42,15 +38,13 @@ class Menu implements Imenu {
   public update() {
 
     //handles the users click
-    if (game.menu.menuState === "main") {
-      this.prevMouseIsPressed = false;
-      if (this.mainMenuOptions === 0) {
+    const checkForUserInput = () => {
+      if (this.menuState === "main") {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 400 && mouseY > 377) {
             if (mouseIsPressed) {
               console.log("Game started");
               this.menuState = "close"
-
             }
           }
           if (mouseY < 425 && mouseY > 410) {
@@ -68,7 +62,10 @@ class Menu implements Imenu {
         }
       }
     }
-    this.prevMouseIsPressed = mouseIsPressed;
+    // set timeout här? Fråga david
+    if (this.menuState === 'main') {
+      setTimeout(checkForUserInput, 2000);
+    }
   }
 
   private movingBackground() {
@@ -102,6 +99,7 @@ class Menu implements Imenu {
       textAlign(CENTER);
       text("Cyberjump", 400, 200);
 
+      stroke(0);
       textFont(pixelFont);
       textSize(20);
       fill(128, 0, 0);
@@ -119,6 +117,7 @@ class Menu implements Imenu {
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Exit", 400, 460);
+      noStroke();
 
     } else if (this.menuState === "pause") {
       this.pauseScreen.draw();
@@ -165,8 +164,8 @@ class Menu implements Imenu {
       text("Press ESC to return to menu", 400, 550);
       noStroke();
 
-      if (keyIsPressed){
-        if(keyCode === 27){
+      if (keyIsPressed) {
+        if (keyCode === 27) {
           this.menuState = "main";
         }
       }
