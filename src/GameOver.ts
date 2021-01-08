@@ -2,29 +2,25 @@ class GameOver {
   backGroundColor: String;
   menuOptions: String;
   private menu: Imenu;
-  private prevMouseIsPressedGO: boolean;
+
 
   constructor(menu: Imenu) {
     this.menuOptions = "";
     this.backGroundColor = "";
     this.menu = menu;
-    this.prevMouseIsPressedGO = false;
+
   }
-  public playAgain() {}
-  public quit() {}
+
   public update() {
     // handles the users click
-    if (
-      !this.prevMouseIsPressedGO &&
-      mouseIsPressed &&
-      this.menu.menuState === "gameOver"
-    ) {
+    if (this.menu.menuState === "gameOver") {
       const mouseClickedGO = () => {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 385 && mouseY > 366) {
             if (mouseIsPressed) {
               console.log("Game Restarted");
               this.menu.menuState = "restart"
+
             }
           }
           if (mouseY < 429 && mouseY > 405) {
@@ -37,7 +33,6 @@ class GameOver {
       };
       mouseClickedGO();
     }
-    this.prevMouseIsPressedGO = mouseIsPressed;
   }
   public draw() {
     this.update();
