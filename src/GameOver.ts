@@ -2,12 +2,16 @@ class GameOver {
   backGroundColor: String;
   menuOptions: String;
   private menu: Imenu;
+  private textSize1: number;
+  private textSize2: number;
 
 
   constructor(menu: Imenu) {
     this.menuOptions = "";
     this.backGroundColor = "";
     this.menu = menu;
+    this.textSize1 = 20;
+    this.textSize2 = 20;
 
   }
 
@@ -17,18 +21,25 @@ class GameOver {
       const mouseClickedGO = () => {
         if (mouseX < 500 && mouseX > 300) {
           if (mouseY < 385 && mouseY > 366) {
+            this.textSize1 = 30;
             if (mouseIsPressed) {
               console.log("Game Restarted");
               this.menu.menuState = "restart"
-
             }
           }
-          if (mouseY < 429 && mouseY > 405) {
+          else if (mouseY < 429 && mouseY > 405) {
+            this.textSize2 = 30;
             if (mouseIsPressed) {
               console.log("Go to main");
               this.menu.menuState = "main";
             }
+          } else {
+            this.textSize1 = 20;
+            this.textSize2 = 20;
           }
+        } else {
+          this.textSize1 = 20;
+          this.textSize2 = 20;
         }
       };
       mouseClickedGO();
@@ -52,13 +63,13 @@ class GameOver {
     text("You died", 400, 250);
 
     textFont(pixelFont);
-    textSize(20);
+    textSize(this.textSize1);
     fill(128, 0, 0);
     textAlign(CENTER);
     text("Again?", 400, 390);
 
     textFont(pixelFont);
-    textSize(20);
+    textSize(this.textSize2);
     fill(128, 0, 0);
     textAlign(CENTER);
     text("Quit", 400, 430);
