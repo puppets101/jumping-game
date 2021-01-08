@@ -13,7 +13,7 @@ class GamePlay {
   private platformInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
-  public super: Boolean;
+  public isSuperWeaponAvalible: Boolean;
 
   private playBackgroundSound: boolean;
 
@@ -45,7 +45,7 @@ class GamePlay {
     this.projectileArray = [];
 
     // this.movableEntities = [];
-    this.super = false;
+    this.isSuperWeaponAvalible = false;
 
     this.platformInterval = 1000;
     this.platformTimer = this.platformInterval;
@@ -61,8 +61,6 @@ class GamePlay {
     this.lives = new Lives();
     this.graceModeActive = false;
   }
-
-  gameOver() {}
 
   loadGameSound() {
     backgroundSound.loop();
@@ -97,7 +95,7 @@ class GamePlay {
     this.superWeaponCheck();
   }
 
-  public createNewPlatform() {
+  private createPlatform() {
     // Returns 1 or 0 – 1 sets a high platform, 0 sets a low platform
     const randomHeight = Math.round(Math.random());
     // Returns a number < 200 and >= 0
@@ -110,7 +108,7 @@ class GamePlay {
   private checkPlatformInterval() {
     this.platformTimer -= deltaTime;
     if (this.platformTimer < 0) {
-      this.createNewPlatform();
+      this.createPlatform();
       this.platformTimer = this.platformInterval;
     }
   }
@@ -128,11 +126,17 @@ class GamePlay {
   }
 
   private renderPowerupLife() {
-    // Adds new powerups
     this.powerupTimer -= deltaTime;
     if (this.powerupTimer < 0) {
       this.createPowerupLife();
       this.powerupTimer = 13633;
+    }
+  }
+
+  private createPowerupLife() {
+    if (this.lives.life < 5) {
+      let newPowerup = new Powerup();
+      this.powerupArray.push(newPowerup);
     }
   }
 
@@ -145,13 +149,6 @@ class GamePlay {
       if (this.powerupArray[i].isVisible === false) {
         this.powerupArray.splice(i, 1);
       }
-    }
-  }
-
-  public createPowerupLife() {
-    if (this.lives.life < 5) {
-      let newPowerup = new Powerup();
-      this.powerupArray.push(newPowerup);
     }
   }
 
@@ -168,7 +165,7 @@ class GamePlay {
   }
 
   // adds new projectile
-  public addNewProjectiles() {
+  public createProjectile() {
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
   }
@@ -192,7 +189,7 @@ class GamePlay {
     }
   }
 
-  public createNewDroneEnemy() {
+  private createNewDroneEnemy() {
     let droneEnemy = new Obstacle(droneAsset, 500, 0, 0, 10);
     this.obstacleArray.push(droneEnemy);
   }
@@ -208,6 +205,15 @@ class GamePlay {
   public createNewPrototypeEnemy() {
     let prototypeEnemy = new Obstacle(prototypeAsset, 800, 520, 5, 0);
     this.obstacleArray.push(prototypeEnemy);
+  }
+
+  // Check if superWeapon is avalible
+  public superWeaponCheck() {
+    if (this.lives.life >= 4) {
+      this.isSuperWeaponAvalible = true;
+    } else {
+      this.isSuperWeaponAvalible = false;
+    }
   }
 
   private checkCollisions() {
@@ -228,7 +234,7 @@ class GamePlay {
             this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
               570
           ) {
-            // check if drone enemy lands on the ground
+            // Check if drone enemy lands on the ground
             this.obstacleArray[i].velocity.y = 0;
             this.obstacleArray[i].velocity.x = 3;
           }
@@ -347,7 +353,6 @@ class GamePlay {
 
           this.obstacleArray.splice(j, 1);
           // setTimeout(() => {  }, 400);
-          console.log("träff");
         }
       }
     }
@@ -371,13 +376,6 @@ class GamePlay {
         }
       }
     }
-  }
-
-  // Check if superWeapon is avalible
-  public superWeaponCheck() {
-    if (this.lives.life >= 4) {
-      this.super = true;
-    } else this.super = false;
   }
 
   public draw() {
