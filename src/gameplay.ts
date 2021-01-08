@@ -2,14 +2,13 @@ class GamePlay {
   private score: Score;
   public character: Character;
   // private gameAudio: GameAudio;
-  // private drawableEntity: DrawableEntity;
-  // private movableEntity: MovableEntity;
   private obstacleArray: Obstacle[];
   private platformArray: Platform[];
   private powerupArray: Powerup[];
   private droneInterval: number;
   private prototypeInterval: number;
   private platformInterval: number;
+  private scrollInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: Boolean;
@@ -23,18 +22,22 @@ class GamePlay {
   private prototypeTimer: number;
   private platformTimer: number;
   private powerupTimer: number;
+  private scrollTimer: number;
   public isGameOver = false;
+  private scrollSpeed;
 
   constructor() {
     this.score = new Score();
     this.character = new Character();
+    this.scrollSpeed = 0;
     // this.gameAudio = new GameAudio();
 
     this.background = new Background(
       createVector(0, 0),
       true,
       createVector(3, 0),
-      0
+      0,
+      this.scrollSpeed
     );
 
     this.playBackgroundSound = false;
@@ -54,6 +57,9 @@ class GamePlay {
 
     this.prototypeInterval = 2500;
     this.prototypeTimer = this.prototypeInterval;
+
+    this.scrollInterval = 10000;
+    this.scrollTimer = this.scrollInterval;
 
     this.powerupTimer = 13633;
 
@@ -90,19 +96,43 @@ class GamePlay {
     this.checkCollisions();
     this.superWeaponCheck();
     this.checkEnemyDeath();
+    this.updateScrollSpeed();
 
     if(this.character.isAlive === false) {
       this.isGameOver = true;
     }
   }
 
+  private updateScrollSpeed() {
+    this.scrollTimer -= deltaTime;
+    if (this.scrollTimer < 0) {
+
+      // Changes scrollspeed for current objects
+      this.background.scrollSpeed += 0.2
+      for (let i = 0; i < this.platformArray.length; i++) {
+        this.platformArray[i].scrollSpeed += 0.2
+      }
+      for (let i = 0; i < this.obstacleArray.length; i++) {
+        this.obstacleArray[i].scrollSpeed += 0.2
+      }
+      for (let i = 0; i < this.powerupArray.length; i++) {
+        this.powerupArray[i].scrollSpeed += 0.2
+      }
+
+      // Changes scrollspeed for future objects
+      this.scrollSpeed += 0.2;
+      // Resets interval
+      this.scrollTimer = this.scrollInterval;
+    }
+  }
+
   private createPlatform() {
-    // Returns 1 or 0 – 1 sets a high platform, 0 sets a low platform
+    // Returns 1 or 0: 1 sets a high platform, 0 sets a low platform
     const randomHeight = Math.round(Math.random());
     // Returns a number < 200 and >= 0
     const randomPosition = Math.random() * 200;
 
-    let newPlatform = new Platform(randomHeight, randomPosition);
+    let newPlatform = new Platform(randomHeight, randomPosition, this.scrollSpeed);
     this.platformArray.push(newPlatform);
   }
 
@@ -136,7 +166,7 @@ class GamePlay {
 
   private createPowerupLife() {
     if (this.lives.life < 5) {
-      let newPowerup = new Powerup();
+      let newPowerup = new Powerup(this.scrollSpeed);
       this.powerupArray.push(newPowerup);
     }
   }
@@ -188,7 +218,15 @@ class GamePlay {
   }
 
   private createNewDroneEnemy() {
-    let droneEnemy = new Obstacle(droneAsset, droneDeathAsset, 500, 0, 0, 10);
+    let droneEnemy = new Obstacle(
+      droneAsset,
+      droneDeathAsset,
+      500,
+      0,
+      0,
+      10,
+      this.scrollSpeed
+    );
     this.obstacleArray.push(droneEnemy);
   }
 
@@ -207,7 +245,8 @@ class GamePlay {
       800,
       520,
       5,
-      0
+      0,
+      this.scrollSpeed
     );
     this.obstacleArray.push(prototypeEnemy);
   }
@@ -256,9 +295,9 @@ class GamePlay {
         // Character collision with object
 
         if (
-          this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
-            this.character.position.x - this.character.size.x &&
-          this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
+          this.character.position.x + this.character.size.x > this.obstacleArray[i].position.x
+          && this.character.position.x < this.obstacleArray[i].position.x + this.obstacleArray[i].width
+          && this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.character.position.y + this.character.size.y
         ) {
           if (this.graceModeActive) {

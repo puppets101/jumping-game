@@ -4,10 +4,10 @@ class Background extends MovableEntity {
   private scrollingImage;
   private firstImg: number;
   private secondImg: number;
-  private scrollSpeed: number;
+  public scrollSpeed: number;
 
 
-  constructor(position: p5.Vector, isVisible: boolean, velocity: p5.Vector, applyGravity: number) {
+  constructor(position: p5.Vector, isVisible: boolean, velocity: p5.Vector, applyGravity: number, scrollSpeed: number) {
     super(createVector(0, 0), true, createVector(3, 0), 0);
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/cyberpunk-street.png");
@@ -16,13 +16,13 @@ class Background extends MovableEntity {
     //instance 2 of picture
     this.secondImg = 2166;
     //scrollspeed, connect to the velocity of game if we want it to match up! 
-    this.scrollSpeed = velocity.x; 
+    this.scrollSpeed = scrollSpeed; 
   }
 
   update(){
     //move the images to the left by change the value of the picture instances
-    this.firstImg -= this.scrollSpeed;
-    this.secondImg -= this.scrollSpeed;
+    this.firstImg -= (this.velocity.x + this.scrollSpeed);
+    this.secondImg -= (this.velocity.x + this.scrollSpeed);
 
     //reset position
     if (this.firstImg < -width - 1366) {

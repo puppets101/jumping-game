@@ -11,7 +11,6 @@ class Game {
   }
 
   update() {
-    console.log(this.menu.menuState)
     if (keyIsPressed && this.menu.menuState === "close") {
       if (keyCode === 27) {
         this.menu.menuState = "pause"

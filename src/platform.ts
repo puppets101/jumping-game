@@ -4,19 +4,21 @@ class Platform extends MovableEntity {
   public width: number;
   private highOrLow: number;
   private platformImg: any;
+  public scrollSpeed: number;
 
-  constructor(highOrLow: number, randomX: number) {
+  constructor(highOrLow: number, randomX: number, scrollSpeed: number) {
     super(createVector(800 + randomX, 250), true, createVector(3, 0), 0); // Changing velocity.x alters speed
     this.color = color(176, 75, 35);
     this.height = 20;
     this.width = 200;
     this.highOrLow = highOrLow;
     this.platformImg = platformAsset;
+    this.scrollSpeed = scrollSpeed;
   }
 
   public update() {
     // Moves platforms to the left
-    this.position.x -= this.velocity.x;
+    this.position.x -= (this.velocity.x + this.scrollSpeed);
 
     // highOrLow value decides whether platform should have high or low yPosition
     if (this.highOrLow === 1) {
