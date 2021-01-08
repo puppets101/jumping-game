@@ -5,11 +5,13 @@ let menu: Menu;
 let outrunFont: any;
 let pixelFont: any;
 
+
 let shootSound: p5.SoundFile;
 let backgroundSound: p5.SoundFile;
 
 let prototypeAsset: p5.Image;
 let prototypeDeathAsset: p5.Image;
+
 let droneAsset: p5.Image;
 let droneDeathAsset: p5.Image;
 let runnerAsset: p5.Image;
@@ -30,8 +32,9 @@ function preload() {
   outrunFont = loadFont("./assets/fonts/Outrun_future.otf");
   pixelFont = loadFont("./assets/fonts/PressStart2P-Regular.ttf");
 
-
   // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
+
+
 
   runnerAsset = loadImage('./assets/sprites/runner.gif');
   prototypeAsset = loadImage('./assets/sprites/prototype.gif');
@@ -39,26 +42,17 @@ function preload() {
   droneAsset = loadImage('./assets/sprites/drone.gif');
   droneDeathAsset = loadImage('./assets/sprites/droneDeath.gif');
 
-
   // https://trixelized.itch.io/starstring-fields
 
-  platformAsset = loadImage('./assets/imgs/platform.png');
+  platformAsset = loadImage("./assets/imgs/platform.png");
 
-
-
-
-  shootSound = loadSound("./assets/sound/shoot-sound.wav")
-  backgroundSound = loadSound("./assets/sound/background-sound.wav")
-
+  shootSound = loadSound("./assets/sound/shoot-sound.wav");
+  backgroundSound = loadSound("./assets/sound/background-sound.wav");
 
   // https://www.artstation.com/thebyteman
-  powerupLifeAsset = loadImage('./assets/sprites/heart.gif')
+  powerupLifeAsset = loadImage("./assets/sprites/heart.gif");
 
-  lifeAsset = loadImage('./assets/imgs/heart.png')
-
-
-
-
+  lifeAsset = loadImage("./assets/imgs/heart.png");
 }
 /**
  * Built in setup function in P5
@@ -70,10 +64,8 @@ function setup() {
   createCanvas(800, 600); // bestäm storlek
   frameRate(60);
 
-
   game = new Game();
   menu = new Menu(true, "");
-
 }
 
 /**
@@ -84,11 +76,9 @@ function setup() {
 function draw() {
   game.update();
   game.draw();
-
 }
 
 function keyPressed() {
-
   if (keyCode === UP_ARROW) {
     game.gamePlay.character.jump();
   }
@@ -96,18 +86,11 @@ function keyPressed() {
     game.gamePlay.character.fall();
   }
   if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
-    game.gamePlay.addNewProjectiles();
+    game.gamePlay.createProjectile();
 
     shootSound.play();
-
   }
-  
-  
-  
 }
-
-
-
 
 /**
    * Built in windowResize listener function in P5
@@ -115,5 +98,3 @@ function keyPressed() {
   function windowResized() {
   resizeCanvas(windowWidth, windowHeight);}
    */
-
-
