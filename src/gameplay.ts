@@ -68,6 +68,7 @@ class GamePlay {
   }
 
   public update() {
+
     if (keyIsPressed) {
       if (keyCode === 27) {
         this.pauseScreen.draw();
@@ -93,6 +94,7 @@ class GamePlay {
     this.superProjectileCollisions();
     this.checkCollisions();
     this.superWeaponCheck();
+    this.checkEnemyDeath();
   }
 
   private createPlatform() {
@@ -140,6 +142,7 @@ class GamePlay {
     }
   }
 
+
   private updatePowerupLife() {
     for (let i = 0; i < this.powerupArray.length; i++) {
       this.powerupArray[i].update();
@@ -155,8 +158,6 @@ class GamePlay {
   private updateObstacles() {
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].update();
-      this.obstacleArray[i].draw();
-
       // Removes obstacles from array when out of screen
       if (this.obstacleArray[i].isVisible === false) {
         this.obstacleArray.splice(i, 1);
@@ -174,7 +175,6 @@ class GamePlay {
     for (let i = 0; i < this.projectileArray.length; i++) {
       this.projectileArray[i].update();
       this.projectileArray[i].draw();
-
       if (this.projectileArray[i].isVisible === false) {
         this.projectileArray.splice(i, 1);
       }
@@ -188,6 +188,7 @@ class GamePlay {
       this.droneTimer = this.droneInterval;
     }
   }
+
 
   private createNewDroneEnemy() {
     let droneEnemy = new Obstacle(droneAsset, 500, 0, 0, 10);
@@ -212,7 +213,15 @@ class GamePlay {
     if (this.lives.life >= 4) {
       this.isSuperWeaponAvalible = true;
     } else {
-      this.isSuperWeaponAvalible = false;
+      this.isSuperWeaponAvalible = false;    
+    }
+  }
+
+  private checkEnemyDeath() {
+    for (let i = 0; i < this.obstacleArray.length; i++) {
+      if (this.obstacleArray[i].isDead === true) {
+        this.obstacleArray.splice(i, 1);
+      }
     }
   }
 
@@ -241,6 +250,7 @@ class GamePlay {
         }
 
         // Character collision with object
+
         if (
           this.obstacleArray[i].position.x - this.obstacleArray[i].width ===
             this.character.position.x - this.character.size.x &&
@@ -259,6 +269,7 @@ class GamePlay {
           }, 2000);
           return true;
         }
+
       }
     }
 
@@ -346,17 +357,12 @@ class GamePlay {
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
 
-          // FIX DEATH ANIMATION
-          if (this.obstacleArray[j].image === droneAsset) {
-            this.obstacleArray[j].image = droneDeathAsset;
-          }
-
-          this.obstacleArray.splice(j, 1);
-          // setTimeout(() => {  }, 400);
+          this.obstacleArray[j].isShot = true;
         }
       }
     }
   }
+
   // superProjectile collision with object
   public superProjectileCollisions() {
     for (let j = 0; j < this.obstacleArray.length; j++) {
@@ -371,8 +377,9 @@ class GamePlay {
             this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
           this.projectileArray.splice(i, 1);
-          // this.obstacleArray[j].droneAssetGif = droneDeathAsset;
-          // setTimeout(() => { this.obstacleArray.splice(j, 1) }, 400);
+
+          this.score.score += 10;
+          this.obstacleArray[j].isShot = true;
         }
       }
     }
@@ -399,21 +406,4 @@ class GamePlay {
     this.character.update();
     this.score.draw();
   }
-
-  // for (const entity of this.movableEntities){
-  //   if(entity instanceof ScrollableEntity) {
-  //     entity.position.x -= 51;
-  //   }
-  //   if(entity instanceof MovableEntity){
-  //     entity.update()
-  //   }
-  // }
-
-  // private checkCollision(){
-  //   for (const entity of this.movableEntities){
-  //     if(entity instanceof Obstacle) {
-
-  //     }
-  //   }
-  //}
 }
