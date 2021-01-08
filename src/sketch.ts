@@ -4,7 +4,6 @@ let game: Game;
 let outrunFont: any;
 let pixelFont: any;
 
-
 let shootSound: p5.SoundFile;
 let backgroundSound: p5.SoundFile;
 
@@ -33,13 +32,11 @@ function preload() {
 
   // Thanks to https://oco.itch.io/cyberpunk-character-pack for art
 
-
-
-  runnerAsset = loadImage('./assets/sprites/runner.gif');
-  prototypeAsset = loadImage('./assets/sprites/prototype.gif');
-  prototypeDeathAsset = loadImage('./assets/sprites/prototypeDeath.gif');
-  droneAsset = loadImage('./assets/sprites/drone.gif');
-  droneDeathAsset = loadImage('./assets/sprites/droneDeath.gif');
+  runnerAsset = loadImage("./assets/sprites/runner.gif");
+  prototypeAsset = loadImage("./assets/sprites/prototype.gif");
+  prototypeDeathAsset = loadImage("./assets/sprites/prototypeDeath.gif");
+  droneAsset = loadImage("./assets/sprites/drone.gif");
+  droneDeathAsset = loadImage("./assets/sprites/droneDeath.gif");
 
   // https://trixelized.itch.io/starstring-fields
 
@@ -74,20 +71,6 @@ function setup() {
 function draw() {
   game.update();
   game.draw();
-}
-
-function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    game.gamePlay.character.jump();
-  }
-  if (keyCode === DOWN_ARROW) {
-    game.gamePlay.character.fall();
-  }
-  if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
-    game.gamePlay.createProjectile();
-
-    shootSound.play();
-  }
 }
 
 /**
