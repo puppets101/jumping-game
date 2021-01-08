@@ -100,6 +100,7 @@ class GamePlay {
     this.updatePowerupLife();
     this.projectileCollisions();
     this.superProjectileCollisions();
+    this.superProjectileCollisionsLow()
     this.checkCollisions();
     this.superWeaponCheck();
     this.checkEnemyDeath();
@@ -264,7 +265,7 @@ class GamePlay {
 
   // Check if superWeapon is avalible
   public superWeaponCheck() {
-    if (this.lives.life >= 4) {
+    if (this.lives.life <= 1) {
       this.isSuperWeaponAvalible = true;
     } else {
       this.isSuperWeaponAvalible = false;
@@ -422,11 +423,33 @@ class GamePlay {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
           // superProjectile
-          this.projectileArray[i].superPosition.x >=
-            this.obstacleArray[j].position.x &&
+          this.projectileArray[i].superPosition.x > this.obstacleArray[j].position.x && 
+           this.projectileArray[i].superPosition.x < this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
+            this.obstacleArray[j].position.x  &&
           this.projectileArray[i].superPosition.y >
-            this.obstacleArray[j].position.y &&
+            this.obstacleArray[j].position.y  &&
           this.projectileArray[i].superPosition.y <
+            this.obstacleArray[j].position.y + this.obstacleArray[j].height
+        ) {
+          this.projectileArray.splice(i, 1);
+
+          this.score.score += 10;
+          this.obstacleArray[j].isShot = true;
+        }
+      }
+    }
+  }
+  // superProjectile collision with object
+  public superProjectileCollisionsLow() {
+    for (let j = 0; j < this.obstacleArray.length; j++) {
+      for (let i = 0; i < this.projectileArray.length; i++) {
+        if (
+          // superProjectile
+          this.projectileArray[i].superPositionLow.x >=
+            this.obstacleArray[j].position.x &&
+          this.projectileArray[i].superPositionLow.y >
+            this.obstacleArray[j].position.y &&
+          this.projectileArray[i].superPositionLow.y <
             this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
           this.projectileArray.splice(i, 1);
