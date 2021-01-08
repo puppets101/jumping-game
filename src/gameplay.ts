@@ -214,7 +214,7 @@ class GamePlay {
 
   // Check if superWeapon is avalible
   public superWeaponCheck() {
-    if (this.lives.life >= 4) {
+    if (this.lives.life <= 1) {
       this.isSuperWeaponAvalible = true;
     } else {
       this.isSuperWeaponAvalible = false;
