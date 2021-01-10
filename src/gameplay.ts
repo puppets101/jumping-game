@@ -1,7 +1,6 @@
 class GamePlay {
   public score: Score;
   public character: Character;
-  // private gameAudio: GameAudio;
   private obstacleArray: Obstacle[];
   private platformArray: Platform[];
   private powerupArray: Powerup[];
@@ -13,7 +12,6 @@ class GamePlay {
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: Boolean;
 
-  private playBackgroundSound: boolean;
 
   public projectileArray: Projectile[];
 
@@ -31,7 +29,6 @@ class GamePlay {
     this.score = new Score();
     this.character = new Character();
     this.scrollSpeed = 0;
-    // this.gameAudio = new GameAudio();
 
     this.background = new Background(
       createVector(0, 0),
@@ -41,7 +38,6 @@ class GamePlay {
       this.scrollSpeed
     );
 
-    this.playBackgroundSound = false;
     this.obstacleArray = [];
     this.platformArray = [];
     this.powerupArray = [];
@@ -68,25 +64,14 @@ class GamePlay {
     this.graceModeActive = false;
   }
 
-  loadGameSound() {
-    backgroundSound.loop();
-    backgroundSound.setVolume(0.1);
-  }
-
   public update() {
     this.background.update();
     this.score.update();
     this.character.update();
 
-    if (!this.playBackgroundSound) {
-      this.loadGameSound();
-      this.playBackgroundSound = true;
-    }
     if (keyIsPressed) {
       if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
         game.gamePlay.createProjectile();
-
-        shootSound.play();
       }
     }
 
@@ -315,7 +300,6 @@ class GamePlay {
             this.character.position.y + this.character.size.y
         ) {
           if (this.graceModeActive) {
-            console.log(this.graceModeActive);
             return true;
           }
           // Create func to lose a life and add two seconds of grace mode
