@@ -12,6 +12,8 @@ class GamePlay {
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: Boolean;
 
+  public gameAudio: GameAudio;
+
 
   public projectileArray: Projectile[];
 
@@ -37,6 +39,8 @@ class GamePlay {
       0,
       this.scrollSpeed
     );
+
+    this.gameAudio = new GameAudio();
 
     this.obstacleArray = [];
     this.platformArray = [];
@@ -470,5 +474,6 @@ class GamePlay {
     this.lives.draw();
     this.character.draw();
     this.score.draw();
+    this.gameAudio.draw();
   }
 }

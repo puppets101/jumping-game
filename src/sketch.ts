@@ -6,6 +6,7 @@ let pixelFont: any;
 
 let shootSound: p5.SoundFile;
 let backgroundSound: p5.SoundFile;
+let fatality: p5.SoundFile;
 
 let prototypeAsset: p5.Image;
 let prototypeDeathAsset: p5.Image;
@@ -44,6 +45,7 @@ function preload() {
 
   shootSound = loadSound("./assets/sound/shoot-sound.wav");
   backgroundSound = loadSound("./assets/sound/background-sound.wav");
+  fatality = loadSound("./assets/sound/fatality.wav");
 
   // https://www.artstation.com/thebyteman
   powerupLifeAsset = loadImage("./assets/sprites/heart.gif");

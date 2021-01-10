@@ -3,15 +3,10 @@ class Game {
   public gamePlay: GamePlay;
   public menu: Menu;
   public finalScore: number;
-  private backgroundSwitch: boolean;
-
 
   constructor() {
     this.gamePlay = new GamePlay();
     this.finalScore = 0;
-    this.backgroundSwitch = false;
-    
-  
     
     //change boolean value to false to run game without menu
     this.menu = new Menu("title");
@@ -41,20 +36,6 @@ class Game {
       this.gamePlay.isGameOver = false;
       this.menu.menuState = "close"
     }
-    
-    // audio
-    if (this.menu.menuState === "close" && this.backgroundSwitch === false){
-      this.backgroundSwitch = true;
-        backgroundSound.loop();
-        backgroundSound.setVolume(.1);
-    }
-
-    if(this.menu.menuState === "gameOver") {
-      backgroundSound.stop()
-      this.backgroundSwitch = false;
-    }
-
-
   }
 
 
