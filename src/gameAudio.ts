@@ -8,8 +8,11 @@ class GameAudio extends DrawableEntity {
     this.shootSwitch = false;
     this.fatalitySwitch = false;
   }
-
-
+  
+  
+  public draw(){
+    this.toggleAudio();
+}
   public toggleAudio() {
     // audio
 
@@ -35,19 +38,16 @@ class GameAudio extends DrawableEntity {
       if(this.shootSwitch){
         
       }
-
     }
 
     // fatality audio
     if(game.menu.menuState === "gameOver" && this.fatalitySwitch === false){
       fatality.play()
+      fatality.setVolume(.5);
       this.fatalitySwitch = true;
     }
 
 
   }
-  public draw(){
-    this.toggleAudio();
-}
 }
 
