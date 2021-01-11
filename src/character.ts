@@ -41,10 +41,6 @@ class Character extends MovableEntity {
       this.canJump = true;
     }
 
-    // if (this.position.y < 490) {
-    //   this.applyGravity = 0.4;
-    // }
-
     if (keyIsPressed) {
       if (keyCode === UP_ARROW) {
         game.gamePlay.character.jump();
