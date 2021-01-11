@@ -8,6 +8,12 @@ let shootSound: p5.SoundFile;
 let backgroundSound: p5.SoundFile;
 let fatality: p5.SoundFile;
 let title: p5.SoundFile;
+let killSound: p5.SoundFile;
+let heart: p5.SoundFile;
+let oh: p5.SoundFile;
+
+let unmute: p5.Image;
+let mute: p5.Image;
 
 let prototypeAsset: p5.Image;
 let prototypeDeathAsset: p5.Image;
@@ -48,6 +54,12 @@ function preload() {
   backgroundSound = loadSound("./assets/sound/background-sound.wav");
   fatality = loadSound("./assets/sound/fatality.wav");
   title = loadSound("./assets/sound/title.wav");
+  killSound = loadSound("./assets/sound/kill.wav");
+  heart = loadSound("./assets/sound/heart.wav");
+  oh = loadSound("./assets/sound/oh2.wav");
+
+  unmute = loadImage("./assets/imgs/unmute.png");
+  mute = loadImage("./assets/imgs/mute.png");
 
   // https://www.artstation.com/thebyteman
   powerupLifeAsset = loadImage("./assets/sprites/heart.gif");

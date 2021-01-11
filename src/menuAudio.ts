@@ -1,25 +1,46 @@
 class MenuAudio {
-    private volume: boolean
-    private width: number
-    private height: number
-    private xPosition: number
-    private yPosition: number
-    private img: string
+    public menuAudioSwitch: boolean;
+    public audioImg: p5.Image;
 
     constructor() {
-        this.volume = true
-        this.width = 0 // Change this
-        this. height = 0 // Change this
-        this.xPosition = 0 // Change this
-        this.yPosition = 0 // Change this
-        this.img = "" // Change this
+        this.menuAudioSwitch = false;
+        this.audioImg = unmute;
     }
-
-    public toggleAudio() {
-
+    update() {
+        this.toggleMenuSound();
     }
-
     public draw() {
-
+        image(this.audioImg, 725, 525, 50, 50)
     }
+    toggleMenuSound(){
+        // pause audio
+          if(mouseX < 775 &&  mouseX > 725) {
+            if(mouseY < 575 && mouseY > 525){
+              if(mouseIsPressed) {
+                  if(!game.gameAudio.audioSwitch){
+                      title.stop();
+                      game.gameAudio.audioSwitch = true;
+                      this.menuAudioSwitch = false;
+                      this.audioImg = mute;
+                  }
+                //this.audioSwitch = true;
+              }
+            }
+          }
+          // resume audio
+          if(mouseX < 700 && mouseX > 650) {
+            if(mouseY < 575 && mouseY > 525){
+              if(mouseIsPressed) {
+                  if(game.gameAudio.audioSwitch){
+                      title.loop();
+                      game.gameAudio.audioSwitch = false;
+                      this.menuAudioSwitch = true;
+                      this.audioImg = unmute;
+                  }
+              }
+            }
+          }
+      }
+
+
 }

@@ -12,8 +12,6 @@ class GamePlay {
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: Boolean;
 
-  // public gameAudio: GameAudio;
-
   public projectileArray: Projectile[];
 
   private background: Background;
@@ -64,6 +62,8 @@ class GamePlay {
 
     this.lives = new Lives();
     this.graceModeActive = false;
+
+
   }
 
   public update() {
@@ -71,10 +71,15 @@ class GamePlay {
     this.score.update();
     this.character.update();
 
+   
+
+
+
     if (keyIsPressed) {
       if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
         game.gamePlay.createProjectile();
         shootSound.play();
+        shootSound.setVolume(0.1);
       }
     }
 
@@ -384,6 +389,8 @@ class GamePlay {
         ) {
           this.powerupArray.splice(i, 1);
           this.lives.life++;
+          heart.play();
+          heart.setVolume(.1);
         }
       }
     }
@@ -403,7 +410,8 @@ class GamePlay {
         ) {
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
-
+          killSound.play();
+          killSound.setVolume(0.1);
           this.obstacleArray[j].isShot = true;
         }
       }

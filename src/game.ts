@@ -15,8 +15,6 @@ class Game {
   }
 
   update() {
-     this.gameAudio.draw();
-
     if (keyIsPressed && this.menu.menuState === "close") {
       if (keyCode === 27) {
         this.menu.menuState = "pause"
@@ -45,7 +43,8 @@ class Game {
 
 
   draw() {
-       
+    this.gameAudio.draw();
+
     if (this.menu.menuState !== "close" && this.menu.menuState !== "pause") {
       this.menu.draw();
     } else if (this.menu.menuState === "pause") {
