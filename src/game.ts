@@ -2,21 +2,20 @@ class Game {
   // private menu: Menu;
   public gamePlay: GamePlay;
   public menu: Menu;
+  public gameAudio: GameAudio;
   public finalScore: number;
-
 
   constructor() {
     this.gamePlay = new GamePlay();
     this.finalScore = 0;
     
-  
-    
     //change boolean value to false to run game without menu
     this.menu = new Menu("title");
+    this.gameAudio = new GameAudio();
   }
 
   update() {
-     
+     this.gameAudio.draw();
 
     if (keyIsPressed && this.menu.menuState === "close") {
       if (keyCode === 27) {
@@ -40,6 +39,10 @@ class Game {
       this.menu.menuState = "close"
     }
   }
+
+
+
+
 
   draw() {
        

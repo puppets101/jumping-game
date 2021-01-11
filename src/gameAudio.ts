@@ -1,13 +1,57 @@
 class GameAudio extends DrawableEntity {
- protected volume: boolean;
-
-  constructor(_position: p5.Vector, _isVisible: boolean, _volume:boolean) {
-    
-    super(_position, _isVisible);
-    this.volume = _volume;
+  private backgroundSwitch: boolean;
+  private shootSwitch: boolean;
+  private fatalitySwitch: boolean;
+  private titleSwitch: boolean;
+  constructor() {
+    super(createVector(), true);
+    this.backgroundSwitch = false;
+    this.shootSwitch = false;
+    this.fatalitySwitch = false;
+    this.titleSwitch = false;
   }
+  
+  
+  public draw(){
+    this.toggleAudio();
+}
+  public toggleAudio() {
+    // main menu sound
+    if(game.menu.menuState === "main" && this.titleSwitch === false){
+      title.loop();
+      title.setVolume(.1);
+      this.titleSwitch = true;
+    }
+    // if game running turn of main menu sound
+    if(game.menu.menuState === "close") {
+      this.titleSwitch = false;
+      if(!this.titleSwitch){
+        title.pause()
+      }
+    }
 
-  public toggleAudio() {}
-  public draw(){}
+    // if game running start game sound
+    if (game.menu.menuState === "close" && this.backgroundSwitch === false){
+      this.backgroundSwitch = true;
+      this.fatalitySwitch = false;
+        backgroundSound.loop();
+        backgroundSound.setVolume(.1);
+    }
+    // if game over turn off game sound
+    if(game.menu.menuState === "gameOver") {
+      backgroundSound.stop()
+      this.backgroundSwitch = false;
+      this.shootSwitch = false;
+    }
+
+    // fatality audio
+    if(game.menu.menuState === "gameOver" && this.fatalitySwitch === false){
+      fatality.play()
+      fatality.setVolume(.5);
+      this.fatalitySwitch = true;
+    }
+
+
+  }
 }
 
