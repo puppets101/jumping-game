@@ -44,18 +44,6 @@ class GameAudio extends DrawableEntity {
       this.shootSwitch = false;
     }
 
-    // FIX SHOOT SOUND
-    // shoot sound
-    if(game.menu.menuState === "close" && (keyCode === 32) && this.shootSwitch === false){
-      shootSound.play();
-      shootSound.setVolume(.5);
-      this.shootSwitch = true;
-
-      if(this.shootSwitch){
-        
-      }
-    }
-
     // fatality audio
     if(game.menu.menuState === "gameOver" && this.fatalitySwitch === false){
       fatality.play()
