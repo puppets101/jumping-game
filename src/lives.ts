@@ -1,6 +1,6 @@
 class Lives extends DrawableEntity {
   public life: number;
-  public lifeAsset: p5.Image
+  private lifeAsset: p5.Image
   
   constructor() {
     super(createVector(750, 30), true);
@@ -11,7 +11,6 @@ class Lives extends DrawableEntity {
   public countLives() {
     this.life--;
     if (this.life === 0) {
-      console.log("game over");
       game.gamePlay.character.isAlive = false;
     }
   }
@@ -48,9 +47,5 @@ class Lives extends DrawableEntity {
         image(this.lifeAsset, this.position.x - 140, this.position.y, 30, 30);                
         break;  
     }
-    
-    //fill("red");
-    //text(round(this.life), 750, 50);
-    //textFont(pixelFont);
   }
 }

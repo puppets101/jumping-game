@@ -6,7 +6,7 @@ class Score extends DrawableEntity {
     this.score = 0;
   }
 
-  public countScore() {
+  private countScore() {
     this.score = this.score + deltaTime / 500;
     
   }

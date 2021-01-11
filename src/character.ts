@@ -3,7 +3,6 @@ class Character extends MovableEntity {
   public size: p5.Vector;
   private liftForce: number;
   public canJump: boolean;
-
   private runnerAnimation: p5.Image;
 
   constructor() {
@@ -17,14 +16,14 @@ class Character extends MovableEntity {
     this.runnerAnimation = runnerAsset;
   }
 
-  public jump() {
+  private jump() {
     if (this.canJump) {
       this.velocity.y += this.liftForce;
       this.applyGravity = 0.4;
       this.canJump = false;
     }
   }
-  public fall() {
+  private fall() {
     if (this.velocity.y !== 0) {
       this.applyGravity = 0.8;
     }
