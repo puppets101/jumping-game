@@ -1,17 +1,15 @@
 class Obstacle extends MovableEntity {
-    protected color: p5.Color;
     public height: number;
     public width: number;
     public image: p5.Image;
     public deathImage: p5.Image;
     public isShot: boolean;
     public isDead: boolean;
-    public deathTimer: number;
+    private deathTimer: number;
     public scrollSpeed: number;
 
     constructor(image: p5.Image, deathImage: p5.Image, x: number, y: number,velocityX: number, velocityY: number, scrollSpeed: number) {
         super(createVector(x, y), true, createVector(velocityX, velocityY), 0);
-        this.color = color(0, 255, 255);
         this.height = 50;
         this.width = 30;
         this.isShot = false;

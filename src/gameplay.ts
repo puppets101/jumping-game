@@ -10,9 +10,13 @@ class GamePlay {
   private difficultyInterval: number;
   private lives: Lives;
   private graceModeActive: boolean;
-  public isSuperWeaponAvalible: Boolean;
+  public isSuperWeaponAvalible: boolean;
 
-  public projectileArray: Projectile[];
+
+  // public gameAudio: GameAudio;
+
+  private projectileArray: Projectile[];
+
 
   private background: Background;
   private droneTimer: number;
@@ -20,8 +24,8 @@ class GamePlay {
   private platformTimer: number;
   private powerupTimer: number;
   private difficultyTimer: number;
-  public isGameOver = false;
-  private scrollSpeed;
+  public isGameOver: boolean;
+  private scrollSpeed: number;
 
   constructor() {
     this.score = new Score();
@@ -61,6 +65,7 @@ class GamePlay {
     this.powerupTimer = 13633;
 
     this.lives = new Lives();
+    this.isGameOver = false;
     this.graceModeActive = false;
 
 
@@ -203,7 +208,7 @@ class GamePlay {
   }
 
   // adds new projectile
-  public createProjectile() {
+  private createProjectile() {
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
   }

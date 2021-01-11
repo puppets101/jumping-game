@@ -4,14 +4,17 @@ class GameAudio extends DrawableEntity {
   public titleSwitch: boolean;
   private audioImg: p5.Image;
   public audioSwitch: boolean;
+  private menu: Imenu;
+    
+  constructor(menu: Imenu) {
 
-  constructor() {
     super(createVector(), true);
     this.backgroundSwitch = false;
     this.fatalitySwitch = false;
     this.titleSwitch = true;
     this.audioSwitch = false;
     this.audioImg = unmute;
+    this.menu = menu;
   }
   update() {
     this.toggleGameSound();
@@ -21,6 +24,12 @@ class GameAudio extends DrawableEntity {
     image(this.audioImg, 725, 525, 50, 50)
     this.audio();
 }
+
+
+public update() {
+
+}
+
 
   toggleGameSound(){
         // pause audio
@@ -54,32 +63,32 @@ class GameAudio extends DrawableEntity {
 
   public audio() {
     // main menu sound
-    if(game.menu.menuState === "main" && this.titleSwitch === true){
+    if(this.menu.menuState === "main" && this.titleSwitch === true){
       title.loop();
       title.setVolume(.01);
       this.titleSwitch = false;
     }
-    // if game running turn of main menu sound
-    if(game.menu.menuState === "close") {
+    // if game running turn off main menu sound
+    if(this.menu.menuState === "close") {
       this.titleSwitch = false;
       title.stop()
     }
 
     // if game running start game sound
-    if (game.menu.menuState === "close" && this.backgroundSwitch === false){
+    if (this.menu.menuState === "close" && this.backgroundSwitch === false){
       this.backgroundSwitch = true;
       this.fatalitySwitch = false;
       backgroundSound.loop();
       backgroundSound.setVolume(0.01);
     }
     // if game over turn off game sound
-    if(game.menu.menuState === "gameOver") {
+    if(this.menu.menuState === "gameOver") {
       backgroundSound.stop()
       this.backgroundSwitch = false;
     }
 
     // fatality audio
-    if(game.menu.menuState === "gameOver" && this.fatalitySwitch === false){
+    if(this.menu.menuState === "gameOver" && this.fatalitySwitch === false){
       fatality.play()
       fatality.setVolume(.4);
       this.fatalitySwitch = true;

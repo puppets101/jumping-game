@@ -1,7 +1,7 @@
 class Background extends MovableEntity {
 
   //variables 
-  private scrollingImage;
+  private scrollingImage: p5.Image;
   private firstImg: number;
   private secondImg: number;
   public scrollSpeed: number;

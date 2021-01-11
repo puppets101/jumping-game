@@ -1,17 +1,11 @@
 abstract class DrawableEntity {
- 
-  public position: p5.Vector; // CHANGED THIS TEMPORARILY
-  public isVisible: boolean; // CHANGED THIS TEMPORARILY
- 
+  public position: p5.Vector;
+  public isVisible: boolean;
 
-
-  constructor( _position: p5.Vector, _isVisible: boolean) {
-    
-    this.position = _position
-    this.isVisible = _isVisible
-    
+  constructor( position: p5.Vector, isVisible: boolean) {
+    this.position = position
+    this.isVisible = isVisible
   }
 
-// abstract ?
   abstract draw():void; 
 }

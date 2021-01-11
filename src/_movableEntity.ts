@@ -1,6 +1,6 @@
 abstract class MovableEntity extends DrawableEntity {
-  velocity: p5.Vector;
-  applyGravity: number;
+  public velocity: p5.Vector;
+  public applyGravity: number;
 
   constructor(
     position: p5.Vector,

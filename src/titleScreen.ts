@@ -55,6 +55,11 @@ class TitleScreen {
       this.fade += this.fadeAmount;
     
   }
+
+  update() {
+
+  }
+  
   private drawBackstoryInIntervals() {
     textSize(13);
     textAlign(LEFT);
