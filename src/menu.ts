@@ -1,5 +1,7 @@
 type MenuState = "pause" | "main" | "gameOver" | "credits" | "title" | "close" | "restart"
 class Menu implements Imenu {
+
+  public menuAudio: MenuAudio;
   protected gameOver: GameOver;
   protected pauseScreen: PauseScreen;
   protected titleScreen: TitleScreen;
@@ -7,6 +9,7 @@ class Menu implements Imenu {
   private textSize1: number
   private textSize2: number
   private textSize3: number
+  public audioImg: p5.Image;
 
   //for moving background (same code as background-class but doubled to get the parallax effect)
   private scrollingImage1: p5.Image;
@@ -26,6 +29,7 @@ class Menu implements Imenu {
     this.textSize1 = 20;
     this.textSize2 = 20;
     this.textSize3 = 20;
+    this.audioImg = unmute;
 
     //imgs for backgrounds 
     this.scrollingImage1 = loadImage("./assets/imgs/mainSkylight.png");
@@ -42,9 +46,9 @@ class Menu implements Imenu {
   }
 
   public update() {
-
     //handles the users click and changes the text size on hover
     if (this.menuState === "main") {
+      this.menuAudio.update();
       if (mouseX < 500 && mouseX > 300) {
         if (mouseY < 400 && mouseY > 377) {
           this.textSize1 = 30;
@@ -123,30 +127,31 @@ class Menu implements Imenu {
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Cyberjump", 400, 200);
-
+      
       stroke(0);
       textFont(pixelFont);
       textSize(this.textSize1);
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Start game", 400, 400);
-
+      
       textFont(pixelFont);
       textSize(this.textSize2);
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Credits", 400, 430);
-
+      
       textFont(pixelFont);
       textSize(this.textSize3);
       fill(128, 0, 0);
       textAlign(CENTER);
       text("Exit", 400, 460);
       noStroke();
-
+      this.menuAudio.draw();
     } 
     else if (this.menuState === "pause") {
       this.pauseScreen.draw();
+      this.pauseScreen.update();
       // Continue game from pause logic
       if (keyIsPressed) {
         if (keyCode === 13) {

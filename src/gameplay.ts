@@ -12,9 +12,11 @@ class GamePlay {
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: boolean;
 
+
   // public gameAudio: GameAudio;
 
   private projectileArray: Projectile[];
+
 
   private background: Background;
   private droneTimer: number;
@@ -65,6 +67,8 @@ class GamePlay {
     this.lives = new Lives();
     this.isGameOver = false;
     this.graceModeActive = false;
+
+
   }
 
   public update() {
@@ -72,10 +76,15 @@ class GamePlay {
     this.score.update();
     this.character.update();
 
+   
+
+
+
     if (keyIsPressed) {
       if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
         game.gamePlay.createProjectile();
         shootSound.play();
+        shootSound.setVolume(0.1);
       }
     }
 
@@ -385,6 +394,8 @@ class GamePlay {
         ) {
           this.powerupArray.splice(i, 1);
           this.lives.life++;
+          heart.play();
+          heart.setVolume(.1);
         }
       }
     }
@@ -404,7 +415,8 @@ class GamePlay {
         ) {
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
-
+          killSound.play();
+          killSound.setVolume(0.1);
           this.obstacleArray[j].isShot = true;
         }
       }
