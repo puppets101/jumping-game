@@ -388,6 +388,8 @@ class GamePlay {
         ) {
           this.powerupArray.splice(i, 1);
           this.lives.life++;
+          heart.play();
+          heart.setVolume(.1);
         }
       }
     }

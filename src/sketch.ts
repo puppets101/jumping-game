@@ -9,6 +9,8 @@ let backgroundSound: p5.SoundFile;
 let fatality: p5.SoundFile;
 let title: p5.SoundFile;
 let killSound: p5.SoundFile;
+let heart: p5.SoundFile;
+
 let unmute: p5.Image;
 let mute: p5.Image;
 
@@ -52,6 +54,7 @@ function preload() {
   fatality = loadSound("./assets/sound/fatality.wav");
   title = loadSound("./assets/sound/title.wav");
   killSound = loadSound("./assets/sound/kill.wav");
+  heart = loadSound("./assets/sound/heart.wav");
 
   unmute = loadImage("./assets/imgs/unmute.png");
   mute = loadImage("./assets/imgs/mute.png");
