@@ -12,7 +12,6 @@ class GamePlay {
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: Boolean;
 
-
   public projectileArray: Projectile[];
 
   private background: Background;
@@ -23,8 +22,6 @@ class GamePlay {
   private difficultyTimer: number;
   public isGameOver = false;
   private scrollSpeed;
-
- 
 
   constructor() {
     this.score = new Score();
@@ -97,12 +94,11 @@ class GamePlay {
     this.updatePowerupLife();
     this.projectileCollisions();
     this.superProjectileCollisions();
-    this.superProjectileCollisionsLow()
+    this.superProjectileCollisionsLow();
     this.checkCollisions();
     this.superWeaponCheck();
     this.checkEnemyDeath();
     this.updateDifficulty();
-   
 
     if (this.character.isAlive === false) {
       this.isGameOver = true;
@@ -112,22 +108,21 @@ class GamePlay {
   private updateDifficulty() {
     this.difficultyTimer -= deltaTime;
     if (this.difficultyTimer < 0) {
-
       // Increases spawn interval for objects
       this.droneInterval *= 0.95;
       this.prototypeInterval *= 0.95;
       this.platformInterval *= 0.95;
 
       // Increases scrollspeed for current objects
-      this.background.scrollSpeed += 0.25
+      this.background.scrollSpeed += 0.25;
       for (let i = 0; i < this.platformArray.length; i++) {
-        this.platformArray[i].scrollSpeed += 0.25
+        this.platformArray[i].scrollSpeed += 0.25;
       }
       for (let i = 0; i < this.obstacleArray.length; i++) {
-        this.obstacleArray[i].scrollSpeed += 0.25
+        this.obstacleArray[i].scrollSpeed += 0.25;
       }
       for (let i = 0; i < this.powerupArray.length; i++) {
-        this.powerupArray[i].scrollSpeed += 0.25
+        this.powerupArray[i].scrollSpeed += 0.25;
       }
 
       // Increases scrollspeed for future objects
@@ -143,7 +138,11 @@ class GamePlay {
     // Returns a number < 200 and >= 0
     const randomPosition = Math.random() * 200;
 
-    let newPlatform = new Platform(randomHeight, randomPosition, this.scrollSpeed);
+    let newPlatform = new Platform(
+      randomHeight,
+      randomPosition,
+      this.scrollSpeed
+    );
     this.platformArray.push(newPlatform);
   }
 
@@ -302,18 +301,20 @@ class GamePlay {
           }
         }
 
-        // Character collision with object
-
+        // Character collision with obstacle
         if (
-          this.character.position.x + this.character.size.x > this.obstacleArray[i].position.x
-          && this.character.position.x < this.obstacleArray[i].position.x + this.obstacleArray[i].width
-          && this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
-            this.character.position.y + this.character.size.y
+          this.character.position.x + this.character.size.x >
+            this.obstacleArray[i].position.x &&
+          this.character.position.x <
+            this.obstacleArray[i].position.x + this.obstacleArray[i].width &&
+          this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
+            this.character.position.y + this.character.size.y &&
+          this.obstacleArray[i].isShot === false
         ) {
           if (this.graceModeActive) {
             return true;
           }
-          // Create func to lose a life and add two seconds of grace mode
+          // Lose a life and add one seconds of grace mode when hit an obstacle
           this.lives.countLives();
           this.graceModeActive = true;
           setTimeout(() => {
@@ -423,11 +424,13 @@ class GamePlay {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
           // superProjectile
-          this.projectileArray[i].superPosition.x > this.obstacleArray[j].position.x && 
-           this.projectileArray[i].superPosition.x < this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
-            this.obstacleArray[j].position.x  &&
+          this.projectileArray[i].superPosition.x >
+            this.obstacleArray[j].position.x &&
+          this.projectileArray[i].superPosition.x <
+            this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
+          this.obstacleArray[j].position.x &&
           this.projectileArray[i].superPosition.y >
-            this.obstacleArray[j].position.y  &&
+            this.obstacleArray[j].position.y &&
           this.projectileArray[i].superPosition.y <
             this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
