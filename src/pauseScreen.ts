@@ -5,7 +5,8 @@ class PauseScreen {
     private menu: Imenu;
     private fade: number;
     private fadeAmount: number;
-
+    private audioImg: p5.Image;
+    private audioSwitch: boolean;
 
     constructor(menu: Imenu) {
         this.menuOptions = "";
@@ -13,6 +14,8 @@ class PauseScreen {
         this.menu = menu;
         this.fadeAmount = 1;
         this.fade = 40;
+        this.audioImg = loadImage("./assets/imgs/audio.jpeg");
+        this.audioSwitch = false;
     }
 
     draw() {

@@ -1,25 +1,25 @@
 class GameAudio extends DrawableEntity {
-  private backgroundSwitch: boolean;
-  private shootSwitch: boolean;
+  private backgroundSwitch: boolean
   private fatalitySwitch: boolean;
   private titleSwitch: boolean;
   constructor() {
-    super(createVector(), true);
+    super(createVector(250, 250), true);
     this.backgroundSwitch = false;
-    this.shootSwitch = false;
     this.fatalitySwitch = false;
     this.titleSwitch = false;
   }
   
-  
   public draw(){
     this.toggleAudio();
+
+
 }
+
   public toggleAudio() {
     // main menu sound
     if(game.menu.menuState === "main" && this.titleSwitch === false){
       title.loop();
-      title.setVolume(.1);
+      title.setVolume(.01);
       this.titleSwitch = true;
     }
     // if game running turn of main menu sound
@@ -41,13 +41,12 @@ class GameAudio extends DrawableEntity {
     if(game.menu.menuState === "gameOver") {
       backgroundSound.stop()
       this.backgroundSwitch = false;
-      this.shootSwitch = false;
     }
 
     // fatality audio
     if(game.menu.menuState === "gameOver" && this.fatalitySwitch === false){
       fatality.play()
-      fatality.setVolume(.5);
+      fatality.setVolume(.4);
       this.fatalitySwitch = true;
     }
 

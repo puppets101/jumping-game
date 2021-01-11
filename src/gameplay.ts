@@ -12,8 +12,6 @@ class GamePlay {
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: Boolean;
 
-  // public gameAudio: GameAudio;
-
 
   public projectileArray: Projectile[];
 
@@ -25,6 +23,7 @@ class GamePlay {
   private difficultyTimer: number;
   public isGameOver = false;
   private scrollSpeed;
+
  
 
   constructor() {
@@ -66,12 +65,37 @@ class GamePlay {
 
     this.lives = new Lives();
     this.graceModeActive = false;
+
+
   }
 
   public update() {
     this.background.update();
     this.score.update();
     this.character.update();
+
+    if(!this.audioSwitch) {
+      if(mouseX > 750 && mouseY > 535) {
+        if(mouseX > 775 && mouseY > 560){
+          if(mouseIsPressed) {
+            backgroundSound.pause();
+            this.audioSwitch = true;
+          }
+        }
+      }
+    } else if (this.audioSwitch) {
+      if(mouseX > 750 && mouseY > 535) {
+        if(mouseX > 775 && mouseY > 560){
+          if(mouseIsPressed) {
+            backgroundSound.play();
+            this.audioSwitch = false;
+          }
+        }
+      }
+    }
+   
+
+
 
     if (keyIsPressed) {
       if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
@@ -454,6 +478,8 @@ class GamePlay {
 
   public draw() {
     this.background.draw();
+    // audio Img
+    image(this.audioImg, 775, 575, 25, 25)
 
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
