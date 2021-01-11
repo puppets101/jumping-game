@@ -1,6 +1,5 @@
 type MenuState = "pause" | "main" | "gameOver" | "credits" | "title" | "close" | "restart"
 class Menu implements Imenu {
-  protected menuAudio: MenuAudio;
   protected gameOver: GameOver;
   protected pauseScreen: PauseScreen;
   protected titleScreen: TitleScreen;
@@ -20,7 +19,6 @@ class Menu implements Imenu {
   private scrollSpeed2: number;
 
   constructor(menuState: MenuState) {
-    this.menuAudio = new MenuAudio();
     this.gameOver = new GameOver(this);
     this.pauseScreen = new PauseScreen(this);
     this.titleScreen = new TitleScreen(this);
