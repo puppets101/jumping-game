@@ -6,7 +6,7 @@ class PauseScreen {
     private fade: number;
     private fadeAmount: number;
     private audioImg: p5.Image;
-    private audioSwitch: boolean;
+    public audioSwitch: boolean;
 
     constructor(menu: Imenu) {
         this.menuOptions = "";
@@ -14,14 +14,16 @@ class PauseScreen {
         this.menu = menu;
         this.fadeAmount = 1;
         this.fade = 40;
-        this.audioImg = loadImage("./assets/imgs/audio.jpeg");
         this.audioSwitch = false;
+        this.audioImg = loadImage("./assets/imgs/unmute.png");
     }
 
+    update() {
+      game.gameAudio.update();
+    }
+    
     draw() {
-        // console.log(keyCode);
-
-        // this.continueGame();
+      game.gameAudio.draw();
 
         background('rgba(0,0,0,0.5)');
         textFont(outrunFont);

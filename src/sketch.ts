@@ -8,7 +8,6 @@ let shootSound: p5.SoundFile;
 let backgroundSound: p5.SoundFile;
 let fatality: p5.SoundFile;
 let title: p5.SoundFile;
-let audioImg: p5.Image;
 
 let prototypeAsset: p5.Image;
 let prototypeDeathAsset: p5.Image;

@@ -74,25 +74,6 @@ class GamePlay {
     this.score.update();
     this.character.update();
 
-    if(!this.audioSwitch) {
-      if(mouseX > 750 && mouseY > 535) {
-        if(mouseX > 775 && mouseY > 560){
-          if(mouseIsPressed) {
-            backgroundSound.pause();
-            this.audioSwitch = true;
-          }
-        }
-      }
-    } else if (this.audioSwitch) {
-      if(mouseX > 750 && mouseY > 535) {
-        if(mouseX > 775 && mouseY > 560){
-          if(mouseIsPressed) {
-            backgroundSound.play();
-            this.audioSwitch = false;
-          }
-        }
-      }
-    }
    
 
 
@@ -478,8 +459,6 @@ class GamePlay {
 
   public draw() {
     this.background.draw();
-    // audio Img
-    image(this.audioImg, 775, 575, 25, 25)
 
     // Draws all obstacles
     for (let i = 0; i < this.obstacleArray.length; i++) {
