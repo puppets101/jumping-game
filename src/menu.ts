@@ -25,6 +25,7 @@ class Menu implements Imenu {
     this.gameOver = new GameOver(this);
     this.pauseScreen = new PauseScreen(this);
     this.titleScreen = new TitleScreen(this);
+    this.menuAudio = new MenuAudio();
     this.menuState = menuState;
     this.textSize1 = 20;
     this.textSize2 = 20;
