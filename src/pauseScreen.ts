@@ -15,7 +15,7 @@ class PauseScreen {
         this.fadeAmount = 1;
         this.fade = 40;
         this.audioSwitch = false;
-        this.audioImg = loadImage("./assets/imgs/unmute.png");
+        this.audioImg = unmute;
     }
 
     update() {

@@ -1,6 +1,6 @@
 type MenuState = "pause" | "main" | "gameOver" | "credits" | "title" | "close" | "restart"
 class Menu implements Imenu {
-  protected menuAudio: MenuAudio;
+  public menuAudio: MenuAudio;
   protected gameOver: GameOver;
   protected pauseScreen: PauseScreen;
   protected titleScreen: TitleScreen;
@@ -8,7 +8,7 @@ class Menu implements Imenu {
   private textSize1: number
   private textSize2: number
   private textSize3: number
-  private audioImg: p5.Image;
+  public audioImg: p5.Image;
 
   //for moving background (same code as background-class but doubled to get the parallax effect)
   private scrollingImage1: p5.Image;
@@ -29,7 +29,7 @@ class Menu implements Imenu {
     this.textSize1 = 20;
     this.textSize2 = 20;
     this.textSize3 = 20;
-    this.audioImg = loadImage("./assets/imgs/unmute.png");
+    this.audioImg = unmute;
 
     //imgs for backgrounds 
     this.scrollingImage1 = loadImage("./assets/imgs/mainSkylight.png");
@@ -48,6 +48,7 @@ class Menu implements Imenu {
   public update() {
     //handles the users click and changes the text size on hover
     if (this.menuState === "main") {
+      this.menuAudio.update();
       if (mouseX < 500 && mouseX > 300) {
         if (mouseY < 400 && mouseY > 377) {
           this.textSize1 = 30;
@@ -146,9 +147,7 @@ class Menu implements Imenu {
       textAlign(CENTER);
       text("Exit", 400, 460);
       noStroke();
-      
-      console.log(this.menuState)
-      image(this.audioImg, 725, 525, 50, 50)
+      this.menuAudio.draw();
     } 
     else if (this.menuState === "pause") {
       this.pauseScreen.draw();
