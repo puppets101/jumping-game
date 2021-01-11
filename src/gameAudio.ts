@@ -5,9 +5,8 @@ class GameAudio extends DrawableEntity {
   private audioImg: p5.Image;
   public audioSwitch: boolean;
   private menu: Imenu;
-    
-  constructor(menu: Imenu) {
 
+  constructor(menu: Imenu) {
     super(createVector(), true);
     this.backgroundSwitch = false;
     this.fatalitySwitch = false;
@@ -21,15 +20,9 @@ class GameAudio extends DrawableEntity {
   }
 
   public draw(){
-    image(this.audioImg, 725, 525, 50, 50)
+    image(this.audioImg, 725, 525, 50, 50);
     this.audio();
 }
-
-
-public update() {
-
-}
-
 
   toggleGameSound(){
         // pause audio
@@ -68,12 +61,15 @@ public update() {
       title.setVolume(.01);
       this.titleSwitch = false;
     }
-    // if game running turn off main menu sound
+    // if game running turn of main menu sound
     if(this.menu.menuState === "close") {
       this.titleSwitch = false;
       title.stop()
     }
 
+    if(this.menu.menuState === "pause"){
+      
+    }
     // if game running start game sound
     if (this.menu.menuState === "close" && this.backgroundSwitch === false){
       this.backgroundSwitch = true;
