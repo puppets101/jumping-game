@@ -10,6 +10,11 @@ class Lives extends DrawableEntity {
 
   public countLives() {
     this.life--;
+    if(this.life !== 0){
+      oh.play();
+      oh.setVolume(.1);
+    }
+    
     if (this.life === 0) {
       console.log("game over");
       game.gamePlay.character.isAlive = false;
