@@ -11,12 +11,7 @@ class GamePlay {
   private lives: Lives;
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: boolean;
-
-
-  // public gameAudio: GameAudio;
-
   private projectileArray: Projectile[];
-
 
   private background: Background;
   private droneTimer: number;
@@ -39,8 +34,6 @@ class GamePlay {
       0,
       this.scrollSpeed
     );
-
-    // this.gameAudio = new GameAudio();
 
     this.obstacleArray = [];
     this.platformArray = [];
@@ -67,18 +60,12 @@ class GamePlay {
     this.lives = new Lives();
     this.isGameOver = false;
     this.graceModeActive = false;
-
-
   }
 
   public update() {
     this.background.update();
     this.score.update();
     this.character.update();
-
-   
-
-
 
     if (keyIsPressed) {
       if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
@@ -97,14 +84,14 @@ class GamePlay {
     this.updateProjectiles();
     this.updatePlatforms();
     this.updatePowerupLife();
-    this.projectileCollisions();
-    this.superProjectileCollisions();
-    this.superProjectileCollisionsLow();
     this.checkCollisions();
     this.superWeaponCheck();
     this.checkEnemyDeath();
     this.updateDifficulty();
+    this.checkCharacterDeath();
+  }
 
+  private checkCharacterDeath() {
     if (this.character.isAlive === false) {
       this.isGameOver = true;
     }
@@ -283,30 +270,47 @@ class GamePlay {
   }
 
   private checkCollisions() {
+    this.checkObstacleCollisionsWPlatforms();
+    this.checkCharacterCollisionsWObstacle();
+    this.checkCharacterCollisionsWPlatforms();
+    this.checkCharacterCollisionsWPowerups();
+    this.checkPowerupCollisionsWPlatforms();
+    this.checkProjectileCollisions();
+    this.checkSuperProjectileCollisions();
+    this.checkSuperProjectileCollisionsLow();
+  }
+
+  private checkObstacleCollisionsWPlatforms() {
     // Compares the drone enemy positions to the platform positions
     for (let i = 0; i < this.obstacleArray.length; i++) {
       for (let p = 0; p < this.platformArray.length; p++) {
         if (this.obstacleArray[i].image === droneAsset) {
           if (
+            // check if obstacle lands on one of the platforms
             (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
               this.platformArray[p].position.y &&
               this.obstacleArray[i].position.x +
-                this.obstacleArray[i].width * 0.5 >
-                this.platformArray[p].position.x &&
+              this.obstacleArray[i].width * 0.5 >
+              this.platformArray[p].position.x &&
               this.obstacleArray[i].position.x +
-                this.obstacleArray[i].width * 0.5 <
-                this.platformArray[p].position.x +
-                  this.platformArray[p].width) || // check if obstacle lands on one of the platforms
-            this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
+              this.obstacleArray[i].width * 0.5 <
+              this.platformArray[p].position.x +
+              this.platformArray[p].width) ||
+              // Check if drone enemy lands on the ground
+              this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
               570
-          ) {
-            // Check if drone enemy lands on the ground
+          ){
             this.obstacleArray[i].velocity.y = 0;
             this.obstacleArray[i].velocity.x = 3;
           }
         }
-
-        // Character collision with obstacle
+      }
+    }
+  }
+  
+  private checkCharacterCollisionsWObstacle(): true | void {
+    // Character collision with obstacle
+    for (let i = 0; i < this.obstacleArray.length; i++) {
         if (
           this.character.position.x + this.character.size.x >
             this.obstacleArray[i].position.x &&
@@ -315,7 +319,7 @@ class GamePlay {
           this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
             this.character.position.y + this.character.size.y &&
           this.obstacleArray[i].isShot === false
-        ) {
+        ){
           if (this.graceModeActive) {
             return true;
           }
@@ -330,6 +334,7 @@ class GamePlay {
       }
     }
 
+  private checkCharacterCollisionsWPlatforms() {
     // Character collision with platform
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
@@ -360,7 +365,31 @@ class GamePlay {
         this.character.applyGravity = 0.4;
       }
     }
+  }
 
+  private checkCharacterCollisionsWPowerups() {
+    // Powerup collision with platform or ground
+    if (this.powerupArray.length > 0) {
+      for (let i = 0; i < this.powerupArray.length; i++) {
+        // Character collision with powerup
+        if (
+          this.powerupArray[i].position.x <
+            this.character.position.x + this.character.size.x &&
+          this.powerupArray[i].position.y <=
+            this.character.position.y + this.character.size.y &&
+          this.powerupArray[i].position.y + this.powerupArray[i].height >=
+            this.character.position.y
+        ) {
+          this.powerupArray.splice(i, 1);
+          this.lives.life++;
+          heart.play();
+          heart.setVolume(.1);
+        }
+      }
+    }
+  }
+
+  private checkPowerupCollisionsWPlatforms() {
     // Powerup collision with platform or ground
     if (this.powerupArray.length > 0) {
       for (let i = 0; i < this.powerupArray.length; i++) {
@@ -382,50 +411,36 @@ class GamePlay {
             this.powerupArray[i].velocity.x = 3;
           }
         }
-
-        // Character collision with powerup
-        if (
-          this.powerupArray[i].position.x <
-            this.character.position.x + this.character.size.x &&
-          this.powerupArray[i].position.y <=
-            this.character.position.y + this.character.size.y &&
-          this.powerupArray[i].position.y + this.powerupArray[i].height >=
-            this.character.position.y
-        ) {
-          this.powerupArray.splice(i, 1);
-          this.lives.life++;
-          heart.play();
-          heart.setVolume(.1);
-        }
       }
     }
   }
 
-   public projectileCollisions() {
-    for (let j = 0; j < this.obstacleArray.length; j++) {
-      for (let i = 0; i < this.projectileArray.length; i++) {
-        if(
+  private checkProjectileCollisions() {
+    // projectile collision with object
+   for (let j = 0; j < this.obstacleArray.length; j++) {
+     for (let i = 0; i < this.projectileArray.length; i++) {
+       if (
           this.projectileArray[i].position.x + this.projectileArray[i].regularSize.x >=
           this.obstacleArray[j].position.x &&
           this.projectileArray[i].position.x + this.projectileArray[i].regularSize.x <=
           this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
-        this.projectileArray[i].position.y + this.projectileArray[i].regularSize.y >=
+          this.projectileArray[i].position.y + this.projectileArray[i].regularSize.y >=
           this.obstacleArray[j].position.y &&
-        this.projectileArray[i].position.y <=
+          this.projectileArray[i].position.y <=
           this.obstacleArray[j].position.y + this.obstacleArray[j].height
-          ){
-          this.projectileArray.splice(i, 1);
-          this.score.score += 10;
-          killSound.play();
-          killSound.setVolume(0.1);
-          this.obstacleArray[j].isShot = true;
+         ){
+         this.projectileArray.splice(i, 1);
+         this.score.score += 10;
+         killSound.play();
+         killSound.setVolume(0.1);
+         this.obstacleArray[j].isShot = true;
         }
       }
     }
   }
 
-  // superProjectile collision with object
-  public superProjectileCollisions() {
+  private checkSuperProjectileCollisions() {
+    // superProjectile collision with object
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
@@ -449,8 +464,8 @@ class GamePlay {
     }
   }
 
-  // superProjectile collision with object
-  public superProjectileCollisionsLow() {
+  private checkSuperProjectileCollisionsLow() {
+    // superProjectile collision with object
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
@@ -473,26 +488,6 @@ class GamePlay {
       }
     }
   }
-  /* public superProjectileCollisionsLow() {
-    for (let j = 0; j < this.obstacleArray.length; j++) {
-      for (let i = 0; i < this.projectileArray.length; i++) {
-        if (
-          // superProjectile
-          this.projectileArray[i].superPositionLow.x >=
-            this.obstacleArray[j].position.x &&
-          this.projectileArray[i].superPositionLow.y >
-            this.obstacleArray[j].position.y &&
-          this.projectileArray[i].superPositionLow.y <
-            this.obstacleArray[j].position.y + this.obstacleArray[j].height
-        ) {
-          this.projectileArray.splice(i, 1);
-
-          this.score.score += 10;
-          this.obstacleArray[j].isShot = true;
-        }
-      }
-    }
-  } */
 
   public draw() {
     this.background.draw();
