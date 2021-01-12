@@ -22,9 +22,9 @@ class Menu implements Imenu {
   private scrollSpeed2: number;
 
   constructor(menuState: MenuState) {
-    this.gameOver = new GameOver(this);
-    this.pauseScreen = new PauseScreen(this);
-    this.titleScreen = new TitleScreen(this);
+    this.gameOver = new GameOver();
+    this.pauseScreen = new PauseScreen();
+    this.titleScreen = new TitleScreen();
     this.menuAudio = new MenuAudio();
     this.menuState = menuState;
     this.textSize1 = 20;
@@ -59,6 +59,18 @@ class Menu implements Imenu {
 
     if(this.menuState === "gameOver"){
       backgroundSound.stop();
+    }
+
+    if(this.menuState === "restart"){
+      backgroundSound.loop();
+    }
+
+    if(this.menuState === "credits") {
+      title.stop();
+    }
+
+    if(this.menuState === "title"){
+      title.stop();
     }
   }
 
@@ -177,6 +189,7 @@ class Menu implements Imenu {
       }
     }
     else if (this.menuState === "credits") {
+      this.changeMenuState("credits");
       // layout for credits
       background('black');
       textFont(outrunFont);
@@ -215,7 +228,7 @@ class Menu implements Imenu {
       // return to main from credits
       if (keyIsPressed) {
         if (keyCode === 27) {
-          this.menuState = "main";
+          this.changeMenuState("main");
         }
       }
     } 
@@ -226,6 +239,7 @@ class Menu implements Imenu {
     } 
     else if (this.menuState === "title") {
       // Logic for the title menu 
+      this.changeMenuState("title");
 
       this.titleScreen.draw();
       //go to main menu from title menu

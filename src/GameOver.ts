@@ -1,13 +1,12 @@
 class GameOver {
   private backgroundColor: string;
-  private menu: Imenu;
   private textSize1: number;
   private textSize2: number;
 
 
-  constructor(menu: Imenu) {
+  constructor() {
     this.backgroundColor = "black";
-    this.menu = menu;
+
     this.textSize1 = 20;
     this.textSize2 = 20;
 

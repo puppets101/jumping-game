@@ -38,9 +38,9 @@ class GameAudio extends DrawableEntity {
     backgroundSound.setVolume(0.01)
     shootSound.setVolume(0.15);
     heart.setVolume(0.1);
-    oh.setVolume(0.1);
+    oh.setVolume(0.05);
     killSound.setVolume(0.1);
-    title.setVolume(0.1);
+    title.setVolume(0.05);
     fatality.setVolume(0.1);
   }
 

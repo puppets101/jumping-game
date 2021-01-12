@@ -1,21 +1,11 @@
 // interface ?
 class PauseScreen {
-    protected menuOptions: string;
-    protected bgColor: string;
-    private menu: Imenu;
     private fade: number;
     private fadeAmount: number;
-    private audioImg: p5.Image;
-    public audioSwitch: boolean;
 
-    constructor(menu: Imenu) {
-        this.menuOptions = "";
-        this.bgColor = "";
-        this.menu = menu;
+    constructor() {
         this.fadeAmount = 1;
         this.fade = 40;
-        this.audioSwitch = false;
-        this.audioImg = unmute;
     }
 
     update() {
