@@ -2,10 +2,14 @@ class Projectile extends MovableEntity {
   private color: string;
   public superPositionLow: p5.Vector;
   public superPosition: p5.Vector;
+  public regularSize: p5.Vector;
+  public superSize: p5.Vector
 
   constructor() {
     super(createVector(), true, createVector(), 0);
     this.color = "lightBlue";
+    this.regularSize = createVector(20, 3)
+    this.superSize = createVector(10, 3)
     this.position = createVector(
       game.gamePlay.character.position.x,
       game.gamePlay.character.position.y + 50
@@ -49,13 +53,13 @@ class Projectile extends MovableEntity {
   // Draw superProjectile on screen if life >= 4
   private superProjectile() {
     if (game.gamePlay.isSuperWeaponAvalible === true) {
-      rect(this.superPosition.x, this.superPosition.y - 5, 10, 3, 5);
+      rect(this.superPosition.x, this.superPosition.y - 5, this.superSize.x, this.superSize.y, 5);
       rect(this.superPositionLow.x, this.superPositionLow.y - 5, 10, 3, 5);
     }
   }
   public draw() {
     fill(this.color);
-    rect(this.position.x, this.position.y, 20, 3, 5);
+    rect(this.position.x, this.position.y, this.regularSize.x, this.regularSize.y, 5);
     this.superProjectile();
   }
 }
