@@ -1,7 +1,7 @@
 type MenuState = "pause" | "main" | "gameOver" | "credits" | "title" | "close" | "restart"
 class Menu implements Imenu {
 
-  public menuAudio: MenuAudio;
+  // public menuAudio: MenuAudio;
   protected gameOver: GameOver;
   protected pauseScreen: PauseScreen;
   protected titleScreen: TitleScreen;
@@ -25,7 +25,7 @@ class Menu implements Imenu {
     this.gameOver = new GameOver();
     this.pauseScreen = new PauseScreen();
     this.titleScreen = new TitleScreen();
-    this.menuAudio = new MenuAudio();
+    // this.menuAudio = new MenuAudio();
     this.menuState = menuState;
     this.textSize1 = 20;
     this.textSize2 = 20;
@@ -77,7 +77,8 @@ class Menu implements Imenu {
   public update() {
     //handles the users click and changes the text size on hover
     if (this.menuState === "main") {
-      this.menuAudio.update();
+      game.gameAudio.update();
+      //this.menuAudio.update();
       if (mouseX < 500 && mouseX > 300) {
         if (mouseY < 400 && mouseY > 377) {
           this.textSize1 = 30;
@@ -176,7 +177,8 @@ class Menu implements Imenu {
       textAlign(CENTER);
       text("Exit", 400, 460);
       noStroke();
-      this.menuAudio.draw();
+      game.gameAudio.draw();
+      // this.menuAudio.draw();
     } 
     else if (this.menuState === "pause") {
       this.pauseScreen.draw();
