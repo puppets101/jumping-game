@@ -1,11 +1,9 @@
 class Background extends MovableEntity {
-
-  //variables 
+  //variables
   private scrollingImage: p5.Image;
   private firstImg: number;
   private secondImg: number;
   public scrollSpeed: number;
-
 
   constructor(scrollSpeed: number) {
     super(createVector(0, 0), true, createVector(3, 0), 0);
@@ -15,14 +13,14 @@ class Background extends MovableEntity {
     this.firstImg = 0;
     //instance 2 of picture
     this.secondImg = 2166;
-    //scrollspeed, connect to the velocity of game if we want it to match up! 
-    this.scrollSpeed = scrollSpeed; 
+    //scrollspeed, connect to the velocity of game if we want it to match up!
+    this.scrollSpeed = scrollSpeed;
   }
 
-  update(){
+  update() {
     //move the images to the left by change the value of the picture instances
-    this.firstImg -= (this.velocity.x + this.scrollSpeed);
-    this.secondImg -= (this.velocity.x + this.scrollSpeed);
+    this.firstImg -= this.velocity.x + this.scrollSpeed;
+    this.secondImg -= this.velocity.x + this.scrollSpeed;
 
     //reset position
     if (this.firstImg < -width - 1366) {
@@ -31,16 +29,13 @@ class Background extends MovableEntity {
     if (this.secondImg < -width - 1366) {
       this.secondImg = width + 1366;
     }
-  };
+  }
 
   draw() {
-
     //create two instacnes of the image
     image(this.scrollingImage, this.firstImg, 0, 2166, height);
     image(this.scrollingImage, this.secondImg, 0, 2166, height);
-
   }
-
 }
 
 //Thanks for the art /u/Ansimuz
