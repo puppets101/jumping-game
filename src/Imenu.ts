@@ -1,3 +1,3 @@
 interface Imenu {
-     menuState: MenuState;
+     changeMenuState: (menuState: MenuState) => void
 }

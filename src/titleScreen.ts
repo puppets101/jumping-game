@@ -1,15 +1,13 @@
 class TitleScreen {
   private backstory: string[];
   private backstoryTimer: number;
-  private menu: Imenu;
   private fade: number;
   private fadeAmount: number;
   private titleScreen: p5.Image;
 
-  constructor(menu: Imenu) {
+  constructor() {
     this.backstory = ["Neo-Tokyo, Earth, 2076.", "The latest Intergalactic War and subsequent waves of Alien Invasion have left humanity at the verge of extinction, its cities deserted and crawling with Alien life forms on the lookout for any remaining signs of human activity.", "Your only chance of survival is to keep running, avoiding all contact while shooting as many Aliens as you can.", "Do you have what it takes to stay alive?"];
     this.backstoryTimer = 0;
-    this.menu = menu;
 
     //fade in and out for the press any key text
     this.fadeAmount = 1;
@@ -24,7 +22,7 @@ class TitleScreen {
   draw() {
 
     if (keyIsPressed === true) {
-      this.menu.menuState = "main";
+     game.menu.changeMenuState("main");
     }
     
     image(this.titleScreen, 0, 0, width, height);

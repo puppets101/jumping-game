@@ -1,13 +1,12 @@
 class GameOver {
   private backgroundColor: string;
-  private menu: Imenu;
   private textSize1: number;
   private textSize2: number;
 
 
-  constructor(menu: Imenu) {
+  constructor() {
     this.backgroundColor = "black";
-    this.menu = menu;
+
     this.textSize1 = 20;
     this.textSize2 = 20;
 
@@ -17,20 +16,20 @@ class GameOver {
 
 
     // handles the users click
-    if (this.menu.menuState === "gameOver") {
+    if (game.menu.menuState === "gameOver") {
       if (mouseY < 477 && mouseY > 458) {
         if (mouseX < 325 && mouseX > 205) {
           this.textSize1 = 30;
           if (mouseIsPressed) {
             console.log("Game Restarted");
-            this.menu.menuState = "restart"
+            game.menu.changeMenuState("restart")
           }
         }
         else if (mouseX < 575 && mouseX > 493) {
           this.textSize2 = 30;
           if (mouseIsPressed) {
             console.log("Go to main");
-            this.menu.menuState = "main";
+            game.menu.changeMenuState("main")
           }
         } else {
           this.textSize1 = 20;

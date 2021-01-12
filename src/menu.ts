@@ -22,9 +22,9 @@ class Menu implements Imenu {
   private scrollSpeed2: number;
 
   constructor(menuState: MenuState) {
-    this.gameOver = new GameOver(this);
-    this.pauseScreen = new PauseScreen(this);
-    this.titleScreen = new TitleScreen(this);
+    this.gameOver = new GameOver();
+    this.pauseScreen = new PauseScreen();
+    this.titleScreen = new TitleScreen();
     this.menuAudio = new MenuAudio();
     this.menuState = menuState;
     this.textSize1 = 20;
@@ -45,6 +45,34 @@ class Menu implements Imenu {
     this.scrollSpeed1 = 1;
     this.scrollSpeed2 = 3;
   }
+  public changeMenuState (menuState: MenuState){
+    this.menuState = menuState;
+
+    if(this.menuState === "main") {
+      title.loop()
+      backgroundSound.stop();
+    }
+    if(this.menuState === "close"){
+      backgroundSound.loop();
+      title.stop();
+    }
+
+    if(this.menuState === "gameOver"){
+      backgroundSound.stop();
+    }
+
+    if(this.menuState === "restart"){
+      backgroundSound.loop();
+    }
+
+    if(this.menuState === "credits") {
+      title.stop();
+    }
+
+    if(this.menuState === "title"){
+      title.stop();
+    }
+  }
 
   public update() {
     //handles the users click and changes the text size on hover
@@ -55,7 +83,7 @@ class Menu implements Imenu {
           this.textSize1 = 30;
           if (mouseIsPressed) {
             console.log("Game started");
-            this.menuState = "close"
+            this.changeMenuState("close");
           }
         } else if (mouseY < 425 && mouseY > 410) {
           this.textSize2 = 30;
@@ -161,6 +189,7 @@ class Menu implements Imenu {
       }
     }
     else if (this.menuState === "credits") {
+      this.changeMenuState("credits");
       // layout for credits
       background('black');
       textFont(outrunFont);
@@ -199,7 +228,7 @@ class Menu implements Imenu {
       // return to main from credits
       if (keyIsPressed) {
         if (keyCode === 27) {
-          this.menuState = "main";
+          this.changeMenuState("main");
         }
       }
     } 
@@ -210,6 +239,7 @@ class Menu implements Imenu {
     } 
     else if (this.menuState === "title") {
       // Logic for the title menu 
+      this.changeMenuState("title");
 
       this.titleScreen.draw();
       //go to main menu from title menu
