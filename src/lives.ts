@@ -21,7 +21,6 @@ class Lives extends DrawableEntity {
     }
   }
 
-  public update() {}
 
   public draw() {
     switch(this.life) {
