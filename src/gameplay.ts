@@ -84,6 +84,7 @@ class GamePlay {
       if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
         game.gamePlay.createProjectile();
         shootSound.play();
+        shootSound.setVolume(0.1);
       }
     }
 
@@ -394,26 +395,29 @@ class GamePlay {
           this.powerupArray.splice(i, 1);
           this.lives.life++;
           heart.play();
+          heart.setVolume(.1);
         }
       }
     }
   }
 
-  // Projectile collision with object
-  public projectileCollisions() {
+   public projectileCollisions() {
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
-        if (
-          this.projectileArray[i].position.x >=
-            this.obstacleArray[j].position.x &&
-          this.projectileArray[i].position.y >
-            this.obstacleArray[j].position.y &&
-          this.projectileArray[i].position.y <
-            this.obstacleArray[j].position.y + this.obstacleArray[j].height
-        ) {
+        if(
+          this.projectileArray[i].position.x + this.projectileArray[i].regularSize.x >=
+          this.obstacleArray[j].position.x &&
+          this.projectileArray[i].position.x + this.projectileArray[i].regularSize.x <=
+          this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
+        this.projectileArray[i].position.y + this.projectileArray[i].regularSize.y >=
+          this.obstacleArray[j].position.y &&
+        this.projectileArray[i].position.y <=
+          this.obstacleArray[j].position.y + this.obstacleArray[j].height
+          ){
           this.projectileArray.splice(i, 1);
           this.score.score += 10;
           killSound.play();
+          killSound.setVolume(0.1);
           this.obstacleArray[j].isShot = true;
         }
       }
@@ -426,26 +430,50 @@ class GamePlay {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
           // superProjectile
-          this.projectileArray[i].superPosition.x >
-            this.obstacleArray[j].position.x &&
-          this.projectileArray[i].superPosition.x <
-            this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
+          this.projectileArray[i].superPosition.x + this.projectileArray[i].superSize.x >=
           this.obstacleArray[j].position.x &&
-          this.projectileArray[i].superPosition.y >
-            this.obstacleArray[j].position.y &&
-          this.projectileArray[i].superPosition.y <
-            this.obstacleArray[j].position.y + this.obstacleArray[j].height
+          this.projectileArray[i].superPosition.x + this.projectileArray[i].superSize.x <=
+          this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
+        this.projectileArray[i].superPosition.y + this.projectileArray[i].superSize.y >=
+          this.obstacleArray[j].position.y &&
+        this.projectileArray[i].superPosition.y <=
+          this.obstacleArray[j].position.y + this.obstacleArray[j].height
         ) {
           this.projectileArray.splice(i, 1);
-
+          killSound.play();
+          killSound.setVolume(0.1);
           this.score.score += 10;
           this.obstacleArray[j].isShot = true;
         }
       }
     }
   }
+
   // superProjectile collision with object
   public superProjectileCollisionsLow() {
+    for (let j = 0; j < this.obstacleArray.length; j++) {
+      for (let i = 0; i < this.projectileArray.length; i++) {
+        if (
+          // superProjectile
+          this.projectileArray[i].superPositionLow.x + this.projectileArray[i].superSize.x >=
+          this.obstacleArray[j].position.x &&
+          this.projectileArray[i].superPositionLow.x + this.projectileArray[i].superSize.x <=
+          this.obstacleArray[j].position.x + this.obstacleArray[j].width &&
+        this.projectileArray[i].superPositionLow.y + this.projectileArray[i].superSize.y >=
+          this.obstacleArray[j].position.y &&
+        this.projectileArray[i].superPositionLow.y <=
+          this.obstacleArray[j].position.y + this.obstacleArray[j].height
+        ) {
+          this.projectileArray.splice(i, 1);
+          killSound.play();
+          killSound.setVolume(0.1);
+          this.score.score += 10;
+          this.obstacleArray[j].isShot = true;
+        }
+      }
+    }
+  }
+  /* public superProjectileCollisionsLow() {
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
@@ -464,7 +492,7 @@ class GamePlay {
         }
       }
     }
-  }
+  } */
 
   public draw() {
     this.background.draw();
