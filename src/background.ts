@@ -7,7 +7,7 @@ class Background extends MovableEntity {
   public scrollSpeed: number;
 
 
-  constructor(position: p5.Vector, isVisible: boolean, velocity: p5.Vector, applyGravity: number, scrollSpeed: number) {
+  constructor(scrollSpeed: number) {
     super(createVector(0, 0), true, createVector(3, 0), 0);
     //img for background
     this.scrollingImage = loadImage("./assets/imgs/cyberpunk-street.png");

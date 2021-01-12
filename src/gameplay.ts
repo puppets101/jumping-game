@@ -32,13 +32,7 @@ class GamePlay {
     this.character = new Character();
     this.scrollSpeed = 0;
 
-    this.background = new Background(
-      createVector(0, 0),
-      true,
-      createVector(3, 0),
-      0,
-      this.scrollSpeed
-    );
+    this.background = new Background(this.scrollSpeed);
 
     // this.gameAudio = new GameAudio();
 
