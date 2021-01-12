@@ -12,11 +12,12 @@ class Lives extends DrawableEntity {
     this.life--;
     if(this.life !== 0){
       oh.play();
-      oh.setVolume(.1);
     }
     
     if (this.life === 0) {
       game.gamePlay.character.isAlive = false;
+      fatality.play();
+      game.menu.changeMenuState("gameOver");
     }
   }
 

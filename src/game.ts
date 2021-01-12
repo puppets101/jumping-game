@@ -11,7 +11,7 @@ class Game {
     
     //change boolean value to false to run game without menu
     this.menu = new Menu("title");
-    this.gameAudio = new GameAudio(this.menu);
+    this.gameAudio = new GameAudio();
   }
 
   update() {

@@ -89,7 +89,9 @@ function draw() {
   game.draw();
   // console.log(game.menu.menuState)
 }
-
+function mousePressed() {
+  (window as any).userStartAudio();
+}
 
 /**
    * Built in windowResize listener function in P5

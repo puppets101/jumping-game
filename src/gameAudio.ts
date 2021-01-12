@@ -1,97 +1,65 @@
 class GameAudio extends DrawableEntity {
-  private backgroundSwitch: boolean
-  private fatalitySwitch: boolean;
-  public titleSwitch: boolean;
+  private isMuted: boolean;
   private audioImg: p5.Image;
-  public audioSwitch: boolean;
-  private menu: Imenu;
+  private previousMouseIsPressed: boolean;
 
-  constructor(menu: Imenu) {
+  constructor() {
     super(createVector(), true);
-    this.backgroundSwitch = false;
-    this.fatalitySwitch = false;
-    this.titleSwitch = true;
-    this.audioSwitch = false;
+    this.isMuted = true;
+    this.previousMouseIsPressed = mouseIsPressed;
     this.audioImg = unmute;
-    this.menu = menu;
+    backgroundSound.loop();
+    this.mute();
+    (window as any).getAudioContext().suspend();
   }
   update() {
     this.toggleGameSound();
+    this.previousMouseIsPressed = mouseIsPressed;
   }
 
   public draw(){
     image(this.audioImg, 725, 525, 50, 50);
-    this.audio();
 }
+  private mute() {
+    this.isMuted = true;
+    this.audioImg = mute;
+    backgroundSound.setVolume(0);
+    shootSound.setVolume(0);
+    heart.setVolume(0);
+    oh.setVolume(0);
+    killSound.setVolume(0);
+    title.setVolume(0);
+    fatality.setVolume(0);
+  }
+  
+  private unmute() {
+    this.isMuted = false;
+    this.audioImg = unmute;
+    backgroundSound.setVolume(0.01)
+    shootSound.setVolume(0.15);
+    heart.setVolume(0.1);
+    oh.setVolume(0.1);
+    killSound.setVolume(0.1);
+    title.setVolume(0.1);
+    fatality.setVolume(0.1);
+  }
 
-  toggleGameSound(){
+  public toggleGameSound(){
         // pause audio
           if(mouseX < 775 &&  mouseX > 725) {
             if(mouseY < 575 && mouseY > 525){
-              if(mouseIsPressed) {
-                if(this.backgroundSwitch){
-                  this.backgroundSwitch = false;
-                  backgroundSound.stop();
-                  this.audioSwitch = false;
-                  this.audioImg = mute;
+              if(mouseIsPressed && !this.previousMouseIsPressed) {
+                if(this.isMuted){
+                  this.unmute();
+                } else {
+                  this.mute();
                 }
                 //this.audioSwitch = true;
               }
             }
           }
-          // resume audio
-          if(mouseX < 700 && mouseX > 650) {
-            if(mouseY < 575 && mouseY > 525){
-              if(mouseIsPressed && this.audioSwitch === false) {
-                if(!this.backgroundSwitch) {
-                  this.backgroundSwitch = true;
-                  backgroundSound.loop();
-                  this.audioSwitch = true;
-                  this.audioImg = unmute;
-                }
-              }
-            }
-          }
+        
       }
 
-  public audio() {
-    // main menu sound
-    if(this.menu.menuState === "main" && this.titleSwitch === true){
-      title.loop();
-      title.setVolume(.01);
-      this.titleSwitch = false;
-    }
-    // if game running turn of main menu sound
-    if(this.menu.menuState === "close") {
-      this.titleSwitch = false;
-      title.stop()
-    }
-
-    if(this.menu.menuState === "pause"){
-      
-    }
-    // if game running start game sound
-    if (this.menu.menuState === "close" && this.backgroundSwitch === false){
-      this.backgroundSwitch = true;
-      this.fatalitySwitch = false;
-      backgroundSound.loop();
-      backgroundSound.setVolume(0.01);
-    }
-    // if game over turn off game sound
-    if(this.menu.menuState === "gameOver") {
-      backgroundSound.stop()
-      this.backgroundSwitch = false;
-    }
-
-    // fatality audio
-    if(this.menu.menuState === "gameOver" && this.fatalitySwitch === false){
-      fatality.play()
-      fatality.setVolume(.4);
-      this.fatalitySwitch = true;
-      this.titleSwitch = true;
-    }
-
-
-  }
 }
 

@@ -45,6 +45,22 @@ class Menu implements Imenu {
     this.scrollSpeed1 = 1;
     this.scrollSpeed2 = 3;
   }
+  public changeMenuState (menuState: MenuState){
+    this.menuState = menuState;
+
+    if(this.menuState === "main") {
+      title.loop()
+      backgroundSound.stop();
+    }
+    if(this.menuState === "close"){
+      backgroundSound.loop();
+      title.stop();
+    }
+
+    if(this.menuState === "gameOver"){
+      backgroundSound.stop();
+    }
+  }
 
   public update() {
     //handles the users click and changes the text size on hover
@@ -55,7 +71,7 @@ class Menu implements Imenu {
           this.textSize1 = 30;
           if (mouseIsPressed) {
             console.log("Game started");
-            this.menuState = "close"
+            this.changeMenuState("close");
           }
         } else if (mouseY < 425 && mouseY > 410) {
           this.textSize2 = 30;

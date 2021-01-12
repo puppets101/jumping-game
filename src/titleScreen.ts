@@ -24,7 +24,7 @@ class TitleScreen {
   draw() {
 
     if (keyIsPressed === true) {
-      this.menu.menuState = "main";
+      game.menu.changeMenuState("main");
     }
     
     image(this.titleScreen, 0, 0, width, height);
