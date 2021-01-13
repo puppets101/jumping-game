@@ -25,13 +25,6 @@ class Projectile extends MovableEntity {
     );
   }
 
-  public update() {
-    this.position.x += 10;
-    this.projectileOnScreen();
-    this.superProjectilePosition();
-  }
-
-  // Position superProjectiles if life > 4
   private superProjectilePosition() {
     if (game.gamePlay.isSuperWeaponAvalible === true) {
       this.superPosition.y -= 2;
@@ -50,13 +43,20 @@ class Projectile extends MovableEntity {
     }
   }
 
-  // Draw superProjectile on screen if life >= 4
+  // Draw superProjectile on screen
   private superProjectile() {
     if (game.gamePlay.isSuperWeaponAvalible === true) {
       rect(this.superPosition.x, this.superPosition.y - 5, this.superSize.x, this.superSize.y, 5);
       rect(this.superPositionLow.x, this.superPositionLow.y - 5, 10, 3, 5);
     }
   }
+
+  public update() {
+    this.position.x += 10;
+    this.projectileOnScreen();
+    this.superProjectilePosition();
+  }
+  
   public draw() {
     fill(this.color);
     rect(this.position.x, this.position.y, this.regularSize.x, this.regularSize.y, 5);

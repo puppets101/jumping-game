@@ -14,25 +14,22 @@ class Powerup extends MovableEntity {
         this.scrollSpeed = scrollSpeed;
     }
 
-public update() {
-    this.position.y += this.velocity.y;
-    this.position.x -= (this.velocity.x + this.scrollSpeed);
-    this.isOnScreen()
-}
-
-public draw() {
-    //fill(this.color)
-    //rect(this.position.x, this.position.y, this.width, this.height)
-
-    image(this.powerupAsset, this.position.x, this.position.y, this.width, this.height)
-}
-
-private isOnScreen() {
-    if (this.position.x + this.width < 0) {
-        this.isVisible = false;
+    private isOnScreen() {
+        if (this.position.x + this.width < 0) {
+            this.isVisible = false;
+        }
+        else {
+            this.isVisible = true;
+        }
     }
-    else {
-        this.isVisible = true;
+
+    public update() {
+        this.position.y += this.velocity.y;
+        this.position.x -= (this.velocity.x + this.scrollSpeed);
+        this.isOnScreen();
     }
-}
+
+    public draw() {
+        image(this.powerupAsset, this.position.x, this.position.y, this.width, this.height);
+    }
 }
