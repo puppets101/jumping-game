@@ -12,7 +12,6 @@ class GamePlay {
   private graceModeActive: boolean;
   public isSuperWeaponAvalible: boolean;
   private projectileArray: Projectile[];
-
   private background: Background;
   private droneTimer: number;
   private prototypeTimer: number;
@@ -26,62 +25,24 @@ class GamePlay {
     this.score = new Score();
     this.character = new Character();
     this.scrollSpeed = 0;
-
     this.background = new Background(this.scrollSpeed);
-
     this.obstacleArray = [];
     this.platformArray = [];
     this.powerupArray = [];
     this.projectileArray = [];
-
-    // this.movableEntities = [];
     this.isSuperWeaponAvalible = false;
-
     this.platformInterval = 1000;
     this.platformTimer = this.platformInterval;
-
     this.droneInterval = 1500;
     this.droneTimer = this.droneInterval;
-
     this.prototypeInterval = 2500;
     this.prototypeTimer = this.prototypeInterval;
-
     this.difficultyInterval = 10000;
     this.difficultyTimer = this.difficultyInterval;
-
     this.powerupTimer = 13633;
-
     this.lives = new Lives();
     this.isGameOver = false;
     this.graceModeActive = false;
-  }
-
-  public update() {
-    this.background.update();
-    this.score.update();
-    this.character.update();
-
-    if (keyIsPressed) {
-      if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
-        game.gamePlay.createProjectile();
-        shootSound.play();
-      }
-    }
-
-    // Method calls
-    this.checkPlatformInterval();
-    this.renderEnemyDrone();
-    this.renderPrototypeEnemy();
-    this.renderPowerupLife();
-    this.updateObstacles();
-    this.updateProjectiles();
-    this.updatePlatforms();
-    this.updatePowerupLife();
-    this.checkCollisions();
-    this.superWeaponCheck();
-    this.checkEnemyDeath();
-    this.updateDifficulty();
-    this.checkCharacterDeath();
   }
 
   private checkCharacterDeath() {
@@ -180,6 +141,7 @@ class GamePlay {
   private updateObstacles() {
     for (let i = 0; i < this.obstacleArray.length; i++) {
       this.obstacleArray[i].update();
+
       // Removes obstacles from array when out of screen
       if (this.obstacleArray[i].isVisible === false) {
         this.obstacleArray.splice(i, 1);
@@ -187,7 +149,6 @@ class GamePlay {
     }
   }
 
-  // adds new projectile
   private createProjectile() {
     let newProjectile = new Projectile();
     this.projectileArray.push(newProjectile);
@@ -245,7 +206,6 @@ class GamePlay {
     this.obstacleArray.push(prototypeEnemy);
   }
 
-  // Check if superWeapon is avalible
   public superWeaponCheck() {
     if (this.lives.life <= 1) {
       this.isSuperWeaponAvalible = true;
@@ -279,7 +239,7 @@ class GamePlay {
       for (let p = 0; p < this.platformArray.length; p++) {
         if (this.obstacleArray[i].image === droneAsset) {
           if (
-            // check if obstacle lands on one of the platforms
+            // Check if obstacle lands on one of the platforms
             (this.obstacleArray[i].position.y + this.obstacleArray[i].height ===
               this.platformArray[p].position.y &&
               this.obstacleArray[i].position.x +
@@ -302,7 +262,6 @@ class GamePlay {
   }
 
   private checkCharacterCollisionsWObstacle(): true | void {
-    // Character collision with obstacle
     for (let i = 0; i < this.obstacleArray.length; i++) {
       if (
         this.character.position.x + this.character.size.x >
@@ -328,7 +287,6 @@ class GamePlay {
   }
 
   private checkCharacterCollisionsWPlatforms() {
-    // Character collision with platform
     for (let p = 0; p < this.platformArray.length; p++) {
       if (
         this.character.position.y + this.character.size.y <=
@@ -408,7 +366,7 @@ class GamePlay {
   }
 
   private checkProjectileCollisions() {
-    // projectile collision with object
+    // Projectile collision with object
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
@@ -434,7 +392,7 @@ class GamePlay {
   }
 
   private checkSuperProjectileCollisions() {
-    // superProjectile collision with object
+    // SuperProjectile collision with object
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
@@ -460,7 +418,7 @@ class GamePlay {
   }
 
   private checkSuperProjectileCollisionsLow() {
-    // superProjectile collision with object
+    // SuperProjectile collision with object
     for (let j = 0; j < this.obstacleArray.length; j++) {
       for (let i = 0; i < this.projectileArray.length; i++) {
         if (
@@ -483,6 +441,34 @@ class GamePlay {
         }
       }
     }
+  }
+
+  public update() {
+    this.background.update();
+    this.score.update();
+    this.character.update();
+
+    if (keyIsPressed) {
+      if (keyCode === 32 && game.gamePlay.projectileArray.length < 1) {
+        game.gamePlay.createProjectile();
+        shootSound.play();
+      }
+    }
+
+    // Method calls
+    this.checkPlatformInterval();
+    this.renderEnemyDrone();
+    this.renderPrototypeEnemy();
+    this.renderPowerupLife();
+    this.updateObstacles();
+    this.updateProjectiles();
+    this.updatePlatforms();
+    this.updatePowerupLife();
+    this.checkCollisions();
+    this.superWeaponCheck();
+    this.checkEnemyDeath();
+    this.updateDifficulty();
+    this.checkCharacterDeath();
   }
 
   public draw() {

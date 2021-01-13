@@ -15,10 +15,18 @@ class Obstacle extends MovableEntity {
         this.isShot = false;
         this.isDead = false;
         this.deathTimer = 300;
-
         this.image = image;
         this.deathImage = deathImage;
         this.scrollSpeed = scrollSpeed;
+    }
+
+    private isOnScreen() {
+        if (this.position.x + this.width < 0) {
+            this.isVisible = false;
+        }
+        else {
+            this.isVisible = true;
+        }
     }
 
     public update() {
@@ -36,14 +44,5 @@ class Obstacle extends MovableEntity {
 
     public draw() {
         image(this.image, this.position.x -37, this.position.y - 25, 100, 100)
-    }
-
-    private isOnScreen() {
-        if (this.position.x + this.width < 0) {
-            this.isVisible = false;
-        }
-        else {
-            this.isVisible = true;
-        }
     }
 }

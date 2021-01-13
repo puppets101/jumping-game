@@ -12,14 +12,7 @@ class GameAudio extends DrawableEntity {
     this.mute();
     (window as any).getAudioContext().suspend();
   }
-  update() {
-    this.toggleGameSound();
-    this.previousMouseIsPressed = mouseIsPressed;
-  }
 
-  public draw(){
-    image(this.audioImg, 725, 525, 50, 50);
-}
   private mute() {
     this.isMuted = true;
     this.audioImg = mute;
@@ -45,21 +38,27 @@ class GameAudio extends DrawableEntity {
   }
 
   public toggleGameSound(){
-        // pause audio
-          if(mouseX < 775 &&  mouseX > 725) {
-            if(mouseY < 575 && mouseY > 525){
-              if(mouseIsPressed && !this.previousMouseIsPressed) {
-                if(this.isMuted){
-                  this.unmute();
-                } else {
-                  this.mute();
-                }
-                //this.audioSwitch = true;
-              }
-            }
+    // Pause audio
+    if(mouseX < 775 &&  mouseX > 725) {
+      if(mouseY < 575 && mouseY > 525){
+        if(mouseIsPressed && !this.previousMouseIsPressed) {
+          if(this.isMuted){
+            this.unmute();
+          } else {
+            this.mute();
           }
-        
+        }
       }
+    }
+  }
 
+  public update() {
+    this.toggleGameSound();
+    this.previousMouseIsPressed = mouseIsPressed;
+  }
+
+  public draw(){
+  image(this.audioImg, 725, 525, 50, 50);
+  }
 }
 

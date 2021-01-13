@@ -14,6 +14,14 @@ class Platform extends MovableEntity {
     this.scrollSpeed = scrollSpeed;
   }
 
+  private isOnScreen() {
+    if (this.position.x + this.width < 0) {
+      this.isVisible = false;
+    } else {
+      this.isVisible = true;
+    }
+  }
+
   public update() {
     // Moves platforms to the left
     this.position.x -= (this.velocity.x + this.scrollSpeed);
@@ -26,14 +34,6 @@ class Platform extends MovableEntity {
     }
 
     this.isOnScreen();
-  }
-
-  private isOnScreen() {
-    if (this.position.x + this.width < 0) {
-      this.isVisible = false;
-    } else {
-      this.isVisible = true;
-    }
   }
 
   public draw() {

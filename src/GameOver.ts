@@ -3,33 +3,25 @@ class GameOver {
   private textSize1: number;
   private textSize2: number;
 
-
   constructor() {
     this.backgroundColor = "black";
-
     this.textSize1 = 20;
     this.textSize2 = 20;
-
   }
 
   public update() {
-
-
-    // handles the users click
+    // Handles the users click
     if (game.menu.menuState === "gameOver") {
       if (mouseY < 477 && mouseY > 458) {
         if (mouseX < 325 && mouseX > 205) {
           this.textSize1 = 30;
           if (mouseIsPressed) {
-            console.log("Game Restarted");
-            game.menu.changeMenuState("restart")
+            game.menu.changeMenuState("restart");
           }
-        }
-        else if (mouseX < 575 && mouseX > 493) {
+        } else if (mouseX < 575 && mouseX > 493) {
           this.textSize2 = 30;
           if (mouseIsPressed) {
-            console.log("Go to main");
-            game.menu.changeMenuState("main")
+            game.menu.changeMenuState("main");
           }
         } else {
           this.textSize1 = 20;

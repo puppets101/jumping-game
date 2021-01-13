@@ -1,4 +1,3 @@
-// interface ?
 class PauseScreen {
     private fade: number;
     private fadeAmount: number;
@@ -39,5 +38,4 @@ class PauseScreen {
           }
           this.fade += this.fadeAmount;
     }
-
 }

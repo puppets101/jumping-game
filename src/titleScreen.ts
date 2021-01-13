@@ -9,17 +9,17 @@ class TitleScreen {
     this.backstory = ["Neo-Tokyo, Earth, 2076.", "The latest Intergalactic War and subsequent waves of Alien Invasion have left humanity at the verge of extinction, its cities deserted and crawling with Alien life forms on the lookout for any remaining signs of human activity.", "Your only chance of survival is to keep running, avoiding all contact while shooting as many Aliens as you can.", "Do you have what it takes to stay alive?"];
     this.backstoryTimer = 0;
 
-    //fade in and out for the press any key text
+    // Fade in and out for the press any key text
     this.fadeAmount = 1;
     this.fade = 40;
 
-    //add the video to the variable titleScreen
+    // Add the video to the variable titleScreen
     this.titleScreen = loadImage("./assets/imgs/titleGif.gif");
         
   }
 
  // TACK FÖR ART https://www.reddit.com/r/cyberpunkgame/comments/9big46/cyberpunk_2077_pixel_art_oc/
-  draw() {
+  public draw() {
 
     if (keyIsPressed === true) {
      game.menu.changeMenuState("main");
@@ -53,10 +53,6 @@ class TitleScreen {
       this.fade += this.fadeAmount;
     
   }
-
-  update() {
-
-  }
   
   private drawBackstoryInIntervals() {
     textSize(13);
@@ -80,6 +76,7 @@ class TitleScreen {
       text(this.backstory[3], 50, 450);  
     }
   }
+  
   private getBackstoryAlpha(textStartTime: number) {
     let alpha = 0;
     const fadeDuration = 1500;
